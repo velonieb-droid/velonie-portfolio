@@ -7,7 +7,7 @@ GitHub Pages portfolio for Velonie Baluarte.
 After GitHub Pages is enabled, the site will be available at:
 
 ```text
-https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPOSITORY-NAME/
+https://velonieb-droid.github.io/velonie-portfolio/
 ```
 
 ## Files Published
