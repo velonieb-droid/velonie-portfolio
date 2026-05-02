@@ -1,0 +1,11 @@
+# Keep source/private resume drafts out of the public portfolio repo.
+Curriculum Vitae*.docx
+Curriculum Vitae*.pdf
+*.docx
+
+# Keep alternate generated resume formats local unless intentionally published.
+Velonie-Baluarte-Digital-Automation-Resume-2026.html
+
+# Local/system noise
+Thumbs.db
+.DS_Store
