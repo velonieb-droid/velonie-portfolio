@@ -252,6 +252,119 @@
     line-height: 1.4;
   }
 
+  .tool-carousel {
+    padding: 0 0 34px;
+    overflow: hidden;
+  }
+
+  .carousel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 14px;
+  }
+
+  .carousel-head h2 {
+    max-width: 560px;
+    font-size: clamp(24px, 3vw, 34px);
+  }
+
+  .carousel-note {
+    max-width: 430px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .logo-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(9, 22, 17, 0.82);
+  }
+
+  .logo-marquee::before,
+  .logo-marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 90px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .logo-marquee::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg), transparent);
+  }
+
+  .logo-marquee::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--bg), transparent);
+  }
+
+  .logo-track {
+    display: flex;
+    width: max-content;
+    gap: 12px;
+    padding: 14px;
+    animation: scrollTools 34s linear infinite;
+  }
+
+  .logo-marquee:hover .logo-track {
+    animation-play-state: paused;
+  }
+
+  .logo-tile {
+    min-width: 158px;
+    height: 72px;
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid rgba(214, 242, 229, 0.12);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: #06120d;
+    background: linear-gradient(135deg, var(--green), var(--cyan));
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  .logo-name {
+    color: var(--ink);
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 1.15;
+  }
+
+  .logo-type {
+    margin-top: 3px;
+    color: var(--soft);
+    font-size: 11px;
+    line-height: 1.25;
+  }
+
+  @keyframes scrollTools {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
   section { padding: 54px 0; }
 
   .section-head {
@@ -478,6 +591,7 @@
     .stack { grid-template-columns: repeat(3, 1fr); }
     .quick-proof { grid-template-columns: repeat(2, 1fr); }
     .signal-card { max-width: 520px; }
+    .carousel-head { align-items: start; flex-direction: column; }
   }
 
   @media (max-width: 640px) {
@@ -494,6 +608,17 @@
     .project-label { border-right: 0; border-bottom: 1px solid var(--line); }
     .btn { width: 100%; }
     section { padding: 42px 0; }
+    .logo-marquee::before,
+    .logo-marquee::after { width: 38px; }
+    .logo-tile { min-width: 148px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-track {
+      animation: none;
+      flex-wrap: wrap;
+      width: auto;
+    }
   }
 </style>
 </head>
@@ -555,6 +680,52 @@
         <div class="proof-label">Website structure, search intent, AEO-ready content, and conversion-focused page planning.</div>
       </div>
     </div>
+
+    <section class="wrap tool-carousel" aria-label="Tools and platforms">
+      <div class="carousel-head">
+        <div>
+          <div class="section-tag">Tools I work with</div>
+          <h2>Apps, platforms, and software behind my digital systems.</h2>
+        </div>
+        <p class="carousel-note">CRM, automation, websites, AI, productivity, and engineering tools that support my work from planning to delivery.</p>
+      </div>
+
+      <div class="logo-marquee" aria-label="Scrolling tools carousel">
+        <div class="logo-track">
+          <div class="logo-tile"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">Writing & Analysis</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">AC</div><div><div class="logo-name">AutoCAD</div><div class="logo-type">Technical Design</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">BB</div><div><div class="logo-name">Bluebeam</div><div class="logo-type">Takeoff & Review</div></div></div>
+          <div class="logo-tile"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
+
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">Writing & Analysis</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AC</div><div><div class="logo-name">AutoCAD</div><div class="logo-type">Technical Design</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">BB</div><div><div class="logo-name">Bluebeam</div><div class="logo-type">Takeoff & Review</div></div></div>
+          <div class="logo-tile" aria-hidden="true"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
+        </div>
+      </div>
+    </section>
 
     <section class="wrap" id="roles">
       <div class="section-head">
