@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Velonie Baluarte — GHL CRM automation specialist, website developer, and AI systems builder for service businesses.">
+<title>Velonie Baluarte | GHL CRM Automation, Web & AI Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #060e0a;
+  --bg2: #0a1610;
+  --ink: #f0f9f4;
+  --text: #cce0d6;
+  --muted: #8aab9c;
+  --soft: #5a7a6c;
+  --line: rgba(180, 230, 200, 0.11);
+  --line2: rgba(180, 230, 200, 0.07);
+  --panel: rgba(10, 22, 16, 0.85);
+  --panel2: rgba(14, 28, 21, 0.95);
+  --green: #1fe47a;
+  --green2: #0cc45e;
+  --cyan: #3dd9f0;
+  --amber: #f5b83a;
+  --rose: #f06070;
+  --shadow: 0 32px 80px rgba(0,0,0,0.5);
+  --shadow-sm: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Ambient background blobs */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 8% 12%, rgba(31, 228, 122, 0.09), transparent),
+    radial-gradient(ellipse 50% 40% at 88% 28%, rgba(61, 217, 240, 0.07), transparent),
+    radial-gradient(ellipse 40% 60% at 50% 80%, rgba(31, 228, 122, 0.05), transparent);
+  z-index: -1;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+/* ── NAV ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: rgba(6, 14, 10, 0.82);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar-inner {
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.brand-mark {
+  width: 36px; height: 36px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px 2px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.nav a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav a:hover { color: var(--ink); background: rgba(255,255,255,0.05); }
+
+.nav .avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border: 1px solid rgba(31, 228, 122, 0.3);
+  border-radius: 999px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(31, 228, 122, 0.06);
+  margin-left: 6px;
+}
+
+.nav .avail::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.8); }
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, opacity 0.18s;
+}
+
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.btn:active { transform: translateY(0); }
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  color: #031809;
+  border-color: transparent;
+  font-weight: 700;
+}
+
+.btn.secondary { color: var(--ink); background: rgba(255,255,255,0.05); }
+.btn.ghost { color: var(--muted); background: transparent; border-color: var(--line); }
+.btn.ghost:hover { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: calc(100vh - 68px);
+  display: flex; /* Changed to flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  padding: 60px 0 52px;
+  border-radius: 14px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 52px;
+  align-items: center;
+  width: 100%;
+}
+
+.hero-logo {
+  width: 80%;
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto 32px auto; /* Center horizontally and add bottom margin */
+  display: block;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid rgba(31, 228, 122, 0.28);
+  border-radius: 999px;
+  background: rgba(31, 228, 122, 0.07);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+h1, h2, h3 {
+  font-family: "Outfit", sans-serif;
+  color: var(--ink);
+  line-height: 1;
+}
+
+h1 {
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.lead {
+  margin-top: 26px;
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 640px;
+}
+
+.lead strong { color: var(--ink); font-weight: 600; }
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+/* Hero card */
+.hero-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hero-card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-card-body { padding: 22px; }
+
+.hero-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.hero-card-body p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.hero-card-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(10, 22, 16, 0.6);
+}
+
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-item {
+  padding: 26px 20px;
+  border-right: 1px solid var(--line);
+}
+
+.stat-item:last-child { border-right: 0; }
+
+.stat-num {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+}
+
+.stat-label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* ── SECTION SHARED ── */
+section { padding: 72px 0; }
+
+.section-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+}
+
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: end;
+  margin-bottom: 40px;
+}
+
+.section-copy {
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+/* ── TOOL CAROUSEL ── */
+.carousel-wrap {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(10, 22, 16, 0.7);
+}
+
+.carousel-wrap::before,
+.carousel-wrap::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.carousel-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+.carousel-wrap::after { right: 0; background: linear-gradient(270deg, var(--bg), transparent); }
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  gap: 10px;
+  padding: 14px;
+  animation: scrollTools 38s linear infinite;
+}
+
+.carousel-wrap:hover .logo-track { animation-play-state: paused; }
+
+.logo-tile {
+  min-width: 160px;
+  height: 70px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.logo-tile:hover {
+  border-color: rgba(31, 228, 122, 0.3);
+  background: rgba(31, 228, 122, 0.05);
+}
+
+.logo-mark {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--green2), var(--cyan));
+  color: #031809;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.logo-name { font-weight: 600; font-size: 13px; color: var(--ink); line-height: 1.2; }
+.logo-type { font-size: 11px; color: var(--soft); margin-top: 3px; }
+
+@keyframes scrollTools {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── ROLES ── */
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+
+.card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(31, 228, 122, 0.25);
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.card p {
+  margin-top: 11px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.accent-line {
+  width: 38px; height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+  margin-bottom: 16px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.chip {
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #aecebf;
+  background: rgba(255,255,255,0.03);
+  letter-spacing: 0.03em;
+}
+
+/* ── PROJECTS ── */
+.projects-section { background: rgba(10, 22, 16, 0.4); }
+
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel2);
+  margin-bottom: 16px;
+  transition: border-color 0.25s;
+}
+
+.project-card:hover { border-color: rgba(31, 228, 122, 0.25); }
+.project-card:last-child { margin-bottom: 0; }
+
+.project-left {
+  padding: 30px;
+  border-right: 1px solid var(--line);
+  background: rgba(255,255,255,0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-niche {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 10px;
+}
+
+.project-left h3 {
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.15;
+}
+
+.project-left .desc {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--soft);
+  line-height: 1.62;
+  flex: 1;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.project-tag {
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: rgba(31, 228, 122, 0.1);
+  color: var(--green);
+  border: 1px solid rgba(31, 228, 122, 0.2);
+}
+
+.project-right { padding: 30px; }
+
+.deliverable-list {
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.deliverable-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.deliverable-list li::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.deliverable-list li { padding-left: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+.outcome {
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--green);
+  border-radius: 0 8px 8px 0;
+  background: rgba(31, 228, 122, 0.06);
+}
+
+.outcome-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 5px;
+}
+
+.outcome p { font-size: 13px; color: var(--text); line-height: 1.55; }
+
+/* ── TESTIMONIALS ── */
+.testimonials-section { }
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.testi-card {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.testi-card:hover {
+  border-color: rgba(31, 228, 122, 0.2);
+  transform: translateY(-3px);
+}
+
+.testi-quote {
+  font-size: 32px;
+  color: var(--green);
+  font-family: "Outfit", sans-serif;
+  line-height: 1;
+  margin-bottom: 14px;
+  opacity: 0.6;
+}
+
+.testi-text {
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--text);
+  font-style: italic;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.testi-avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green2), var(--cyan));
+  display: grid; place-items: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #031809;
+  flex-shrink: 0;
+}
+
+.testi-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.testi-role {
+  font-size: 12px;
+  color: var(--soft);
+  margin-top: 2px;
+}
+
+/* ── BACKGROUND ── */
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.timeline {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--panel);
+}
+
+.time-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+.time-row:last-child { border-bottom: 0; }
+.time-row:hover { background: rgba(31, 228, 122, 0.04); }
+
+.time {
+  font-family: "Outfit", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  padding-top: 2px;
+}
+
+.time-copy { font-size: 14px; color: var(--muted); line-height: 1.58; }
+
+/* ── DELIVERABLES ── */
+.deliverables-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.deliverables-card h3 { font-size: 17px; margin-bottom: 8px; }
+
+/* ── STACK ── */
+.stack-card { text-align: left; }
+.stack-card h3 { font-size: 15px; margin-bottom: 6px; }
+.stack-card p { font-size: 13px; }
+
+/* ── CONTACT ── */
+.contact-section {
+  background:
+    linear-gradient(135deg, rgba(31, 228, 122, 0.08), rgba(61, 217, 240, 0.04)),
+    var(--panel2);
+  border: 1px solid rgba(31, 228, 122, 0.2);
+  border-radius: 14px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: center;
+}
+
+.contact-section h2 { font-size: clamp(30px, 4vw, 48px); }
+
+.contact-section p {
+  margin-top: 14px;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 190px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  padding: 28px 0 40px;
+  border-top: 1px solid var(--line);
+  color: var(--soft);
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.footer-links { display: flex; gap: 18px; }
+.footer-links a { color: var(--soft); transition: color 0.15s; }
+.footer-links a:hover { color: var(--green); }
+
+/* ── FADE IN ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-card { max-width: 480px; }
+  .section-head { grid-template-columns: 1fr; gap: 14px; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
+  .testi-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-card { grid-template-columns: 1fr; }
+  .project-left { border-right: 0; border-bottom: 1px solid var(--line); }
+  .story-grid { grid-template-columns: 1fr; }
+  .contact-section { grid-template-columns: 1fr; padding: 32px; }
+  .contact-actions { flex-direction: row; flex-wrap: wrap; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stat-item:nth-child(2) { border-right: 0; }
+}
+
+@media (max-width: 640px) {
+  .wrap { width: calc(100% - 32px); }
+  .topbar-inner { flex-direction: column; align-items: flex-start; padding: 14px 0; min-height: auto; gap: 10px; }
+  .nav { justify-content: flex-start; gap: 4px 0; }
+  .hero { padding: 44px 0 36px; min-height: auto; }
+  .grid-4, .grid-3, .grid-2, .grid-5, .testi-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-right: 1px solid var(--line); }
+  .stat-item:nth-child(even) { border-right: 0; }
+  section { padding: 52px 0; }
+  .btn { width: 100%; justify-content: center; }
+  .hero-cta .btn { width: auto; }
+  .contact-actions .btn { width: 100%; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track { animation: none; flex-wrap: wrap; width: auto; }
+  .fade-in { opacity: 1; transform: none; }
+  * { transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" aria-label="Velonie Baluarte home">
+      <img src="VAB LOGO 2.png" alt="Velonie Baluarte Logo" class="brand-mark">
+      Velonie Baluarte
+    </a>
+    <nav class="nav" aria-label="Portfolio navigation">
+      <a href="#roles">Roles</a>
+      <a href="#projects">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#background">Background</a>
+      <a href="#contact">Contact</a>
+      <span class="avail">Available now</span>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="wrap hero">
+    <img src="VAB LOGO 2.png" alt="VAB Logo" class="hero-logo">
+    <div class="hero-grid">
+      <div class="fade-in">
+        <div class="kicker">CRM Automation Specialist | Website Developer | AI Prompt Engineer</div>
+        <h1>CRM automation, websites, and AI systems for <em>business growth.</em></h1>
+        <p class="lead">
+          I help real estate, coaching, blog, hotel, condominium, photography, and service businesses turn scattered leads and daily admin into clear digital systems: CRM pipelines, responsive websites, workflow automation, AI prompt systems, SEO/AEO structure, and executive support.
+        </p>
+        <div class="hero-cta">
+          <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Hire / Interview Me</a>
+          <a class="btn secondary" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">View Resume</a>
+        </div>
+      </div>
+
+      <aside class="hero-card fade-in" style="transition-delay:0.15s" aria-label="Portfolio snapshot">
+        <img class="hero-card-img" src="assets/automation-portfolio-hero.png" alt="Digital automation dashboard — CRM, website, SEO, and AI workflow systems">
+        <div class="hero-card-body">
+          <div class="hero-card-label">What employers get</div>
+          <p>A digital operator who can build websites, organize CRM pipelines, automate follow-up, write AI-assisted content, document processes, and keep client work moving.</p>
+          <div class="hero-card-links">
+            <a class="btn primary" style="min-height:38px;font-size:13px;padding:0 14px" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
+            <a class="btn ghost" style="min-height:38px;font-size:13px;padding:0 14px" href="tel:+639152845260">WhatsApp</a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar fade-in">
+    <div class="stats-inner wrap">
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years of systems & operations experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Industries served — real estate, coaching, hospitality & more</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Automation platforms — GHL, Zapier, n8n, Pabbly</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">RME</div>
+        <div class="stat-label">Registered Master Electrician & BS Electrical Engineering</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLS CAROUSEL -->
+  <section class="wrap" aria-label="Tools">
+    <div style="margin-bottom:16px">
+      <div class="section-tag">Tools I work with</div>
+      <h2 style="font-size:clamp(22px,3vw,34px)">Apps, platforms, and software behind every system.</h2>
+    </div>
+    <div class="carousel-wrap">
+      <div class="logo-track">
+        <div class="logo-tile"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">LV</div><div><div class="logo-name">Lovable</div><div class="logo-type">App Builder</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">AI & Analysis</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">PR</div><div><div class="logo-name">Premiere</div><div class="logo-type">Video Editing</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">PS</div><div><div class="logo-name">Photoshop</div><div class="logo-type">Photo Editing</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
+        <div class="logo-tile"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">LV</div><div><div class="logo-name">Lovable</div><div class="logo-type">App Builder</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">AI & Analysis</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PR</div><div><div class="logo-name">Premiere</div><div class="logo-type">Video Editing</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PS</div><div><div class="logo-name">Photoshop</div><div class="logo-type">Photo Editing</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
+        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section class="wrap" id="roles">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Hiring fit</div>
+        <h2>Four roles. One operator who delivers end-to-end.</h2>
+      </div>
+      <p class="section-copy">Engineering discipline means I don't just set it up — I map the requirement, build the logic, test the handoff, and document everything so it runs without me.</p>
+    </div>
+
+    <div class="grid-4 fade-in">
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>CRM Specialist</h3>
+        <p>GHL pipelines, forms, calendars, lead sources, tags, automations, follow-up stages, and contact tracking built to convert.</p>
+        <div class="chips">
+          <span class="chip">GoHighLevel</span>
+          <span class="chip">Zapier</span>
+          <span class="chip">n8n</span>
+          <span class="chip">Pabbly</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>Website Developer</h3>
+        <p>Responsive sites, landing pages, booking pages, service pages, and inquiry forms built for lead generation and conversion.</p>
+        <div class="chips">
+          <span class="chip">WordPress</span>
+          <span class="chip">HTML/CSS</span>
+          <span class="chip">Lovable</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>AI Prompt Engineer</h3>
+        <p>Prompt libraries, content workflows, SOP drafts, client summaries, FAQ generation, and quality-control systems using Claude, ChatGPT, and Gemini.</p>
+        <div class="chips">
+          <span class="chip">Claude</span>
+          <span class="chip">ChatGPT</span>
+          <span class="chip">Gemini</span>
+        </div>
+      </article>
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>Digital Operations</h3>
+        <p>Executive support, calendar coordination, reporting, documentation, SEO/AEO structure, and client operations management.</p>
+        <div class="chips">
+          <span class="chip">ClickUp</span>
+          <span class="chip">Airtable</span>
+          <span class="chip">SEO/AEO</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects-section" id="projects">
+    <div class="wrap">
+      <div class="section-head fade-in">
+        <div>
+          <div class="section-tag">Project work</div>
+          <h2>Systems I've built across six industries.</h2>
+        </div>
+        <p class="section-copy">Real deliverables for real businesses — CRM setups, automated follow-up, landing pages, content systems, and operational workflows from setup through handover.</p>
+      </div>
+
+      <div class="fade-in">
+
+        <article class="project-card">
+          <div class="project-left">
+            <div class="project-niche">Real Estate & Condominiums</div>
+            <h3>GHL CRM & Lead Pipeline Setup</h3>
+            <p class="desc">Property developer needed inquiry capture from multiple ad sources, automated follow-up, and pipeline visibility across buyer stages.</p>
+            <div class="project-tags">
+              <span class="project-tag">GoHighLevel</span>
+              <span class="project-tag">Zapier</span>
+              <span class="project-tag">Landing Pages</span>
+              <span class="project-tag">SEO/AEO</span>
+            </div>
+          </div>
+          <div class="project-right">
+            <ul class="deliverable-list">
+              <li><span>Multi-stage GHL pipeline with lead source tagging for Facebook Ads, website, and referral inbound channels</span></li>
+              <li><span>Automated SMS and email follow-up sequences triggered on form submission and stage changes</span></li>
+              <li><span>Inquiry landing pages with booking integration, contact forms, and calendar scheduling</span></li>
+              <li><span>Local SEO/AEO page structure with service descriptions, FAQs, and search-intent headings</span></li>
+            </ul>
+            <div class="outcome">
+              <div class="outcome-label">Outcome</div>
+              <p>Eliminated manual lead tracking across spreadsheets. All new inquiries enter a single pipeline with automated next-step reminders and no lead falling through.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-left">
+            <div class="project-niche">Business Coaching & Content</div>
+            <h3>Funnel + AI Content System Build</h3>
+            <p class="desc">Coaching business needed a consultation funnel, content publishing system, and repeatable AI prompt workflow to produce weekly blog and email content.</p>
+            <div class="project-tags">
+              <span class="project-tag">GHL Funnels</span>
+              <span class="project-tag">Claude AI</span>
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">Email/SMS</span>
+            </div>
+          </div>
+          <div class="project-right">
+            <ul class="deliverable-list">
+              <li><span>GHL coaching offer page, opt-in funnel, lead magnet delivery, and automated consultation booking sequence</span></li>
+              <li><span>AI prompt library for article outlines, FAQ generation, email sequences, and client-facing copy drafts</span></li>
+              <li><span>WordPress blog structure with SEO/AEO-ready headings, internal linking plan, and publishing SOP</span></li>
+              <li><span>Client onboarding workflow with automated welcome sequence and CRM tag-based segmentation</span></li>
+            </ul>
+            <div class="outcome">
+              <div class="outcome-label">Outcome</div>
+              <p>Coach went from manually writing every piece of content to operating a repeatable content system — weekly posts produced in under two hours using the AI prompt library.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-left">
+            <div class="project-niche">Hospitality & Photography</div>
+            <h3>Website + Booking + CRM Operations</h3>
+            <p class="desc">Photography studio needed a professional site, package presentation, and CRM-based client follow-up to replace scattered WhatsApp and manual booking.</p>
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">GoHighLevel</span>
+              <span class="project-tag">n8n</span>
+              <span class="project-tag">Ops Docs</span>
+            </div>
+          </div>
+          <div class="project-right">
+            <ul class="deliverable-list">
+              <li><span>Portfolio site with package pages, inquiry forms, booking process page, and mobile-responsive layout</span></li>
+              <li><span>GHL pipeline for inquiry → quote sent → confirmed → session → delivered workflow with task reminders</span></li>
+              <li><span>n8n automation connecting form submissions to GHL contact creation and owner Slack/email notification</span></li>
+              <li><span>Workflow documentation and SOP for client communication and booking handoff process</span></li>
+            </ul>
+            <div class="outcome">
+              <div class="outcome-label">Outcome</div>
+              <p>Studio moved from WhatsApp-based booking to a structured CRM system with automated confirmations — client inquiries handled without manual follow-up for routine cases.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="wrap" id="testimonials">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Social proof</div>
+        <h2>What clients and colleagues say.</h2>
+      </div>
+      <p class="section-copy">Feedback from the people I've built systems for — on delivery quality, communication, and follow-through.</p>
+    </div>
+
+    <div class="testi-grid fade-in">
+      <article class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Velonie built our GHL pipeline from scratch and actually documented every step. We could hand it to any new staff member and they'd know exactly what to do. That level of clarity is rare.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RL</div>
+          <div>
+            <div class="testi-name">R. Lopez</div>
+            <div class="testi-role">Real Estate Developer, Manila</div>
+          </div>
+        </div>
+      </article>
+      <article class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">The AI prompt system Velonie set up cut my content prep time in half. It's not just templates — it's a whole workflow that actually fits how I work and what my audience needs.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MC</div>
+          <div>
+            <div class="testi-name">M. Cruz</div>
+            <div class="testi-role">Business Coach & Content Creator</div>
+          </div>
+        </div>
+      </article>
+      <article class="testi-card">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">What impressed me most was how she thinks through a system before touching any tool. The questions she asked before building saved us from a lot of rework down the line.</p>
+        <div class="testi-author">
+          <div class="testi-avatar">JS</div>
+          <div>
+            <div class="testi-name">J. Santos</div>
+            <div class="testi-role">Photography Studio Owner, Quezon City</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="wrap">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Deliverables</div>
+        <h2>Specific work I own from setup to handover.</h2>
+      </div>
+      <p class="section-copy">Every engagement ends with working systems, documented logic, and a clean handoff — not just a build that lives and dies with one person knowing how it works.</p>
+    </div>
+
+    <div class="grid-3 fade-in">
+      <article class="card deliverables-card">
+        <h3>Website & Funnel Build</h3>
+        <p>Homepage, landing page, service page, booking page, contact page, inquiry form, and CTA structure — responsive and conversion-focused.</p>
+      </article>
+      <article class="card deliverables-card">
+        <h3>GHL CRM & Pipeline</h3>
+        <p>Pipeline creation, lead source tagging, automation triggers, email/SMS sequences, calendar booking, and contact cleanup.</p>
+      </article>
+      <article class="card deliverables-card">
+        <h3>AI Prompt Systems</h3>
+        <p>Prompt libraries for content, email replies, client summaries, SOPs, meeting notes, research workflows, and website copy.</p>
+      </article>
+      <article class="card deliverables-card">
+        <h3>SEO / AEO Setup</h3>
+        <p>Content outlines, FAQ sections, keyword-intent mapping, local service wording, metadata drafts, and AI-answer-optimized page structure.</p>
+      </article>
+      <article class="card deliverables-card">
+        <h3>Operations & EA Support</h3>
+        <p>Schedule coordination, task tracking, business documentation, client updates, workflow reports, and SOP creation for smooth handoffs.</p>
+      </article>
+      <article class="card deliverables-card">
+        <h3>Video & Photo Editing</h3>
+        <p>Marketing video edits, reel assembly, photo retouching, and visual content production for client campaigns and social media.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="wrap" id="stack">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Stack</div>
+        <h2>Tools — and the habit behind them.</h2>
+      </div>
+      <p class="section-copy">The operating habit matters more than the tool list: map the process, build the workflow, test the handoff, document the logic, then improve what isn't working.</p>
+    </div>
+
+    <div class="grid-5 fade-in">
+      <article class="card stack-card"><h3>Web</h3><p>HTML, CSS, WordPress, Lovable, VS Code, responsive pages, landing pages, forms.</p></article>
+      <article class="card stack-card"><h3>CRM</h3><p>GoHighLevel, pipelines, calendars, forms, lead sources, tags, follow-up stages.</p></article>
+      <article class="card stack-card"><h3>Automation</h3><p>Zapier, Pabbly, n8n, Google Sheets, email/SMS triggers, task handoffs.</p></article>
+      <article class="card stack-card"><h3>AI & Content</h3><p>Claude, ChatGPT, Gemini Studio, prompt templates, SOPs, content drafts.</p></article>
+      <article class="card stack-card"><h3>Ops & Creative</h3><p>ClickUp, Airtable, Excel, Google Workspace, Premiere, Photoshop, reporting.</p></article>
+    </div>
+  </section>
+
+  <!-- BACKGROUND -->
+  <section class="wrap" id="background">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Career story</div>
+        <h2>Digital systems — backed by 20 years of engineering discipline.</h2>
+      </div>
+      <p class="section-copy">Most digital freelancers learned tools. I also learned how to manage multi-year technical projects, lead O&M teams across three countries, and deliver on a schedule. That changes how I build.</p>
+    </div>
+
+    <div class="story-grid fade-in">
+      <article class="card">
+        <h3>Why the engineering background matters</h3>
+        <p style="margin-top:12px;font-size:15px;color:var(--muted);line-height:1.7">CRM and automation work fails for the same reason construction projects fail: unclear requirements, untested logic, and no documentation. My engineering career trained me out of all three.</p>
+        <p style="margin-top:14px;font-size:15px;color:var(--muted);line-height:1.7">I map requirements before touching any tool. I test every workflow trigger before handing it over. I document everything so it survives after I'm done. That's not extra — it's baseline discipline from a decade of project management.</p>
+        <div style="margin-top:22px;padding:16px;border:1px solid var(--line);border-radius:8px;background:rgba(31,228,122,0.05)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Credentials</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6">Bachelor of Electrical Engineering · Registered Master Electrician · Revit, AutoCAD, Bluebeam, PlanSwift, ETAP, HAP6, Pipe-Flo</p>
+        </div>
+      </article>
+
+      <div class="timeline" aria-label="Career timeline">
+        <div class="time-row">
+          <div class="time">2025–Now</div>
+          <p class="time-copy">Freelance Digital Automation, CRM & Website Specialist — real estate, coaching, hospitality, photography, and service business clients across GHL, automation, websites, AI, and SEO/AEO.</p>
+        </div>
+        <div class="time-row">
+          <div class="time">2019–2025</div>
+          <p class="time-copy">Project Manager, Inovus Building Solutions — HVAC design, BIM coordination, estimates, schedules, suppliers, subcontractors, and client management across multiple concurrent technical projects.</p>
+        </div>
+        <div class="time-row">
+          <div class="time">2013–2019</div>
+          <p class="time-copy">Operations & Maintenance Manager, Pristine Energy Transfer — led O&M, preventive maintenance, troubleshooting, estimates, proposals, staff training, and project execution.</p>
+        </div>
+        <div class="time-row">
+          <div class="time">2002–2013</div>
+          <p class="time-copy">Facilities & electrical technician — Philippines, Qatar, Saudi Arabia. Electrical systems, controls, instrumentation, commissioning, maintenance, and technical documentation across international sites.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="wrap" id="contact">
+    <div class="contact-section fade-in">
+      <div>
+        <div class="section-tag">Open for work — remote, freelance, or project-based</div>
+        <h2>Let me build the system behind your growth.</h2>
+        <p>Best fit: GHL CRM specialist, website developer, AI systems builder, SEO/AEO support, or digital operations assistant for a business that wants someone technical, organized, and dependable — with the discipline of a project manager.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
+        <a class="btn secondary" href="tel:+639152845260">Call / WhatsApp</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn ghost" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap footer">
+  <div class="footer-brand">
+    <img src="VAB LOGO 2.png" alt="Velonie Baluarte Logo" class="footer-logo">
+    <span>Velonie Baluarte · CRM Automation · Web · AI Systems · SEO/AEO · Executive Operations</span>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:velonieb@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="tel:+639152845260">WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
