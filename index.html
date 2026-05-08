@@ -829,6 +829,240 @@ h2 {
   .fade-in { opacity: 1; transform: none; }
   * { transition-duration: 0.01ms !important; }
 }
+
+/* ── SAMPLE WORKS CAROUSEL ── */
+.works-section {
+  background: rgba(10, 22, 16, 0.4);
+}
+
+.works-carousel-outer {
+  position: relative;
+}
+
+.works-carousel-viewport {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.works-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.work-slide {
+  flex: 0 0 calc(33.333% - 14px);
+  min-width: 0;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-slide:hover {
+  border-color: rgba(31, 228, 122, 0.35);
+  transform: translateY(-4px);
+}
+
+.work-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: rgba(6, 14, 10, 0.8);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.work-img-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  pointer-events: none;
+  transform: scale(1.01);
+}
+
+.work-img-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6,14,10,0.15);
+  transition: background 0.2s;
+}
+
+.work-img-cover:hover {
+  background: rgba(6,14,10,0.0);
+}
+
+.work-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  background: rgba(6, 14, 10, 0.82);
+  border: 1px solid rgba(31, 228, 122, 0.4);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(4px);
+  text-decoration: none;
+}
+
+.work-slide:hover .work-view-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.work-img-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.work-body {
+  padding: 20px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.work-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.work-platform-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.work-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.work-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.work-tag {
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--soft);
+  background: rgba(255,255,255,0.02);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Nav arrows + dots */
+.works-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.works-arrow {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.works-arrow:hover {
+  border-color: rgba(31, 228, 122, 0.4);
+  color: var(--green);
+  background: rgba(31, 228, 122, 0.08);
+}
+
+.works-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.works-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.works-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--soft);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  padding: 0;
+}
+
+.works-dot.active {
+  background: var(--green);
+  transform: scale(1.35);
+}
+
+.work-platform-ghl { color: #1fe47a; }
+.work-platform-zapier { color: #FF6B35; }
+.work-platform-n8n { color: #ea4b71; }
+
+.work-platform-dot-ghl { background: #1fe47a; }
+.work-platform-dot-zapier { background: #FF6B35; }
+.work-platform-dot-n8n { background: #ea4b71; }
+
+@media (max-width: 960px) {
+  .work-slide { flex: 0 0 calc(50% - 10px); }
+}
+
+@media (max-width: 640px) {
+  .work-slide { flex: 0 0 100%; }
+}
 </style>
 </head>
 <body>
@@ -843,6 +1077,7 @@ h2 {
     <nav class="nav" aria-label="Portfolio navigation">
       <a href="#roles">Roles</a>
       <a href="#projects">Projects</a>
+      <a href="#sample-works">Sample Works</a>
       <a href="#stack">Stack</a>
       <a href="#background">Background</a>
       <a href="#contact">Contact</a>
@@ -1100,6 +1335,204 @@ h2 {
     </div>
   </section>
 
+  <!-- SAMPLE WORKS -->
+  <section class="works-section" id="sample-works">
+    <div class="wrap">
+      <div class="section-head fade-in">
+        <div>
+          <div class="section-tag">Sample Works</div>
+          <h2>Real builds, live systems.</h2>
+        </div>
+        <p class="section-copy">Actual automation screenshots and workflow builds across GoHighLevel, Zapier, and N8N — built for real client operations.</p>
+      </div>
+
+      <div class="works-carousel-outer fade-in">
+        <div class="works-carousel-viewport">
+          <div class="works-track" id="worksTrack">
+
+            <!-- Slide 1: GHL -->
+            <div class="work-slide">
+              <div class="work-img-wrap">
+                <img class="work-img-thumb"
+                  src="https://drive.google.com/thumbnail?id=1pmRP4lzYI__dt68IjFTeM2naFGc7JK6E&sz=w800"
+                  alt="GoHighLevel CRM automation workflow"
+                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
+                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
+                </div>
+                <div class="work-img-cover">
+                  <a class="work-view-btn" href="https://drive.google.com/file/d/1pmRP4lzYI__dt68IjFTeM2naFGc7JK6E/view" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Full
+                  </a>
+                </div>
+              </div>
+              <div class="work-body">
+                <div class="work-platform work-platform-ghl">
+                  <span class="work-platform-dot work-platform-dot-ghl"></span>
+                  GoHighLevel
+                </div>
+                <div class="work-title">CRM Pipeline & Workflow Automation</div>
+                <p class="work-desc">Full GHL pipeline setup with automation triggers, lead source tagging, and follow-up sequences configured for service business ops.</p>
+                <div class="work-tags">
+                  <span class="work-tag">Pipeline</span>
+                  <span class="work-tag">Triggers</span>
+                  <span class="work-tag">Automation</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: GHL -->
+            <div class="work-slide">
+              <div class="work-img-wrap">
+                <img class="work-img-thumb"
+                  src="https://drive.google.com/thumbnail?id=1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe&sz=w800"
+                  alt="GoHighLevel email and SMS sequence"
+                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
+                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
+                </div>
+                <div class="work-img-cover">
+                  <a class="work-view-btn" href="https://drive.google.com/file/d/1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe/view" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Full
+                  </a>
+                </div>
+              </div>
+              <div class="work-body">
+                <div class="work-platform work-platform-ghl">
+                  <span class="work-platform-dot work-platform-dot-ghl"></span>
+                  GoHighLevel
+                </div>
+                <div class="work-title">Webhook Integration — Stripe & Apple Pay</div>
+                <p class="work-desc">GHL workflow triggered by Stripe and Apple Pay webhooks, handling step order logic with conditional branches for Abandon Cart and Payment Successful events.</p>
+                <div class="work-tags">
+                  <span class="work-tag">Webhook</span>
+                  <span class="work-tag">Stripe</span>
+                  <span class="work-tag">Apple Pay</span>
+                  <span class="work-tag">Abandon Cart</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: GHL -->
+            <div class="work-slide">
+              <div class="work-img-wrap">
+                <img class="work-img-thumb"
+                  src="https://drive.google.com/thumbnail?id=1EgVhTiRNoVR08topSAjER8RYrsle6IZQ&sz=w800"
+                  alt="GoHighLevel calendar booking and automation"
+                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
+                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
+                </div>
+                <div class="work-img-cover">
+                  <a class="work-view-btn" href="https://drive.google.com/file/d/1EgVhTiRNoVR08topSAjER8RYrsle6IZQ/view" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Full
+                  </a>
+                </div>
+              </div>
+              <div class="work-body">
+                <div class="work-platform work-platform-ghl">
+                  <span class="work-platform-dot work-platform-dot-ghl"></span>
+                  GoHighLevel
+                </div>
+                <div class="work-title">Calendar Booking & Confirmation Flow</div>
+                <p class="work-desc">GHL calendar integration with automated booking confirmations, reminders, and post-appointment follow-up — replacing manual WhatsApp coordination.</p>
+                <div class="work-tags">
+                  <span class="work-tag">Calendar</span>
+                  <span class="work-tag">Booking</span>
+                  <span class="work-tag">Reminders</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4: Zapier -->
+            <div class="work-slide">
+              <div class="work-img-wrap">
+                <img class="work-img-thumb"
+                  src="https://drive.google.com/thumbnail?id=1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh&sz=w800"
+                  alt="Zapier multi-step automation workflow"
+                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
+                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,107,53,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
+                </div>
+                <div class="work-img-cover">
+                  <a class="work-view-btn" href="https://drive.google.com/file/d/1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh/view" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Full
+                  </a>
+                </div>
+              </div>
+              <div class="work-body">
+                <div class="work-platform work-platform-zapier">
+                  <span class="work-platform-dot work-platform-dot-zapier"></span>
+                  Zapier
+                </div>
+                <div class="work-title">Cross-Platform Integration Zap</div>
+                <p class="work-desc">Multi-step Zap connecting form submissions, Google Sheets, and GHL contact creation — eliminating manual data entry across platforms.</p>
+                <div class="work-tags">
+                  <span class="work-tag">Integration</span>
+                  <span class="work-tag">Multi-step</span>
+                  <span class="work-tag">Sheets</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 5: N8N -->
+            <div class="work-slide">
+              <div class="work-img-wrap">
+                <img class="work-img-thumb"
+                  src="https://drive.google.com/thumbnail?id=1NcCb1_tlSKN2xjQSsYW5swD73EaeKl6T&sz=w800"
+                  alt="N8N workflow automation"
+                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
+                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(234,75,113,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
+                </div>
+                <div class="work-img-cover">
+                  <a class="work-view-btn" href="https://drive.google.com/file/d/1NcCb1_tlSKN2xjQSsYW5swD73EaeKl6T/view" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    View Full
+                  </a>
+                </div>
+              </div>
+              <div class="work-body">
+                <div class="work-platform work-platform-n8n">
+                  <span class="work-platform-dot work-platform-dot-n8n"></span>
+                  N8N
+                </div>
+                <div class="work-title">N8N Workflow — API Node Automation</div>
+                <p class="work-desc">N8N visual workflow using HTTP request nodes, conditional logic, and data transformation — built for advanced API-to-CRM integrations.</p>
+                <div class="work-tags">
+                  <span class="work-tag">API</span>
+                  <span class="work-tag">Logic</span>
+                  <span class="work-tag">Nodes</span>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /works-track -->
+        </div><!-- /viewport -->
+
+        <!-- Navigation -->
+        <div class="works-nav">
+          <button class="works-arrow" id="worksPrev" aria-label="Previous">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="works-dots" id="worksDots"></div>
+          <button class="works-arrow" id="worksNext" aria-label="Next">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- TESTIMONIALS -->
   <section class="wrap" id="testimonials">
     <div class="section-head fade-in">
@@ -1135,7 +1568,7 @@ h2 {
       </article>
       <article class="testi-card">
         <div class="testi-quote">"</div>
-        <p class="testi-text">What impressed me most was how he thinks through a system before touching any tool. The questions he asked before building saved us from a lot of rework down the line.</p>
+        <p class="testi-text">What impressed me most was how she thinks through a system before touching any tool. The questions she asked before building saved us from a lot of rework down the line.</p>
         <div class="testi-author">
           <div class="testi-avatar">JS</div>
           <div>
@@ -1227,11 +1660,11 @@ h2 {
 
       <div class="timeline" aria-label="Career timeline">
         <div class="time-row">
-          <div class="time">2024–Now</div>
+          <div class="time">2025–Now</div>
           <p class="time-copy">Freelance Digital Automation, CRM & Website Specialist — real estate, coaching, hospitality, photography, and service business clients across GHL, automation, websites, AI, and SEO/AEO.</p>
         </div>
         <div class="time-row">
-          <div class="time">2019–2024</div>
+          <div class="time">2019–2025</div>
           <p class="time-copy">Project Manager, Inovus Building Solutions — HVAC design, BIM coordination, estimates, schedules, suppliers, subcontractors, and client management across multiple concurrent technical projects.</p>
         </div>
         <div class="time-row">
@@ -1289,6 +1722,94 @@ h2 {
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── WORKS CAROUSEL ──
+  (function() {
+    const track = document.getElementById('worksTrack');
+    const prevBtn = document.getElementById('worksPrev');
+    const nextBtn = document.getElementById('worksNext');
+    const dotsWrap = document.getElementById('worksDots');
+
+    if (!track) return;
+
+    const slides = track.querySelectorAll('.work-slide');
+    let current = 0;
+
+    function getSlidesVisible() {
+      if (window.innerWidth <= 640) return 1;
+      if (window.innerWidth <= 960) return 2;
+      return 3;
+    }
+
+    function totalPositions() {
+      return Math.max(1, slides.length - getSlidesVisible() + 1);
+    }
+
+    // Build dots
+    function buildDots() {
+      dotsWrap.innerHTML = '';
+      const n = totalPositions();
+      for (let i = 0; i < n; i++) {
+        const d = document.createElement('button');
+        d.className = 'works-dot' + (i === current ? ' active' : '');
+        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function updateDots() {
+      dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function getSlideWidth() {
+      if (!slides[0]) return 0;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.gap) || 20;
+      const visible = getSlidesVisible();
+      const viewportW = track.parentElement.offsetWidth;
+      return (viewportW - gap * (visible - 1)) / visible + gap;
+    }
+
+    function goTo(index) {
+      const max = totalPositions() - 1;
+      current = Math.max(0, Math.min(index, max));
+      const offset = current * getSlideWidth();
+      track.style.transform = `translateX(-${offset}px)`;
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= max;
+      updateDots();
+    }
+
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    window.addEventListener('resize', () => {
+      current = Math.min(current, totalPositions() - 1);
+      buildDots();
+      goTo(current);
+    });
+
+    buildDots();
+    goTo(0);
+
+    // Touch / drag support
+    let startX = 0, isDragging = false;
+    track.parentElement.addEventListener('pointerdown', e => {
+      startX = e.clientX;
+      isDragging = true;
+    });
+    window.addEventListener('pointerup', e => {
+      if (!isDragging) return;
+      isDragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 50) {
+        diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      }
+    });
+  })();
 </script>
 </body>
 </html>
