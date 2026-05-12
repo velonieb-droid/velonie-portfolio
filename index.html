@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Ambient background blobs */
 body::before {
   content: "";
   position: fixed;
@@ -170,16 +170,162 @@ a { color: inherit; text-decoration: none; }
 .btn.ghost { color: var(--muted); background: transparent; border-color: var(--line); }
 .btn.ghost:hover { color: var(--ink); }
 
+/* ── WATCH INTRO BUTTON ── */
+.btn.watch-intro {
+  color: var(--green);
+  background: rgba(31, 228, 122, 0.08);
+  border-color: rgba(31, 228, 122, 0.3);
+  gap: 10px;
+}
+
+.btn.watch-intro:hover {
+  background: rgba(31, 228, 122, 0.14);
+  border-color: rgba(31, 228, 122, 0.5);
+  color: var(--ink);
+}
+
+.play-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green), var(--cyan));
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.btn.watch-intro:hover .play-icon { transform: scale(1.12); }
+
+.play-icon svg { width: 10px; height: 10px; fill: #031809; margin-left: 1px; }
+
+/* ── VIDEO MODAL ── */
+.video-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(4, 10, 7, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.video-modal {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  background: var(--panel2);
+  border: 1px solid rgba(31, 228, 122, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(31,228,122,0.08);
+  transform: translateY(28px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.video-modal-overlay.open .video-modal {
+  transform: translateY(0) scale(1);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(6, 14, 10, 0.6);
+}
+
+.video-modal-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.video-modal-label::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.video-modal-close {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  color: var(--muted);
+  cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: "Inter", sans-serif;
+}
+
+.video-modal-close:hover {
+  background: rgba(240, 96, 112, 0.12);
+  border-color: rgba(240, 96, 112, 0.3);
+  color: var(--rose);
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.video-modal-footer {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  background: rgba(6, 14, 10, 0.4);
+}
+
+.video-modal-footer p {
+  font-size: 13px;
+  color: var(--soft);
+}
+
+.video-modal-footer strong { color: var(--muted); }
+
 /* ── HERO ── */
 .hero {
   min-height: calc(100vh - 68px);
-  display: flex; /* Changed to flex container */
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center children horizontally */
-  justify-content: center; /* Center children vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 60px 0 52px;
 }
-
 
 .hero-grid {
   display: grid;
@@ -193,7 +339,7 @@ a { color: inherit; text-decoration: none; }
   width: 80%;
   max-width: 80%;
   height: auto;
-  margin: 0 auto 32px auto; /* Center horizontally and add bottom margin */
+  margin: 0 auto 32px auto;
   display: block;
 }
 
@@ -596,8 +742,6 @@ h2 {
 .outcome p { font-size: 13px; color: var(--text); line-height: 1.55; }
 
 /* ── TESTIMONIALS ── */
-.testimonials-section { }
-
 .testi-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -778,7 +922,7 @@ h2 {
 .footer-links a { color: var(--soft); transition: color 0.15s; }
 .footer-links a:hover { color: var(--green); }
 
-/* ── FADE IN ANIMATIONS ── */
+/* ── FADE IN ── */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
@@ -822,6 +966,8 @@ h2 {
   .hero-cta .btn { width: auto; }
   .contact-actions .btn { width: 100%; }
   .footer { flex-direction: column; align-items: flex-start; }
+  .video-modal { border-radius: 10px; }
+  .video-modal-footer { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -829,243 +975,32 @@ h2 {
   .fade-in { opacity: 1; transform: none; }
   * { transition-duration: 0.01ms !important; }
 }
-
-/* ── SAMPLE WORKS CAROUSEL ── */
-.works-section {
-  background: rgba(10, 22, 16, 0.4);
-}
-
-.works-carousel-outer {
-  position: relative;
-}
-
-.works-carousel-viewport {
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-.works-track {
-  display: flex;
-  gap: 20px;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
-}
-
-.work-slide {
-  flex: 0 0 calc(33.333% - 14px);
-  min-width: 0;
-  background: var(--panel2);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: border-color 0.25s, transform 0.25s;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-}
-
-.work-slide:hover {
-  border-color: rgba(31, 228, 122, 0.35);
-  transform: translateY(-4px);
-}
-
-.work-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  background: rgba(6, 14, 10, 0.8);
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
-}
-
-.work-img-wrap iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  pointer-events: none;
-  transform: scale(1.01);
-}
-
-.work-img-cover {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(6,14,10,0.15);
-  transition: background 0.2s;
-}
-
-.work-img-cover:hover {
-  background: rgba(6,14,10,0.0);
-}
-
-.work-view-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 18px;
-  background: rgba(6, 14, 10, 0.82);
-  border: 1px solid rgba(31, 228, 122, 0.4);
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  backdrop-filter: blur(8px);
-  opacity: 0;
-  transition: opacity 0.2s, transform 0.2s;
-  transform: translateY(4px);
-  text-decoration: none;
-}
-
-.work-slide:hover .work-view-btn {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.work-img-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-}
-
-.work-body {
-  padding: 20px 22px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.work-platform {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-
-.work-platform-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.work-title {
-  font-family: "Outfit", sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.25;
-  margin-bottom: 8px;
-}
-
-.work-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.work-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
-}
-
-.work-tag {
-  padding: 3px 8px;
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--soft);
-  background: rgba(255,255,255,0.02);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-/* Nav arrows + dots */
-.works-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 28px;
-}
-
-.works-arrow {
-  width: 44px; height: 44px;
-  display: grid; place-items: center;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  background: var(--panel);
-  color: var(--muted);
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-  flex-shrink: 0;
-  user-select: none;
-}
-
-.works-arrow:hover {
-  border-color: rgba(31, 228, 122, 0.4);
-  color: var(--green);
-  background: rgba(31, 228, 122, 0.08);
-}
-
-.works-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.works-dots {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.works-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--soft);
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  padding: 0;
-}
-
-.works-dot.active {
-  background: var(--green);
-  transform: scale(1.35);
-}
-
-.work-platform-ghl { color: #1fe47a; }
-.work-platform-zapier { color: #FF6B35; }
-.work-platform-n8n { color: #ea4b71; }
-
-.work-platform-dot-ghl { background: #1fe47a; }
-.work-platform-dot-zapier { background: #FF6B35; }
-.work-platform-dot-n8n { background: #ea4b71; }
-
-@media (max-width: 960px) {
-  .work-slide { flex: 0 0 calc(50% - 10px); }
-}
-
-@media (max-width: 640px) {
-  .work-slide { flex: 0 0 100%; }
-}
 </style>
 </head>
 <body>
+
+<!-- VIDEO MODAL -->
+<div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Introduction video">
+  <div class="video-modal" id="videoModalBox">
+    <div class="video-modal-header">
+      <div class="video-modal-label">Meet Velonie — 2 min intro</div>
+      <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+    </div>
+    <div class="video-wrapper">
+      <iframe
+        id="introIframe"
+        src=""
+        allow="autoplay; fullscreen"
+        allowfullscreen
+        title="Velonie Baluarte Introduction Video"
+      ></iframe>
+    </div>
+    <div class="video-modal-footer">
+      <p>👋 <strong>Velonie Baluarte</strong> — GHL CRM Specialist · Automation · Web & AI Systems</p>
+      <a class="btn primary" style="min-height:36px;font-size:12px;padding:0 14px;white-space:nowrap" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Hire Me</a>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <header class="topbar">
@@ -1077,7 +1012,6 @@ h2 {
     <nav class="nav" aria-label="Portfolio navigation">
       <a href="#roles">Roles</a>
       <a href="#projects">Projects</a>
-      <a href="#sample-works">Sample Works</a>
       <a href="#stack">Stack</a>
       <a href="#background">Background</a>
       <a href="#contact">Contact</a>
@@ -1093,14 +1027,20 @@ h2 {
     <img src="VAB LOGO 2.png" alt="VAB Logo" class="hero-logo">
     <div class="hero-grid">
       <div class="fade-in">
-        <div class="kicker">GoHighLevel CRM Specialist | Automation | Website Developer</div>
-        <h1>GHL CRM automation for service businesses done managing leads <em>manually.</em></h1>
+        <div class="kicker">CRM Automation Specialist | Website Developer | AI Prompt Engineer</div>
+        <h1>CRM automation, websites, and AI systems for <em>business growth.</em></h1>
         <p class="lead">
-         I build <strong>GoHighLevel CRM systems end-to-end</strong> — pipelines, automations, funnels, calendar booking, and follow-up sequences. Real estate agents, coaches, and service businesses hire me when leads are falling through spreadsheets and WhatsApp and they need a clean system that runs itself.
+          I help real estate, coaching, blog, hotel, condominium, photography, and service businesses turn scattered leads and daily admin into clear digital systems: CRM pipelines, responsive websites, workflow automation, AI prompt systems, SEO/AEO structure, and executive support.
         </p>
         <div class="hero-cta">
           <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Hire / Interview Me</a>
           <a class="btn secondary" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">View Resume</a>
+          <button class="btn watch-intro" id="watchIntroBtn" aria-label="Watch introduction video">
+            <span class="play-icon">
+              <svg viewBox="0 0 10 12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 10,6 0,12"/></svg>
+            </span>
+            Watch My Intro
+          </button>
         </div>
       </div>
 
@@ -1108,7 +1048,7 @@ h2 {
         <img class="hero-card-img" src="assets/automation-portfolio-hero.png" alt="Digital automation dashboard — CRM, website, SEO, and AI workflow systems">
         <div class="hero-card-body">
           <div class="hero-card-label">What employers get</div>
-          <p>GHL specialist who builds the full system — pipeline, triggers, sequences, funnels, and integrations — then documents everything so it runs without hand-holding.</p>
+          <p>A digital operator who can build websites, organize CRM pipelines, automate follow-up, write AI-assisted content, document processes, and keep client work moving.</p>
           <div class="hero-card-links">
             <a class="btn primary" style="min-height:38px;font-size:13px;padding:0 14px" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
             <a class="btn ghost" style="min-height:38px;font-size:13px;padding:0 14px" href="tel:+639152845260">WhatsApp</a>
@@ -1335,204 +1275,6 @@ h2 {
     </div>
   </section>
 
-  <!-- SAMPLE WORKS -->
-  <section class="works-section" id="sample-works">
-    <div class="wrap">
-      <div class="section-head fade-in">
-        <div>
-          <div class="section-tag">Sample Works</div>
-          <h2>Real builds, live systems.</h2>
-        </div>
-        <p class="section-copy">Actual automation screenshots and workflow builds across GoHighLevel, Zapier, and N8N — built for real client operations.</p>
-      </div>
-
-      <div class="works-carousel-outer fade-in">
-        <div class="works-carousel-viewport">
-          <div class="works-track" id="worksTrack">
-
-            <!-- Slide 1: GHL -->
-            <div class="work-slide">
-              <div class="work-img-wrap">
-                <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1pmRP4lzYI__dt68IjFTeM2naFGc7JK6E&sz=w800"
-                  alt="GoHighLevel CRM automation workflow"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
-                <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1pmRP4lzYI__dt68IjFTeM2naFGc7JK6E/view" target="_blank" rel="noopener">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    View Full
-                  </a>
-                </div>
-              </div>
-              <div class="work-body">
-                <div class="work-platform work-platform-ghl">
-                  <span class="work-platform-dot work-platform-dot-ghl"></span>
-                  GoHighLevel
-                </div>
-                <div class="work-title">CRM Pipeline & Workflow Automation</div>
-                <p class="work-desc">Full GHL pipeline setup with automation triggers, lead source tagging, and follow-up sequences configured for service business ops.</p>
-                <div class="work-tags">
-                  <span class="work-tag">Pipeline</span>
-                  <span class="work-tag">Triggers</span>
-                  <span class="work-tag">Automation</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2: GHL -->
-            <div class="work-slide">
-              <div class="work-img-wrap">
-                <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe&sz=w800"
-                  alt="GoHighLevel email and SMS sequence"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
-                <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe/view" target="_blank" rel="noopener">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    View Full
-                  </a>
-                </div>
-              </div>
-              <div class="work-body">
-                <div class="work-platform work-platform-ghl">
-                  <span class="work-platform-dot work-platform-dot-ghl"></span>
-                  GoHighLevel
-                </div>
-                <div class="work-title">Webhook Integration — Stripe & Apple Pay</div>
-                <p class="work-desc">GHL workflow triggered by Stripe and Apple Pay webhooks, handling step order logic with conditional branches for Abandon Cart and Payment Successful events.</p>
-                <div class="work-tags">
-                  <span class="work-tag">Webhook</span>
-                  <span class="work-tag">Stripe</span>
-                  <span class="work-tag">Apple Pay</span>
-                  <span class="work-tag">Abandon Cart</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 3: GHL -->
-            <div class="work-slide">
-              <div class="work-img-wrap">
-                <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1EgVhTiRNoVR08topSAjER8RYrsle6IZQ&sz=w800"
-                  alt="GoHighLevel calendar booking and automation"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
-                <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1EgVhTiRNoVR08topSAjER8RYrsle6IZQ/view" target="_blank" rel="noopener">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    View Full
-                  </a>
-                </div>
-              </div>
-              <div class="work-body">
-                <div class="work-platform work-platform-ghl">
-                  <span class="work-platform-dot work-platform-dot-ghl"></span>
-                  GoHighLevel
-                </div>
-                <div class="work-title">Calendar Booking & Confirmation Flow</div>
-                <p class="work-desc">GHL calendar integration with automated booking confirmations, reminders, and post-appointment follow-up — replacing manual WhatsApp coordination.</p>
-                <div class="work-tags">
-                  <span class="work-tag">Calendar</span>
-                  <span class="work-tag">Booking</span>
-                  <span class="work-tag">Reminders</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 4: Zapier -->
-            <div class="work-slide">
-              <div class="work-img-wrap">
-                <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh&sz=w800"
-                  alt="Zapier multi-step automation workflow"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,107,53,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
-                <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh/view" target="_blank" rel="noopener">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    View Full
-                  </a>
-                </div>
-              </div>
-              <div class="work-body">
-                <div class="work-platform work-platform-zapier">
-                  <span class="work-platform-dot work-platform-dot-zapier"></span>
-                  Zapier
-                </div>
-                <div class="work-title">Cross-Platform Integration Zap</div>
-                <p class="work-desc">Multi-step Zap connecting form submissions, Google Sheets, and GHL contact creation — eliminating manual data entry across platforms.</p>
-                <div class="work-tags">
-                  <span class="work-tag">Integration</span>
-                  <span class="work-tag">Multi-step</span>
-                  <span class="work-tag">Sheets</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 5: N8N -->
-            <div class="work-slide">
-              <div class="work-img-wrap">
-                <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1NcCb1_tlSKN2xjQSsYW5swD73EaeKl6T&sz=w800"
-                  alt="N8N workflow automation"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(234,75,113,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
-                <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1NcCb1_tlSKN2xjQSsYW5swD73EaeKl6T/view" target="_blank" rel="noopener">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                    View Full
-                  </a>
-                </div>
-              </div>
-              <div class="work-body">
-                <div class="work-platform work-platform-n8n">
-                  <span class="work-platform-dot work-platform-dot-n8n"></span>
-                  N8N
-                </div>
-                <div class="work-title">N8N Workflow — API Node Automation</div>
-                <p class="work-desc">N8N visual workflow using HTTP request nodes, conditional logic, and data transformation — built for advanced API-to-CRM integrations.</p>
-                <div class="work-tags">
-                  <span class="work-tag">API</span>
-                  <span class="work-tag">Logic</span>
-                  <span class="work-tag">Nodes</span>
-                </div>
-              </div>
-            </div>
-
-          </div><!-- /works-track -->
-        </div><!-- /viewport -->
-
-        <!-- Navigation -->
-        <div class="works-nav">
-          <button class="works-arrow" id="worksPrev" aria-label="Previous">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <div class="works-dots" id="worksDots"></div>
-          <button class="works-arrow" id="worksNext" aria-label="Next">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- TESTIMONIALS -->
   <section class="wrap" id="testimonials">
     <div class="section-head fade-in">
@@ -1711,7 +1453,7 @@ h2 {
 </footer>
 
 <script>
-  // Intersection Observer for fade-in animations
+  // ── FADE IN ANIMATIONS ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1723,93 +1465,39 @@ h2 {
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // ── WORKS CAROUSEL ──
-  (function() {
-    const track = document.getElementById('worksTrack');
-    const prevBtn = document.getElementById('worksPrev');
-    const nextBtn = document.getElementById('worksNext');
-    const dotsWrap = document.getElementById('worksDots');
+  // ── VIDEO MODAL ──
+  const VIDEO_SRC = 'https://drive.google.com/file/d/1nHtymmVLEyV8h6DiOJwFsR4QPLjLxD1Y/preview?autoplay=1';
 
-    if (!track) return;
+  const modal        = document.getElementById('videoModal');
+  const iframe       = document.getElementById('introIframe');
+  const openBtn      = document.getElementById('watchIntroBtn');
+  const closeBtn     = document.getElementById('videoModalClose');
 
-    const slides = track.querySelectorAll('.work-slide');
-    let current = 0;
+  function openModal() {
+    iframe.src = VIDEO_SRC;         // inject src with autoplay on open
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 
-    function getSlidesVisible() {
-      if (window.innerWidth <= 640) return 1;
-      if (window.innerWidth <= 960) return 2;
-      return 3;
-    }
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    // Small delay so the close animation plays before wiping the src
+    setTimeout(() => { iframe.src = ''; }, 320);
+  }
 
-    function totalPositions() {
-      return Math.max(1, slides.length - getSlidesVisible() + 1);
-    }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
 
-    // Build dots
-    function buildDots() {
-      dotsWrap.innerHTML = '';
-      const n = totalPositions();
-      for (let i = 0; i < n; i++) {
-        const d = document.createElement('button');
-        d.className = 'works-dot' + (i === current ? ' active' : '');
-        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        d.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(d);
-      }
-    }
+  // Click outside modal box to close
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
 
-    function updateDots() {
-      dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
-    }
-
-    function getSlideWidth() {
-      if (!slides[0]) return 0;
-      const style = window.getComputedStyle(track);
-      const gap = parseFloat(style.gap) || 20;
-      const visible = getSlidesVisible();
-      const viewportW = track.parentElement.offsetWidth;
-      return (viewportW - gap * (visible - 1)) / visible + gap;
-    }
-
-    function goTo(index) {
-      const max = totalPositions() - 1;
-      current = Math.max(0, Math.min(index, max));
-      const offset = current * getSlideWidth();
-      track.style.transform = `translateX(-${offset}px)`;
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current >= max;
-      updateDots();
-    }
-
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
-
-    window.addEventListener('resize', () => {
-      current = Math.min(current, totalPositions() - 1);
-      buildDots();
-      goTo(current);
-    });
-
-    buildDots();
-    goTo(0);
-
-    // Touch / drag support
-    let startX = 0, isDragging = false;
-    track.parentElement.addEventListener('pointerdown', e => {
-      startX = e.clientX;
-      isDragging = true;
-    });
-    window.addEventListener('pointerup', e => {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) {
-        diff > 0 ? goTo(current + 1) : goTo(current - 1);
-      }
-    });
-  })();
+  // Escape key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
 </script>
 </body>
 </html>
