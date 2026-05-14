@@ -595,79 +595,6 @@ h2 {
 
 .outcome p { font-size: 13px; color: var(--text); line-height: 1.55; }
 
-/* ── TESTIMONIALS ── */
-.testimonials-section { }
-
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.testi-card {
-  padding: 26px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--panel);
-  position: relative;
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.testi-card:hover {
-  border-color: rgba(31, 228, 122, 0.2);
-  transform: translateY(-3px);
-}
-
-.testi-quote {
-  font-size: 32px;
-  color: var(--green);
-  font-family: "Outfit", sans-serif;
-  line-height: 1;
-  margin-bottom: 14px;
-  opacity: 0.6;
-}
-
-.testi-text {
-  font-size: 15px;
-  line-height: 1.68;
-  color: var(--text);
-  font-style: italic;
-}
-
-.testi-author {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-}
-
-.testi-avatar {
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green2), var(--cyan));
-  display: grid; place-items: center;
-  font-family: "Outfit", sans-serif;
-  font-weight: 800;
-  font-size: 14px;
-  color: #031809;
-  flex-shrink: 0;
-}
-
-.testi-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.testi-role {
-  font-size: 12px;
-  color: var(--soft);
-  margin-top: 2px;
-}
-
 /* ── BACKGROUND ── */
 .story-grid {
   display: grid;
@@ -1687,8 +1614,8 @@ h2 {
   <div class="stats-bar fade-in">
     <div class="stats-inner wrap">
       <div class="stat-item">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Years in Engineering, Operations & Systems Management</div>
+        <div class="stat-num">8+</div>
+        <div class="stat-label">GHL systems delivered across real estate, coaching, healthcare & more</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">6+</div>
@@ -1801,7 +1728,7 @@ h2 {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
           </div>
           <h3>Engineering Mindset</h3>
-          <p>I map requirements before touching any tool. I ask the questions that prevent rework. That's a discipline from 20 years in technical project management — not something learned from a YouTube course.</p>
+          <p>Most GHL builds break mid-engagement because no one mapped the requirements before opening the tool. I ask those questions first — then test every trigger before handover. That process comes from technical project management, not a YouTube course.</p>
         </article>
         <article class="whyme-card">
           <div class="whyme-icon">
@@ -2319,53 +2246,6 @@ h2 {
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section class="wrap" id="testimonials">
-    <div class="section-head fade-in">
-      <div>
-        <div class="section-tag">Social proof</div>
-        <h2>What clients and colleagues say.</h2>
-      </div>
-      <p class="section-copy">Feedback from the people I've built systems for — on delivery quality, communication, and follow-through.</p>
-    </div>
-
-    <div class="testi-grid fade-in">
-      <article class="testi-card">
-        <div class="testi-quote">"</div>
-        <p class="testi-text">Velonie built our GHL pipeline from scratch and actually documented every step. We could hand it to any new staff member and they'd know exactly what to do. That level of clarity is rare.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">RL</div>
-          <div>
-            <div class="testi-name">R. Lopez</div>
-            <div class="testi-role">Real Estate Developer, Manila</div>
-          </div>
-        </div>
-      </article>
-      <article class="testi-card">
-        <div class="testi-quote">"</div>
-        <p class="testi-text">The AI prompt system Velonie set up cut my content prep time in half. It's not just templates — it's a whole workflow that actually fits how I work and what my audience needs.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">MC</div>
-          <div>
-            <div class="testi-name">M. Cruz</div>
-            <div class="testi-role">Business Coach & Content Creator</div>
-          </div>
-        </div>
-      </article>
-      <article class="testi-card">
-        <div class="testi-quote">"</div>
-        <p class="testi-text">What impressed me most was how he thinks through a system before touching any tool. The questions he asked before building saved us from a lot of rework down the line.</p>
-        <div class="testi-author">
-          <div class="testi-avatar">JS</div>
-          <div>
-            <div class="testi-name">J. Santos</div>
-            <div class="testi-role">Photography Studio Owner, Quezon City</div>
-          </div>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <!-- DELIVERABLES -->
   <section class="wrap">
     <div class="section-head fade-in">
@@ -2424,16 +2304,17 @@ h2 {
     <div class="section-head fade-in">
       <div>
         <div class="section-tag">Career story</div>
-        <h2>Digital systems — backed by 20 years of engineering discipline.</h2>
+        <h2>Why most automation builds fail — and how I prevent it.</h2>
       </div>
-      <p class="section-copy">Most digital freelancers learned tools. I also learned how to manage multi-year technical projects, lead O&M teams across three countries, and deliver on a schedule. That changes how I build.</p>
+      <p class="section-copy">Unclear requirements. Untested triggers. No documentation after handover. These are the patterns behind most failed CRM builds — and the exact problems a technical project background trains you to eliminate.</p>
     </div>
 
     <div class="story-grid fade-in">
       <article class="card">
-        <h3>Why the engineering background matters</h3>
-        <p style="margin-top:12px;font-size:15px;color:var(--muted);line-height:1.7">CRM and automation work fails for the same reason construction projects fail: unclear requirements, untested logic, and no documentation. My engineering career trained me out of all three.</p>
-        <p style="margin-top:14px;font-size:15px;color:var(--muted);line-height:1.7">I map requirements before touching any tool. I test every workflow trigger before handing it over. I document everything so it survives after I'm done. That's not extra — it's baseline discipline from a decade of project management.</p>
+        <h3>How this applies to your build</h3>
+        <p style="margin-top:12px;font-size:15px;color:var(--muted);line-height:1.7">Most CRM and automation work fails because no one fully mapped what the system needs to do before building it — and no one tested whether the logic actually holds under real conditions.</p>
+        <p style="margin-top:14px;font-size:15px;color:var(--muted);line-height:1.7">I address both before you ever see the final build. Requirements get mapped first. Every workflow trigger gets tested. Everything gets documented so your team can run it after I'm gone.</p>
+        <p style="margin-top:14px;font-size:15px;color:var(--muted);line-height:1.7">That's not an extra deliverable — it's baseline discipline from a background in technical project management.</p>
       </article>
 
       <div class="timeline" aria-label="Career timeline">
@@ -2451,7 +2332,7 @@ h2 {
         </div>
         <div class="time-row">
           <div class="time">2002–2013</div>
-          <p class="time-copy">Facilities & electrical technician — Philippines, Qatar, Saudi Arabia. Electrical systems, controls, instrumentation, commissioning, maintenance, and technical documentation across international sites.</p>
+          <p class="time-copy">Prior career in technical operations across international sites — the discipline carried over, not the industry.</p>
         </div>
       </div>
     </div>
