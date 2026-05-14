@@ -1501,6 +1501,55 @@ h2 {
 @media (max-width: 640px) {
   .work-slide { flex: 0 0 100%; }
 }
+
+/* ── AI BUILDS GRID ── */
+.ai-builds-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.ai-build-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 22px 24px;
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel2);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.ai-build-card:hover {
+  border-color: rgba(31, 228, 122, 0.3);
+}
+
+.ai-build-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--green2), var(--cyan));
+  display: grid;
+  place-items: center;
+}
+
+.ai-build-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-build-link {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .ai-builds-grid { grid-template-columns: 1fr; }
+  .ai-build-card { flex-direction: column; align-items: flex-start; padding: 18px 20px; gap: 14px; }
+  .ai-build-link { align-self: flex-start; }
+}
 </style>
 </head>
 <body>
@@ -2218,29 +2267,29 @@ h2 {
       </div>
 
       <!-- Special builds row -->
-      <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:14px" class="fade-in">
-        <article style="display:flex;flex-direction:row;align-items:center;padding:22px 24px;gap:20px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);transition:border-color 0.2s,transform 0.2s" onmouseenter="this.style.borderColor='rgba(31,228,122,0.3)'" onmouseleave="this.style.borderColor='var(--line)'">
-          <div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--green2),var(--cyan));display:grid;place-items:center">
+      <div class="ai-builds-grid fade-in">
+        <article class="ai-build-card">
+          <div class="ai-build-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#031809" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
           </div>
-          <div style="flex:1;min-width:0">
+          <div class="ai-build-body">
             <div class="site-type">AI Integration <span class="work-badge">Voice AI</span></div>
             <div class="site-title" style="margin-top:4px">Voice AI Widget</div>
             <p class="site-desc" style="margin-top:4px">Live conversational voice AI embedded into a client site — handles inbound queries using natural language in real time.</p>
           </div>
-          <a class="site-link" href="https://kensinglohi.com" target="_blank" rel="noopener" style="flex-shrink:0">Visit ↗</a>
+          <a class="site-link ai-build-link" href="https://kensinglohi.com" target="_blank" rel="noopener">Visit ↗</a>
         </article>
 
-        <article style="display:flex;flex-direction:row;align-items:center;padding:22px 24px;gap:20px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);transition:border-color 0.2s,transform 0.2s" onmouseenter="this.style.borderColor='rgba(31,228,122,0.3)'" onmouseleave="this.style.borderColor='var(--line)'">
-          <div style="flex-shrink:0;width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--green2),var(--cyan));display:grid;place-items:center">
+        <article class="ai-build-card">
+          <div class="ai-build-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#031809" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </div>
-          <div style="flex:1;min-width:0">
+          <div class="ai-build-body">
             <div class="site-type">AI Integration <span class="work-badge">Conversation AI</span></div>
             <div class="site-title" style="margin-top:4px">Conversation AI Bot</div>
             <p class="site-desc" style="margin-top:4px">AI chat bot integrated into a health client's homepage — qualifies leads and answers patient questions automatically.</p>
           </div>
-          <a class="site-link" href="https://sarahdevidohealth.com/homepage" target="_blank" rel="noopener" style="flex-shrink:0">Visit ↗</a>
+          <a class="site-link ai-build-link" href="https://sarahdevidohealth.com/homepage" target="_blank" rel="noopener">Visit ↗</a>
         </article>
       </div>
     </div>
