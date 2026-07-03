@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nonprofit Automation Build — Donor Engagement Client | Velonie Baluarte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #060e0a;
+  --bg2: #0a1610;
+  --ink: #f0f9f4;
+  --text: #cce0d6;
+  --muted: #8aab9c;
+  --soft: #5a7a6c;
+  --line: rgba(180, 230, 200, 0.11);
+  --line2: rgba(180, 230, 200, 0.07);
+  --panel: rgba(10, 22, 16, 0.85);
+  --panel2: rgba(14, 28, 21, 0.95);
+  --green: #1fe47a;
+  --green2: #0cc45e;
+  --cyan: #3dd9f0;
+  --amber: #f5b83a;
+  --rose: #f06070;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 8% 12%, rgba(31, 228, 122, 0.09), transparent),
+    radial-gradient(ellipse 50% 40% at 88% 28%, rgba(61, 217, 240, 0.07), transparent),
+    radial-gradient(ellipse 40% 60% at 50% 80%, rgba(31, 228, 122, 0.05), transparent);
+  z-index: -1;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+.topbar { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(6, 14, 10, 0.82); border-bottom: 1px solid var(--line); }
+.topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: "Outfit", sans-serif; font-weight: 800; font-size: 16px; color: var(--ink); }
+.back-link { font-size: 13px; font-weight: 600; color: var(--muted); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); transition: color .15s, border-color .15s; }
+.back-link:hover { color: var(--ink); border-color: rgba(31,228,122,0.3); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; font-weight: 600; font-family: "Inter", sans-serif; cursor: pointer; transition: transform .18s, box-shadow .18s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.btn.primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #031809; border-color: transparent; font-weight: 700; }
+.btn.ghost { color: var(--muted); background: transparent; border-color: var(--line); }
+.btn.ghost:hover { color: var(--ink); }
+
+.hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+.kicker { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid rgba(31, 228, 122, 0.28); border-radius: 999px; background: rgba(31, 228, 122, 0.07); color: var(--green); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 22px; }
+.kicker::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 8px var(--green); }
+
+h1, h2, h3 { font-family: "Outfit", sans-serif; color: var(--ink); line-height: 1; }
+h1 { font-size: clamp(34px, 5.6vw, 56px); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; max-width: 820px; }
+h1 em { font-style: normal; background: linear-gradient(135deg, var(--green), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.lead { margin-top: 24px; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.7; color: var(--text); max-width: 640px; }
+
+.client-meta { margin-top: 34px; display: flex; gap: 32px; flex-wrap: wrap; font-size: 13px; }
+.client-meta div { display: flex; flex-direction: column; gap: 4px; }
+.client-meta .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+.client-meta .val { color: var(--ink); font-size: 13.5px; font-weight: 500; }
+
+section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+.section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; max-width: 640px; }
+.section-copy { margin-top: 14px; font-size: 15.5px; color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 36px; }
+
+/* methodology stages */
+.stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.stage { background: var(--panel); padding: 18px 12px; text-align: center; }
+.stage .n { font-family: "Outfit", sans-serif; font-size: 11px; color: var(--amber); margin-bottom: 8px; font-weight: 700; }
+.stage .t { font-size: 13px; font-weight: 600; color: var(--ink); }
+@media (max-width: 720px) { .stages { grid-template-columns: repeat(2, 1fr); } }
+
+/* pipeline diagram */
+.pipeline { border: 1px solid var(--line); border-radius: 12px; padding: 32px 20px; background: var(--panel); margin-top: 24px; overflow-x: auto; }
+.pipeline svg { display: block; margin: 0 auto; min-width: 640px; }
+
+/* build cards */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card { padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); transition: border-color .2s, transform .2s; }
+.card:hover { border-color: rgba(31, 228, 122, 0.25); transform: translateY(-3px); }
+.card .num { font-family: "Outfit", sans-serif; color: var(--green); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.card .chip-label { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(61, 217, 240, 0.35); background: rgba(61, 217, 240, 0.08); padding: 3px 9px; border-radius: 6px; margin-bottom: 12px; }
+.card h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+.card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+@media (max-width: 720px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* swatches */
+.swatches { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+.swatch { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--muted); font-weight: 500; }
+.swatch .chip-color { width: 20px; height: 20px; border-radius: 5px; border: 1px solid var(--line); }
+
+/* image slots */
+.img-slot { border: 1px dashed var(--line); border-radius: 10px; background: var(--panel); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; color: var(--soft); font-size: 12.5px; text-align: center; padding: 20px; overflow: hidden; }
+.img-slot img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.img-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+@media (max-width: 720px) { .img-row { grid-template-columns: 1fr; } }
+.img-cap { font-size: 11px; color: var(--soft); margin-top: 8px; text-align: center; }
+
+/* war story */
+.war-story { border-left: 3px solid var(--amber); padding-left: 22px; }
+.war-story p { font-size: 14.5px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+.war-story p:last-child { margin-bottom: 0; }
+.war-story b { color: var(--ink); }
+
+/* stats */
+.stats-bar { border: 1px solid var(--line); border-radius: 12px; background: rgba(10, 22, 16, 0.6); overflow: hidden; }
+.stats-inner { display: grid; grid-template-columns: repeat(5, 1fr); }
+.stat-item { padding: 24px 16px; border-right: 1px solid var(--line); }
+.stat-item:last-child { border-right: 0; }
+.stat-num { font-family: "Outfit", sans-serif; font-size: clamp(22px, 3vw, 32px); font-weight: 800; color: var(--green); line-height: 1; }
+.stat-label { margin-top: 8px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+@media (max-width: 720px) { .stats-inner { grid-template-columns: repeat(2, 1fr); } .stat-item { border-right: 1px solid var(--line); } }
+
+.role-list { list-style: none; margin-top: 6px; }
+.role-list li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line2); font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+.role-list li:last-child { border-bottom: 0; }
+.role-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-top: 8px; }
+.role-list b { color: var(--ink); }
+
+.contact-section { background: linear-gradient(135deg, rgba(31, 228, 122, 0.08), rgba(61, 217, 240, 0.04)), var(--panel2); border: 1px solid rgba(31, 228, 122, 0.2); border-radius: 14px; padding: 44px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.contact-section h2 { font-size: clamp(24px, 3.5vw, 34px); }
+.contact-section p { margin-top: 12px; font-size: 15px; color: var(--muted); line-height: 1.65; max-width: 520px; }
+.contact-actions { display: flex; flex-direction: column; gap: 10px; min-width: 190px; }
+@media (max-width: 720px) { .contact-section { grid-template-columns: 1fr; padding: 30px; } .contact-actions { flex-direction: row; flex-wrap: wrap; } }
+
+.footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 18px; }
+.footer-links a { color: var(--soft); transition: color .15s; }
+.footer-links a:hover { color: var(--green); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">Velonie Baluarte</div>
+    <a class="back-link" href="Portfolio_July_2026.html">&larr; Back to portfolio</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Case Study &mdash; Automation Architecture Build</div>
+    <h1>Built a self-running content engine so a nonprofit's Facebook page <em>posts, tracks, and reports without anyone touching it.</em></h1>
+    <p class="lead">A full GHL buildout plus a custom n8n automation pipeline for a donor engagement platform &mdash; content rotation, AI image generation, and auto-posting, architected around the client's own Capture &rarr; Automate &rarr; Track &rarr; Show Impact &rarr; Grow model.</p>
+
+    <div class="client-meta">
+      <div><span class="label">Industry</span><span class="val">Nonprofit donor engagement platform</span></div>
+      <div><span class="label">Engagement</span><span class="val">GHL buildout + n8n automation architecture</span></div>
+      <div><span class="label">Role</span><span class="val">Automation architect, GHL specialist</span></div>
+      <div><span class="label">Stack</span><span class="val">GHL, n8n, FastAPI, OpenAI, Facebook Graph API</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">The brief</div>
+    <h2>Architected around the client's own methodology, not a generic template</h2>
+    <p class="section-copy">Everything &mdash; pipelines, fields, workflows, content system &mdash; was built to mirror the client's existing donor engagement model, so the CRM matches how the organization actually thinks about a donor relationship.</p>
+    <div class="stages">
+      <div class="stage"><div class="n">01</div><div class="t">Capture</div></div>
+      <div class="stage"><div class="n">02</div><div class="t">Automate</div></div>
+      <div class="stage"><div class="n">03</div><div class="t">Track</div></div>
+      <div class="stage"><div class="n">04</div><div class="t">Show Impact</div></div>
+      <div class="stage"><div class="n">05</div><div class="t">Grow</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">System architecture</div>
+    <h2>The Facebook auto-poster pipeline</h2>
+    <p class="section-copy">A content rotation system that generates, brands, and publishes posts with zero manual steps &mdash; built because the client had no consistent posting cadence and no bandwidth to create one manually.</p>
+
+    <div class="pipeline">
+      <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pipeline diagram: Google Sheets to OpenAI image generation to FastAPI overlay service to Facebook Graph API">
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#1fe47a"/>
+          </marker>
+        </defs>
+        <line x1="120" y1="110" x2="330" y2="110" stroke="#1fe47a" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="340" y1="110" x2="550" y2="110" stroke="#1fe47a" stroke-width="1.5" marker-end="url(#arrow)"/>
+        <line x1="560" y1="110" x2="770" y2="110" stroke="#1fe47a" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+        <rect x="20" y="75" width="100" height="70" rx="6" fill="#0a1610" stroke="rgba(180,230,200,0.14)"/>
+        <circle cx="70" cy="95" r="4" fill="#f5b83a"/>
+        <text x="70" y="118" text-anchor="middle" fill="#f0f9f4" font-family="Outfit, sans-serif" font-size="11" font-weight="700">Google Sheets</text>
+        <text x="70" y="132" text-anchor="middle" fill="#8aab9c" font-family="Inter, sans-serif" font-size="9.5">content rotation</text>
+
+        <rect x="240" y="75" width="100" height="70" rx="6" fill="#0a1610" stroke="rgba(180,230,200,0.14)"/>
+        <circle cx="290" cy="95" r="4" fill="#f5b83a"/>
+        <text x="290" y="118" text-anchor="middle" fill="#f0f9f4" font-family="Outfit, sans-serif" font-size="11" font-weight="700">OpenAI</text>
+        <text x="290" y="132" text-anchor="middle" fill="#8aab9c" font-family="Inter, sans-serif" font-size="9.5">image generation</text>
+
+        <rect x="460" y="75" width="110" height="70" rx="6" fill="#0a1610" stroke="rgba(180,230,200,0.14)"/>
+        <circle cx="515" cy="95" r="4" fill="#f5b83a"/>
+        <text x="515" y="112" text-anchor="middle" fill="#f0f9f4" font-family="Outfit, sans-serif" font-size="11" font-weight="700">FastAPI overlay</text>
+        <text x="515" y="126" text-anchor="middle" fill="#8aab9c" font-family="Inter, sans-serif" font-size="9.5">custom microservice</text>
+        <text x="515" y="138" text-anchor="middle" fill="#8aab9c" font-family="Inter, sans-serif" font-size="9.5">hosted on Render</text>
+
+        <rect x="690" y="75" width="110" height="70" rx="6" fill="#0a1610" stroke="#1fe47a"/>
+        <circle cx="745" cy="95" r="4" fill="#1fe47a"/>
+        <text x="745" y="118" text-anchor="middle" fill="#f0f9f4" font-family="Outfit, sans-serif" font-size="11" font-weight="700">Facebook Graph API</text>
+        <text x="745" y="132" text-anchor="middle" fill="#8aab9c" font-family="Inter, sans-serif" font-size="9.5">auto-publish</text>
+      </svg>
+    </div>
+
+    <div class="grid-2" style="margin-top:24px;">
+      <div class="card">
+        <span class="chip-label">Content</span>
+        <h3>Rotation without repetition</h3>
+        <p>Google Sheets drives the content calendar so the client can add or reorder posts without touching the workflow itself.</p>
+      </div>
+      <div class="card">
+        <span class="chip-label">Generation</span>
+        <h3>On-brand images, generated per post</h3>
+        <p>OpenAI generates the base image per post; a custom FastAPI microservice on Render overlays branding before it ever reaches Facebook.</p>
+      </div>
+      <div class="card">
+        <span class="chip-label">Publishing</span>
+        <h3>Fully automated, no manual posting</h3>
+        <p>Final asset is pushed live via the Facebook Graph API &mdash; the client's team never opens Meta Business Suite for routine posts.</p>
+      </div>
+      <div class="card">
+        <span class="chip-label">Ownership</span>
+        <h3>Client-editable, not a black box</h3>
+        <p>Every step is editable from the sheet or n8n canvas &mdash; no dependency on me to keep the pipeline running.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Visual proof</div>
+    <h2>The build, in the platforms it actually runs in</h2>
+    <p class="section-copy">Replace these slots with your own redacted screenshots &mdash; the n8n canvas, the GHL Social Planner connection, and a sample generated post.</p>
+    <div class="img-row">
+      <div>
+        <div class="img-slot">
+          <img src="https://drive.google.com/thumbnail?id=17WLlG5k9fvlSSwaq5ig1k1bXXyVmZRhJ&sz=w1000" alt="n8n Facebook auto-poster workflow canvas" loading="lazy">
+        </div>
+        <div class="img-cap">Full auto-poster pipeline, n8n canvas view</div>
+      </div>
+      <div>
+        <div class="img-slot">
+          <img src="https://drive.google.com/thumbnail?id=14joN1WouR_R7MzkddvCzgWA3S8V5lga2&sz=w1000" alt="GHL Social Planner connected to client Facebook Page" loading="lazy">
+        </div>
+        <div class="img-cap">Facebook Page connected in GHL Social Planner</div>
+      </div>
+      <div>
+        <div class="img-slot">
+          <img src="https://drive.google.com/thumbnail?id=1z31BYsTfUJdHynRZl0vpitNLt2_RZIbP&sz=w1000" alt="Sample auto-generated and published Facebook post" loading="lazy">
+        </div>
+        <div class="img-cap">Output: branded, auto-published post</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">GHL buildout</div>
+    <h2>The CRM layer underneath the automation</h2>
+    <div class="grid-2" style="margin-top:8px;">
+      <div class="card">
+        <span class="chip-label">Fields</span>
+        <h3>23 custom fields</h3>
+        <p>Mapped to the donor lifecycle so every stage of the Capture&rarr;Grow model has a corresponding data point in GHL.</p>
+      </div>
+      <div class="card">
+        <span class="chip-label">Workflows</span>
+        <h3>11 workflows, WF&#8209;01 through WF&#8209;11</h3>
+        <p>Numbered and documented individually so the client's team can trace exactly what triggers what, without opening the canvas.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <span class="chip-label">Email kit</span>
+      <h3>6-template HTML email system</h3>
+      <p style="margin-bottom:0;">Built to the client's brand system for consistent donor-facing communication across the full lifecycle.</p>
+      <div class="swatches">
+        <div class="swatch"><span class="chip-color" style="background:#0B1B2E;"></span>Navy #0B1B2E</div>
+        <div class="swatch"><span class="chip-color" style="background:#0D9B8A;"></span>Teal #0D9B8A</div>
+        <div class="swatch"><span class="chip-color" style="background:#F2F0E8;"></span>Inter, typeface</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Problem-solving in the field</div>
+    <h2>Debugging the Page-to-Page DM restriction</h2>
+    <div class="war-story">
+      <p>Meta restricts Page-to-Page direct messaging by default, which broke part of the intended engagement flow once the client's Page was connected to GHL's Social Planner.</p>
+      <p><b>Instead of routing around it with a workaround that would've broken on Meta's next policy update,</b> the connection was diagnosed at the permissions level, confirming exactly which Meta-side restriction was active before adjusting the integration to work within it &mdash; not against it.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Scope proof</div>
+    <h2>What shipped</h2>
+    <div class="stats-bar" style="margin-top:28px;">
+      <div class="stats-inner">
+        <div class="stat-item"><div class="stat-num">23</div><div class="stat-label">Custom fields</div></div>
+        <div class="stat-item"><div class="stat-num">11</div><div class="stat-label">Workflows built</div></div>
+        <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Email templates</div></div>
+        <div class="stat-item"><div class="stat-num">1</div><div class="stat-label">Custom microservice</div></div>
+        <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Lifecycle stages mapped</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">My role</div>
+    <h2>Architect, not just implementer</h2>
+    <ul class="role-list">
+      <li><span><b>Designed</b> the CRM structure around the client's own donor engagement methodology instead of a generic nonprofit template.</span></li>
+      <li><span><b>Built</b> a custom FastAPI microservice from scratch to handle image branding, deployed and hosted independently on Render.</span></li>
+      <li><span><b>Diagnosed and resolved</b> a Meta-side platform restriction rather than working around it.</span></li>
+      <li><span><b>Documented</b> every workflow individually (WF-01&ndash;WF-11) so the system is maintainable without me.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="contact-section">
+      <div>
+        <div class="section-tag">Open for work</div>
+        <h2>Need a CRM and content system that runs itself?</h2>
+        <p>This build shows the full stack &mdash; GHL structure, custom automation, and a microservice built to solve a specific gap no off-the-shelf tool covered.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry">Email Me</a>
+        <a class="btn ghost" href="Portfolio_July_2026.html">View more work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte &middot; CRM Automation &middot; Web &middot; AI Systems &middot; SEO/AEO</span>
+  <div class="footer-links">
+    <a href="mailto:velonieb@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="tel:+639152845260">WhatsApp</a>
+  </div>
+</footer>
+
+</body>
+</html>

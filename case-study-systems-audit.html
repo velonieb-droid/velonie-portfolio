@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHL Systems Audit — Credit Repair & Funding Client | Velonie Baluarte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #060e0a;
+  --bg2: #0a1610;
+  --ink: #f0f9f4;
+  --text: #cce0d6;
+  --muted: #8aab9c;
+  --soft: #5a7a6c;
+  --line: rgba(180, 230, 200, 0.11);
+  --line2: rgba(180, 230, 200, 0.07);
+  --panel: rgba(10, 22, 16, 0.85);
+  --panel2: rgba(14, 28, 21, 0.95);
+  --green: #1fe47a;
+  --green2: #0cc45e;
+  --cyan: #3dd9f0;
+  --amber: #f5b83a;
+  --rose: #f06070;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 8% 12%, rgba(31, 228, 122, 0.09), transparent),
+    radial-gradient(ellipse 50% 40% at 88% 28%, rgba(61, 217, 240, 0.07), transparent),
+    radial-gradient(ellipse 40% 60% at 50% 80%, rgba(31, 228, 122, 0.05), transparent);
+  z-index: -1;
+}
+a { color: inherit; text-decoration: none; }
+.wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+.topbar { position: sticky; top: 0; z-index: 100; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); background: rgba(6, 14, 10, 0.82); border-bottom: 1px solid var(--line); }
+.topbar-inner { min-height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 12px; font-family: "Outfit", sans-serif; font-weight: 800; font-size: 16px; color: var(--ink); }
+.back-link { font-size: 13px; font-weight: 600; color: var(--muted); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); transition: color .15s, border-color .15s; }
+.back-link:hover { color: var(--ink); border-color: rgba(31,228,122,0.3); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 8px; border: 1px solid var(--line); font-size: 14px; font-weight: 600; font-family: "Inter", sans-serif; cursor: pointer; transition: transform .18s, box-shadow .18s; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.btn.primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #031809; border-color: transparent; font-weight: 700; }
+.btn.ghost { color: var(--muted); background: transparent; border-color: var(--line); }
+.btn.ghost:hover { color: var(--ink); }
+
+.hero { padding: 64px 0 56px; border-bottom: 1px solid var(--line); }
+.kicker { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid rgba(245, 184, 58, 0.28); border-radius: 999px; background: rgba(245, 184, 58, 0.07); color: var(--amber); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 22px; }
+.kicker::before { content:""; width:7px; height:7px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px var(--amber); }
+
+h1, h2, h3 { font-family: "Outfit", sans-serif; color: var(--ink); line-height: 1; }
+h1 { font-size: clamp(36px, 6vw, 60px); font-weight: 900; line-height: 0.98; letter-spacing: -0.03em; max-width: 820px; }
+h1 em { font-style: normal; background: linear-gradient(135deg, var(--green), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.lead { margin-top: 24px; font-size: clamp(16px, 1.6vw, 18px); line-height: 1.7; color: var(--text); max-width: 640px; }
+
+.client-meta { margin-top: 34px; display: flex; gap: 32px; flex-wrap: wrap; font-size: 13px; }
+.client-meta div { display: flex; flex-direction: column; gap: 4px; }
+.client-meta .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+.client-meta .val { color: var(--ink); font-size: 13.5px; font-weight: 500; }
+
+section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: none; }
+.section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
+h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; max-width: 640px; }
+.section-copy { margin-top: 14px; font-size: 15.5px; color: var(--muted); line-height: 1.7; max-width: 620px; margin-bottom: 36px; }
+
+.stats-bar { border: 1px solid var(--line); border-radius: 12px; background: rgba(10, 22, 16, 0.6); overflow: hidden; }
+.stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+.stat-item { padding: 26px 22px; border-right: 1px solid var(--line); }
+.stat-item:last-child { border-right: 0; }
+.stat-num { font-family: "Outfit", sans-serif; font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; color: var(--green); line-height: 1; }
+.stat-label { margin-top: 8px; font-size: 13px; color: var(--muted); line-height: 1.45; }
+
+.project-card { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel2); margin-bottom: 16px; transition: border-color .25s; }
+.project-card:hover { border-color: rgba(31, 228, 122, 0.25); }
+.project-card:last-child { margin-bottom: 0; }
+.project-left { padding: 26px 28px; border-right: 1px solid var(--line); background: rgba(255,255,255,0.02); }
+.project-right { padding: 26px 28px; background: rgba(31, 228, 122, 0.03); }
+.col-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); margin-bottom: 12px; }
+.project-left h3, .project-right h3 { font-size: 16px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+.project-left .desc, .project-right .desc { font-size: 14px; color: var(--muted); line-height: 1.62; }
+
+.chip { display: inline-flex; padding: 4px 10px; border-radius: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid; margin-bottom: 14px; }
+.chip.critical { color: var(--rose); border-color: rgba(240, 96, 112, 0.4); background: rgba(240, 96, 112, 0.08); }
+.chip.high { color: var(--amber); border-color: rgba(245, 184, 58, 0.4); background: rgba(245, 184, 58, 0.08); }
+.chip.medium { color: var(--cyan); border-color: rgba(61, 217, 240, 0.4); background: rgba(61, 217, 240, 0.08); }
+.chip.fixed { color: var(--green); border-color: rgba(31, 228, 122, 0.4); background: rgba(31, 228, 122, 0.08); }
+
+@media (max-width: 720px) {
+  .project-card { grid-template-columns: 1fr; }
+  .project-left { border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.card { padding: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); transition: border-color .2s, transform .2s; }
+.card:hover { border-color: rgba(31, 228, 122, 0.25); transform: translateY(-3px); }
+.card .num { font-family: "Outfit", sans-serif; color: var(--green); font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+@media (max-width: 720px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.role-list { list-style: none; margin-top: 6px; }
+.role-list li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line2); font-size: 14.5px; color: var(--muted); line-height: 1.6; }
+.role-list li:last-child { border-bottom: 0; }
+.role-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); margin-top: 8px; }
+.role-list b { color: var(--ink); }
+
+.contact-section { background: linear-gradient(135deg, rgba(31, 228, 122, 0.08), rgba(61, 217, 240, 0.04)), var(--panel2); border: 1px solid rgba(31, 228, 122, 0.2); border-radius: 14px; padding: 44px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center; }
+.contact-section h2 { font-size: clamp(24px, 3.5vw, 34px); }
+.contact-section p { margin-top: 12px; font-size: 15px; color: var(--muted); line-height: 1.65; max-width: 520px; }
+.contact-actions { display: flex; flex-direction: column; gap: 10px; min-width: 190px; }
+@media (max-width: 720px) { .contact-section { grid-template-columns: 1fr; padding: 30px; } .contact-actions { flex-direction: row; flex-wrap: wrap; } }
+
+.footer { padding: 28px 0 40px; border-top: 1px solid var(--line); color: var(--soft); font-size: 13px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.footer-links { display: flex; gap: 18px; }
+.footer-links a { color: var(--soft); transition: color .15s; }
+.footer-links a:hover { color: var(--green); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="brand">Velonie Baluarte</div>
+    <a class="back-link" href="Portfolio_July_2026.html">&larr; Back to portfolio</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Case Study &mdash; GHL + Website Systems Audit</div>
+    <h1>Client asked for a cleanup. The audit found <em>an unauthorized admin, a broken booking flow, and zero attribution.</em></h1>
+    <p class="lead">A dual GoHighLevel + website audit for a credit repair &amp; funding consultancy, run as a systems review rather than a feature checklist &mdash; access, deliverability, revenue capture, and measurement, in that order of risk.</p>
+
+    <div class="client-meta">
+      <div><span class="label">Industry</span><span class="val">Credit repair &amp; funding consultancy</span></div>
+      <div><span class="label">Engagement</span><span class="val">GHL account audit + website audit</span></div>
+      <div><span class="label">Role</span><span class="val">Auditor, GHL specialist</span></div>
+      <div><span class="label">Duration</span><span class="val">Audit phase, single engagement</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Findings &rarr; Fixes</div>
+    <h2>Five gaps, ranked by what they were actually costing the client</h2>
+    <p class="section-copy">Ranked by business impact, not by module: access risk first, revenue leak second, deliverability and measurement after. Each finding maps directly to what was scoped to fix it.</p>
+
+    <div class="project-card">
+      <div class="project-left">
+        <span class="chip critical">Critical</span>
+        <div class="col-label">Found</div>
+        <h3>Unidentified Account-Admin with full access</h3>
+        <p class="desc">An admin-level user with no documented ownership had standing access to the account &mdash; contacts, billing, automation, everything. No one on the client side could confirm who added them or why.</p>
+      </div>
+      <div class="project-right">
+        <span class="chip fixed">Fixed scope</span>
+        <div class="col-label">Fix</div>
+        <h3>Access audit + role re-provisioning</h3>
+        <p class="desc">Full user/role audit, unauthorized access removed, admin roles re-provisioned with documented ownership so every account-level user is traceable going forward.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-left">
+        <span class="chip high">High</span>
+        <div class="col-label">Found</div>
+        <h3>Booking widget returning a 500 error</h3>
+        <p class="desc">The public booking widget failed on load for a share of visitors &mdash; every failed load was a lead that couldn't self-book, silently, with no error surfaced to the client.</p>
+      </div>
+      <div class="project-right">
+        <span class="chip fixed">Fixed scope</span>
+        <div class="col-label">Fix</div>
+        <h3>Root-caused and rebuilt the embed</h3>
+        <p class="desc">Traced the conflict, rebuilt the calendar embed, and verified the booking path end-to-end across entry points before signing off.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-left">
+        <span class="chip high">High</span>
+        <div class="col-label">Found</div>
+        <h3>46% of inbound calls went unanswered</h3>
+        <p class="desc">Nearly half of inbound calls had no follow-up path &mdash; no missed-call text-back, no routing logic, no automated recovery. For a consultancy where inbound calls are qualified leads, this was the single largest revenue leak in the account.</p>
+      </div>
+      <div class="project-right">
+        <span class="chip fixed">Fixed scope</span>
+        <div class="col-label">Fix</div>
+        <h3>Missed-call text-back + routing rebuild</h3>
+        <p class="desc">Automated text-back on missed calls, call routing logic reworked, and a follow-up sequence built to recover leads that would otherwise go cold.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-left">
+        <span class="chip medium">Medium</span>
+        <div class="col-label">Found</div>
+        <h3>A2P 10DLC status: Rejected</h3>
+        <p class="desc">SMS registration was rejected, driving a high message failure rate across every workflow that depended on text &mdash; reminders, nurture sequences, missed-call recovery, all degraded at once.</p>
+      </div>
+      <div class="project-right">
+        <span class="chip fixed">Fixed scope</span>
+        <div class="col-label">Fix</div>
+        <h3>Corrected registration + fallback logic</h3>
+        <p class="desc">Corrected brand/campaign registration for resubmission, with fallback channel logic built into workflows for the period while approval is pending.</p>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-left">
+        <span class="chip medium">Medium</span>
+        <div class="col-label">Found</div>
+        <h3>Zero marketing attribution</h3>
+        <p class="desc">No source tracking existed anywhere in the pipeline. The client couldn't tell which channel, campaign, or page produced a lead &mdash; every marketing dollar was unmeasurable.</p>
+      </div>
+      <div class="project-right">
+        <span class="chip fixed">Fixed scope</span>
+        <div class="col-label">Fix</div>
+        <h3>UTM + source tracking implementation</h3>
+        <p class="desc">Source tracking mapped to pipeline stages, baseline reporting established so future spend can be measured against actual pipeline movement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Method</div>
+    <h2>How the audit was run</h2>
+    <div class="grid-3" style="margin-top:32px;">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>GHL account review</h3>
+        <p>Full pass through pipelines, workflows, user roles, messaging compliance, and automation health &mdash; not a feature-by-feature checklist.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Website audit, cross-referenced</h3>
+        <p>Ran independently, then cross-referenced against the GHL findings &mdash; the booking widget failure only became a priority once matched against the call/lead-loss data.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Severity-ranked reporting</h3>
+        <p>Findings ordered by business risk, not by where they sit in the platform, so the client knows what breaks first if left alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">Scope proof</div>
+    <h2>What the audit produced</h2>
+    <div class="stats-bar" style="margin-top:28px;">
+      <div class="stats-inner">
+        <div class="stat-item"><div class="stat-num">8</div><div class="stat-label">Page SEO / AEO report</div></div>
+        <div class="stat-item"><div class="stat-num">14</div><div class="stat-label">Page GHL account review</div></div>
+        <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Findings, severity-ranked with fixes</div></div>
+        <div class="stat-item"><div class="stat-num">66&ndash;70</div><div class="stat-label">Hour Phase 1 estimate, scoped from findings</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-tag">My role</div>
+    <h2>Audit, not just build</h2>
+    <ul class="role-list">
+      <li><span><b>Diagnosed</b> the account and site independently, then cross-referenced findings before writing anything up.</span></li>
+      <li><span><b>Documented</b> every finding in a client-facing GHL account review and a separate SEO/AEO report.</span></li>
+      <li><span><b>Scoped</b> Phase 1 remediation as an hours-based estimate tied directly to the findings, not a flat retainer guess.</span></li>
+      <li><span><b>Left a system behind:</b> updated GHL SOPs so the access and process gaps don't reopen after handoff.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section style="border-bottom:none;">
+  <div class="wrap">
+    <div class="contact-section">
+      <div>
+        <div class="section-tag">Open for work</div>
+        <h2>Have a GHL account that needs the same treatment?</h2>
+        <p>Audits like this one surface what a "just clean it up" request usually can't &mdash; access risk, revenue leaks, and measurement gaps, ranked by what to fix first.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry">Email Me</a>
+        <a class="btn ghost" href="Portfolio_July_2026.html">View more work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte &middot; CRM Automation &middot; Web &middot; AI Systems &middot; SEO/AEO</span>
+  <div class="footer-links">
+    <a href="mailto:velonieb@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="tel:+639152845260">WhatsApp</a>
+  </div>
+</footer>
+
+</body>
+</html>
