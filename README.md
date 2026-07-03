@@ -10,7 +10,7 @@ After GitHub Pages is enabled, the site will be available at:
 https://velonieb-droid.github.io/velonie-portfolio/
 ```
 
-## Files Published
+## Files Published 
 
 - `index.html` - main portfolio page
 - `assets/automation-portfolio-hero.png` - portfolio hero image
