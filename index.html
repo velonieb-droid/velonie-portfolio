@@ -5,6 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Velonie Baluarte — GHL CRM automation specialist, website developer, and AI systems builder for service businesses.">
 <title>Velonie Baluarte | GHL CRM Automation, Web & AI Systems</title>
+<link rel="icon" type="image/png" href="assets/vab-logo.png">
+<link rel="canonical" href="https://velonieb-droid.github.io/velonie-portfolio/">
+<meta name="theme-color" content="#060e0a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Velonie Baluarte | GHL CRM Automation, Web & AI Systems">
+<meta property="og:description" content="GHL systems that eliminate manual work, missed leads, and disconnected workflows — pipelines, automations, funnels, and follow-up built end-to-end.">
+<meta property="og:image" content="https://velonieb-droid.github.io/velonie-portfolio/assets/og-card.png">
+<meta property="og:url" content="https://velonieb-droid.github.io/velonie-portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Velonie Baluarte | GHL CRM Automation, Web & AI Systems">
+<meta name="twitter:description" content="GHL systems that eliminate manual work, missed leads, and disconnected workflows.">
+<meta name="twitter:image" content="https://velonieb-droid.github.io/velonie-portfolio/assets/og-card.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Velonie Baluarte",
+      "jobTitle": "GoHighLevel CRM Automation Specialist",
+      "url": "https://velonieb-droid.github.io/velonie-portfolio/",
+      "email": "mailto:velonieb@gmail.com",
+      "sameAs": ["https://www.linkedin.com/in/velonie-baluarte"],
+      "knowsAbout": ["GoHighLevel", "CRM automation", "n8n", "Zapier", "Pabbly", "WordPress", "SEO", "AEO", "AI prompt systems"]
+    },
+    {
+      "@type": "ProfessionalService",
+      "name": "Velonie Baluarte — GHL CRM Automation",
+      "url": "https://velonieb-droid.github.io/velonie-portfolio/",
+      "description": "GoHighLevel CRM buildouts, workflow automation, funnels, websites, and AI content systems for service businesses.",
+      "founder": { "@type": "Person", "name": "Velonie Baluarte" },
+      "areaServed": "Worldwide",
+      "serviceType": ["CRM Automation", "GoHighLevel Buildout", "Workflow Automation", "Website & Funnel Design", "SEO/AEO Audit"]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -17,7 +54,7 @@
   --ink: #f0f9f4;
   --text: #cce0d6;
   --muted: #8aab9c;
-  --soft: #5a7a6c;
+  --soft: #6f9484;
   --line: rgba(180, 230, 200, 0.11);
   --line2: rgba(180, 230, 200, 0.07);
   --panel: rgba(10, 22, 16, 0.85);
@@ -1603,6 +1640,81 @@ h2 {
   .ai-build-card { flex-direction: column; align-items: flex-start; padding: 18px 20px; gap: 14px; }
   .ai-build-link { align-self: flex-start; }
 }
+
+/* ── NAV TOGGLE (hamburger) ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px; height: 42px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px;
+}
+.nav-toggle span {
+  display: block; height: 2px; width: 100%;
+  background: var(--ink); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* dropdown open state (tap devices) */
+.nav-dropdown.open .nav-dropdown-menu {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+@media (max-width: 860px) {
+  .nav-toggle { display: flex; }
+  .topbar-inner { flex-direction: row; align-items: center; padding: 0; min-height: 64px; gap: 12px; }
+  .nav {
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 12px 16px 16px;
+    background: var(--panel2);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+  }
+  .nav.open { display: flex; }
+  .nav a { padding: 12px; font-size: 15px; }
+  .nav .avail { margin-top: 8px; align-self: flex-start; }
+  .nav-dropdown-menu {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    border: 0;
+    border-left: 2px solid rgba(31,228,122,0.3);
+    border-radius: 0;
+    margin: 2px 0 4px 12px;
+    opacity: 1; visibility: hidden; transform: none;
+    display: none;
+  }
+  .nav-dropdown.open .nav-dropdown-menu { display: block; visibility: visible; }
+}
+
+/* ── BOOKING SECTION ── */
+.book-section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: var(--shadow-sm);
+}
+.book-copy { color: var(--muted); max-width: 560px; margin-top: 10px; }
+.book-cal { min-height: 0; margin-top: 24px; border-radius: 14px; overflow: hidden; }
+.book-cal.loaded { min-height: 560px; background: var(--bg2); }
+.book-fallback { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.book-fallback p { color: var(--soft); font-size: 14px; }
+
+::selection { background: rgba(31,228,122,0.25); color: var(--ink); }
 </style>
 </head>
 <body>
@@ -1634,18 +1746,22 @@ h2 {
 <header class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="#top" aria-label="Velonie Baluarte home">
-      <img src="VAB LOGO 2.png" alt="Velonie Baluarte Logo" class="brand-mark">
+      <img src="assets/vab-logo.png" alt="Velonie Baluarte Logo" class="brand-mark" width="36" height="36">
       Velonie Baluarte
     </a>
-    <nav class="nav" aria-label="Portfolio navigation">
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="siteNav" aria-label="Portfolio navigation">
       <a href="#projects">Projects</a>
       <div class="nav-dropdown">
-        <a href="#projects">Case Studies</a>
+        <a href="#projects" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</a>
         <div class="nav-dropdown-menu">
           <a href="case-study-systems-audit.html">Systems Audit<span class="cs-tag">GHL + Website Audit, Credit Repair Client</span></a>
           <a href="case-study-automation-build.html">Automation Build<span class="cs-tag">n8n + GHL, Nonprofit Client</span></a>
         </div>
       </div>
+      <a href="#sample-works">Builds</a>
       <a href="#why">Why Me</a>
       <a href="#works">Live Sites</a>
       <a href="#background">Background</a>
@@ -1667,8 +1783,8 @@ h2 {
           GoHighLevel CRM built end-to-end — pipelines, automations, funnels, and follow-up sequences. Service businesses hire me when leads are falling through the cracks and they need a clean system that runs itself.
         </p>
         <div class="hero-cta">
-          <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Hire Me</a>
-          <a class="btn secondary" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">View Resume</a>
+          <a class="btn primary" href="#book">Book a Free Systems Call</a>
+          <a class="btn secondary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
           <button class="btn watch-intro" id="watchIntroBtn" aria-label="Watch introduction video">
             <span class="play-icon">
               <svg viewBox="0 0 10 12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 10,6 0,12"/></svg>
@@ -1689,16 +1805,16 @@ h2 {
           </div>
           <div class="hcv-stats">
             <div class="hcv-stat">
-              <span class="hcv-num">100%</span>
-              <span class="hcv-lbl">builds with SOPs</span>
+              <span class="hcv-num">&lt;1min</span>
+              <span class="hcv-lbl">lead response, from hours</span>
             </div>
             <div class="hcv-stat">
-              <span class="hcv-num">6+</span>
-              <span class="hcv-lbl">industries</span>
+              <span class="hcv-num">60%</span>
+              <span class="hcv-lbl">content time cut</span>
             </div>
             <div class="hcv-stat">
-              <span class="hcv-num">4+</span>
-              <span class="hcv-lbl">platforms</span>
+              <span class="hcv-num">46%</span>
+              <span class="hcv-lbl">revenue leak found &amp; fixed</span>
             </div>
           </div>
           <div class="hcv-delivers">
@@ -1712,7 +1828,7 @@ h2 {
           <div class="hero-card-label">Let's build your system</div>
           <div class="hero-card-links">
             <a class="btn primary" style="min-height:38px;font-size:13px;padding:0 14px" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
-            <a class="btn ghost" style="min-height:38px;font-size:13px;padding:0 14px" href="tel:+639152845260">WhatsApp</a>
+            <a class="btn ghost" style="min-height:38px;font-size:13px;padding:0 14px" href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp</a>
           </div>
         </div>
       </aside>
@@ -1742,49 +1858,7 @@ h2 {
   </div>
 
   <!-- TOOLS CAROUSEL -->
-  <section class="wrap" aria-label="Tools" style="display:none">
-    <div style="margin-bottom:16px">
-      <div class="section-tag">Tools I work with</div>
-      <h2 style="font-size:clamp(22px,3vw,34px)">Apps, platforms, and software behind every system.</h2>
-    </div>
-    <div class="carousel-wrap">
-      <div class="logo-track">
-        <div class="logo-tile"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">LV</div><div><div class="logo-name">Lovable</div><div class="logo-type">App Builder</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">AI & Analysis</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">PR</div><div><div class="logo-name">Premiere</div><div class="logo-type">Video Editing</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">PS</div><div><div class="logo-name">Photoshop</div><div class="logo-type">Photo Editing</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
-        <div class="logo-tile"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
-        <!-- Duplicate set for seamless loop -->
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GHL</div><div><div class="logo-name">GoHighLevel</div><div class="logo-type">CRM & Funnels</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">Z</div><div><div class="logo-name">Zapier</div><div class="logo-type">Automation</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">n8n</div><div><div class="logo-name">n8n</div><div class="logo-type">Workflow Logic</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PB</div><div><div class="logo-name">Pabbly</div><div class="logo-type">Integrations</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">WP</div><div><div class="logo-name">WordPress</div><div class="logo-type">Websites</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">LV</div><div><div class="logo-name">Lovable</div><div class="logo-type">App Builder</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">VS</div><div><div class="logo-name">VS Code</div><div class="logo-type">Development</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">CL</div><div><div class="logo-name">Claude</div><div class="logo-type">AI & Analysis</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AI</div><div><div class="logo-name">ChatGPT</div><div class="logo-type">Prompt Systems</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">GM</div><div><div class="logo-name">Gemini</div><div class="logo-type">AI Research</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">AT</div><div><div class="logo-name">Airtable</div><div class="logo-type">Data & Ops</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">G</div><div><div class="logo-name">Google</div><div class="logo-type">Workspace</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PR</div><div><div class="logo-name">Premiere</div><div class="logo-type">Video Editing</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">PS</div><div><div class="logo-name">Photoshop</div><div class="logo-type">Photo Editing</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">RV</div><div><div class="logo-name">Revit</div><div class="logo-type">Engineering BIM</div></div></div>
-        <div class="logo-tile" aria-hidden="true"><div class="logo-mark">XL</div><div><div class="logo-name">Excel</div><div class="logo-type">Reporting</div></div></div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- ROLES -->
   <section class="wrap" id="roles">
@@ -2028,6 +2102,20 @@ h2 {
   </section>
 
   <!-- HOW I WORK -->
+  <!-- TESTIMONIALS — uncomment and fill when quotes are collected
+  <section class="wrap" id="testimonials">
+    <div style="margin-bottom:28px">
+      <div class="section-tag">Client words</div>
+      <h2>What clients say after handover.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
+      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
+      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
+    </div>
+  </section>
+  -->
+
   <section class="process-section" id="process">
     <div class="wrap">
       <div class="section-head fade-in">
@@ -2082,15 +2170,11 @@ h2 {
             <div class="work-slide">
               <div class="work-img-wrap">
                 <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1UdaC7xtISi1G_toU-A3BQb2BDNyRvmEP&sz=w800"
-                  alt="GoHighLevel CRM automation workflow"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
+                  src="assets/ghl-crm-pipeline.webp"
+                  alt="GoHighLevel CRM pipeline and workflow automation"
+                  loading="lazy" width="800" height="410">
                 <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1UdaC7xtISi1G_toU-A3BQb2BDNyRvmEP/view" target="_blank" rel="noopener">
+                  <a class="work-view-btn" href="assets/ghl-crm-pipeline.webp" target="_blank" rel="noopener">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     View Full
                   </a>
@@ -2115,15 +2199,11 @@ h2 {
             <div class="work-slide">
               <div class="work-img-wrap">
                 <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe&sz=w800"
-                  alt="GoHighLevel email and SMS sequence"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
+                  src="assets/ghl-webhook-workflow.webp"
+                  alt="GoHighLevel webhook integration for Stripe and Apple Pay"
+                  loading="lazy" width="800" height="410">
                 <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1fpjVwIQstbomQhg2IPlfZZjTp3OK1BGe/view" target="_blank" rel="noopener">
+                  <a class="work-view-btn" href="assets/ghl-webhook-workflow.webp" target="_blank" rel="noopener">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     View Full
                   </a>
@@ -2149,15 +2229,11 @@ h2 {
             <div class="work-slide">
               <div class="work-img-wrap">
                 <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1J0lOhdN6jEJfyaFRLuaiCX1_EyRjhTi2&sz=w800"
-                  alt="Client Onboarding Flow"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(31,228,122,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
+                  src="assets/ghl-client-onboarding.webp"
+                  alt="GoHighLevel client onboarding automation flow"
+                  loading="lazy" width="800" height="410">
                 <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1J0lOhdN6jEJfyaFRLuaiCX1_EyRjhTi2/view" target="_blank" rel="noopener">
+                  <a class="work-view-btn" href="assets/ghl-client-onboarding.webp" target="_blank" rel="noopener">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     View Full
                   </a>
@@ -2182,15 +2258,11 @@ h2 {
             <div class="work-slide">
               <div class="work-img-wrap">
                 <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh&sz=w800"
-                  alt="Zapier multi-step automation workflow"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,107,53,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
+                  src="assets/zapier-workflow.webp"
+                  alt="Zapier cross-platform integration workflow"
+                  loading="lazy" width="800" height="410">
                 <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1RIFoFlJpKGu98TX1WWSjctASbeMPHwgh/view" target="_blank" rel="noopener">
+                  <a class="work-view-btn" href="assets/zapier-workflow.webp" target="_blank" rel="noopener">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     View Full
                   </a>
@@ -2215,15 +2287,11 @@ h2 {
             <div class="work-slide">
               <div class="work-img-wrap">
                 <img class="work-img-thumb"
-                  src="https://drive.google.com/thumbnail?id=1pQoLe5lWKiKCFlduYQ_mgSTXgcXPGD0a&sz=w800"
-                  alt="N8N workflow automation"
-                  onerror="this.style.display='none'; this.parentElement.querySelector('.work-img-fallback').style.display='flex'">
-                <div class="work-img-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:rgba(6,14,10,0.85);flex-direction:column;gap:10px">
-                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(234,75,113,0.5)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
-                  <span style="font-size:12px;color:var(--soft)">Preview in Drive</span>
-                </div>
+                  src="assets/n8n-seo-report-full.webp"
+                  alt="n8n workflow automation with API node integration"
+                  loading="lazy" width="800" height="410">
                 <div class="work-img-cover">
-                  <a class="work-view-btn" href="https://drive.google.com/file/d/1pQoLe5lWKiKCFlduYQ_mgSTXgcXPGD0a/view" target="_blank" rel="noopener">
+                  <a class="work-view-btn" href="assets/n8n-seo-report-full.webp" target="_blank" rel="noopener">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                     View Full
                   </a>
@@ -2502,6 +2570,22 @@ h2 {
   </section>
 
   <!-- CONTACT -->
+  <!-- BOOKING -->
+  <section class="wrap" id="book">
+    <div class="book-section fade-in">
+      <div>
+        <div class="section-tag">Book a call</div>
+        <h2>Pick a time to talk.</h2>
+        <p class="book-copy">A quick call to understand what you need &mdash; whether that's a GHL build, a workflow fix, or a project you're hiring for. You'll leave with clear next steps.</p>
+      </div>
+      <div id="book-cal" class="book-cal" aria-label="Booking calendar"></div>
+      <div id="book-fallback" class="book-fallback">
+        <p>Prefer email? Send me a note and I'll reply with available times.</p>
+        <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Systems%20Call%20Request">Email Me for Times</a>
+      </div>
+    </div>
+  </section>
+
   <section class="wrap" id="contact">
     <div class="contact-section fade-in">
       <div>
@@ -2511,7 +2595,7 @@ h2 {
       </div>
       <div class="contact-actions">
         <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
-        <a class="btn secondary" href="tel:+639152845260">Call / WhatsApp</a>
+        <a class="btn secondary" href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp Me</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn ghost" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">Download Resume</a>
       </div>
@@ -2522,18 +2606,23 @@ h2 {
 
 <footer class="wrap footer">
   <div class="footer-brand">
-    <img src="VAB LOGO 2.png" alt="Velonie Baluarte Logo" class="footer-logo">
+    <img src="assets/vab-logo.png" alt="Velonie Baluarte Logo" class="footer-logo" width="30" height="30">
     <span>Velonie Baluarte · CRM Automation · Web · AI Systems · SEO/AEO · Executive Operations</span>
   </div>
   <div class="footer-links">
     <a href="mailto:velonieb@gmail.com">Email</a>
     <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
-    <a href="tel:+639152845260">WhatsApp</a>
+    <a href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </footer>
 
 <script>
-  // Intersection Observer for fade-in animations
+  // ── CONFIG ─────────────────────────────────────────────
+  // Set your Cal.com link here once registered, e.g. "velonie/systems-call"
+  const CAL_LINK = "velonie-baluarte/systems-call";
+  // ───────────────────────────────────────────────────────
+
+  // Fade-in on scroll
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -2542,36 +2631,36 @@ h2 {
       }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // ── WORKS CAROUSEL ──
-  (function() {
-    const track = document.getElementById('worksTrack');
-    const prevBtn = document.getElementById('worksPrev');
-    const nextBtn = document.getElementById('worksNext');
-    const dotsWrap = document.getElementById('worksDots');
+  // Utility: debounce
+  function debounce(fn, ms) {
+    let t;
+    return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+  }
 
+  // ── CAROUSEL (shared) ──
+  function initCarousel({ trackId, prevId, nextId, dotsId, slideSelector }) {
+    const track = document.getElementById(trackId);
     if (!track) return;
-
-    const slides = track.querySelectorAll('.work-slide');
+    const prevBtn = document.getElementById(prevId);
+    const nextBtn = document.getElementById(nextId);
+    const dotsWrap = document.getElementById(dotsId);
+    const slides = track.querySelectorAll(slideSelector);
     let current = 0;
 
-    function getSlidesVisible() {
-      if (window.innerWidth <= 640) return 1;
-      if (window.innerWidth <= 960) return 2;
-      return 3;
-    }
+    const visible = () => window.innerWidth <= 640 ? 1 : window.innerWidth <= 960 ? 2 : 3;
+    const positions = () => Math.max(1, slides.length - visible() + 1);
 
-    function totalPositions() {
-      return Math.max(1, slides.length - getSlidesVisible() + 1);
+    function slideWidth() {
+      if (!slides[0]) return 0;
+      const gap = parseFloat(getComputedStyle(track).gap) || 20;
+      const v = visible();
+      return (track.parentElement.offsetWidth - gap * (v - 1)) / v + gap;
     }
-
-    // Build dots
     function buildDots() {
       dotsWrap.innerHTML = '';
-      const n = totalPositions();
-      for (let i = 0; i < n; i++) {
+      for (let i = 0; i < positions(); i++) {
         const d = document.createElement('button');
         d.className = 'works-dot' + (i === current ? ' active' : '');
         d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
@@ -2579,56 +2668,83 @@ h2 {
         dotsWrap.appendChild(d);
       }
     }
-
-    function updateDots() {
-      dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
-    }
-
-    function getSlideWidth() {
-      if (!slides[0]) return 0;
-      const style = window.getComputedStyle(track);
-      const gap = parseFloat(style.gap) || 20;
-      const visible = getSlidesVisible();
-      const viewportW = track.parentElement.offsetWidth;
-      return (viewportW - gap * (visible - 1)) / visible + gap;
-    }
-
     function goTo(index) {
-      const max = totalPositions() - 1;
+      const max = positions() - 1;
       current = Math.max(0, Math.min(index, max));
-      const offset = current * getSlideWidth();
-      track.style.transform = `translateX(-${offset}px)`;
+      track.style.transform = `translateX(-${current * slideWidth()}px)`;
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= max;
-      updateDots();
+      dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
     prevBtn.addEventListener('click', () => goTo(current - 1));
     nextBtn.addEventListener('click', () => goTo(current + 1));
-
-    window.addEventListener('resize', () => {
-      current = Math.min(current, totalPositions() - 1);
+    window.addEventListener('resize', debounce(() => {
+      current = Math.min(current, positions() - 1);
       buildDots();
       goTo(current);
+    }, 120));
+
+    // Drag / swipe — suppress accidental link clicks after a real drag
+    let startX = 0, dragging = false, dragged = false;
+    track.parentElement.addEventListener('pointerdown', e => { startX = e.clientX; dragging = true; dragged = false; });
+    window.addEventListener('pointerup', e => {
+      if (!dragging) return;
+      dragging = false;
+      const diff = startX - e.clientX;
+      if (Math.abs(diff) > 50) {
+        dragged = true;
+        diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      }
     });
+    track.parentElement.addEventListener('click', e => {
+      if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+    }, true);
 
     buildDots();
     goTo(0);
+  }
 
-    // Touch / drag support
-    let startX = 0, isDragging = false;
-    track.parentElement.addEventListener('pointerdown', e => {
-      startX = e.clientX;
-      isDragging = true;
+  initCarousel({ trackId: 'worksTrack', prevId: 'worksPrev', nextId: 'worksNext', dotsId: 'worksDots', slideSelector: '.work-slide' });
+  initCarousel({ trackId: 'sitesTrack', prevId: 'sitesPrev', nextId: 'sitesNext', dotsId: 'sitesDots', slideSelector: '.site-slide' });
+
+  // ── MOBILE NAV + DROPDOWN ──
+  (function() {
+    const toggle = document.getElementById('navToggle');
+    const nav = document.getElementById('siteNav');
+    const drop = document.querySelector('.nav-dropdown');
+    const trigger = document.querySelector('.nav-dropdown-trigger');
+
+    function closeNav() {
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
-    window.addEventListener('pointerup', e => {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) {
-        diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    // Close panel after choosing a link
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (window.innerWidth <= 860 && !a.classList.contains('nav-dropdown-trigger')) closeNav();
+    }));
+
+    // Case Studies: tap-to-open on touch / small screens instead of navigating away
+    const touchLike = () => window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches;
+    trigger.addEventListener('click', e => {
+      if (!touchLike()) return; // desktop hover behavior unchanged
+      if (!drop.classList.contains('open')) {
+        e.preventDefault();
+        drop.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+      // second tap follows the link (#projects) naturally
+    });
+    document.addEventListener('click', e => {
+      if (!drop.contains(e.target)) {
+        drop.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
       }
     });
   })();
@@ -2645,14 +2761,14 @@ h2 {
       iframe.src = VIDEO_SRC;
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
+      closeBtn.focus();
     }
-
     function closeModal() {
       modal.classList.remove('open');
       document.body.style.overflow = '';
       setTimeout(() => { iframe.src = ''; }, 320);
+      openBtn.focus(); // return focus to trigger
     }
-
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
@@ -2661,83 +2777,44 @@ h2 {
     });
   })();
 
-  // ── SITES CAROUSEL ──
+  // ── CAL.COM INLINE BOOKING ──
   (function() {
-    const track    = document.getElementById('sitesTrack');
-    const prevBtn  = document.getElementById('sitesPrev');
-    const nextBtn  = document.getElementById('sitesNext');
-    const dotsWrap = document.getElementById('sitesDots');
-
-    if (!track) return;
-
-    const slides = track.querySelectorAll('.site-slide');
-    let current = 0;
-
-    function getSlidesVisible() {
-      if (window.innerWidth <= 640) return 1;
-      if (window.innerWidth <= 960) return 2;
-      return 3;
-    }
-
-    function totalPositions() {
-      return Math.max(1, slides.length - getSlidesVisible() + 1);
-    }
-
-    function buildDots() {
-      dotsWrap.innerHTML = '';
-      for (let i = 0; i < totalPositions(); i++) {
-        const d = document.createElement('button');
-        d.className = 'works-dot' + (i === current ? ' active' : '');
-        d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-        d.addEventListener('click', () => goTo(i));
-        dotsWrap.appendChild(d);
-      }
-    }
-
-    function updateDots() {
-      dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => {
-        d.classList.toggle('active', i === current);
-      });
-    }
-
-    function getSlideWidth() {
-      if (!slides[0]) return 0;
-      const style = window.getComputedStyle(track);
-      const gap = parseFloat(style.gap) || 20;
-      const visible = getSlidesVisible();
-      const viewportW = track.parentElement.offsetWidth;
-      return (viewportW - gap * (visible - 1)) / visible + gap;
-    }
-
-    function goTo(index) {
-      const max = totalPositions() - 1;
-      current = Math.max(0, Math.min(index, max));
-      track.style.transform = `translateX(-${current * getSlideWidth()}px)`;
-      prevBtn.disabled = current === 0;
-      nextBtn.disabled = current >= max;
-      updateDots();
-    }
-
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
-
-    window.addEventListener('resize', () => {
-      current = Math.min(current, totalPositions() - 1);
-      buildDots();
-      goTo(current);
+    if (!CAL_LINK) return; // fallback block stays visible until configured
+    (function (C, A, L) {
+      let p = function (a, ar) { a.q.push(ar); };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal, ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {}; cal.q = cal.q || [];
+          d.head.appendChild(d.createElement("script")).src = A;
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api = function () { p(api, arguments); };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); }
+          else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", { origin: "https://cal.com" });
+    Cal("inline", {
+      elementOrSelector: "#book-cal",
+      calLink: CAL_LINK,
+      layout: "month_view"
     });
-
-    buildDots();
-    goTo(0);
-
-    let startX = 0, isDragging = false;
-    track.parentElement.addEventListener('pointerdown', e => { startX = e.clientX; isDragging = true; });
-    window.addEventListener('pointerup', e => {
-      if (!isDragging) return;
-      isDragging = false;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) diff > 0 ? goTo(current + 1) : goTo(current - 1);
+    Cal("ui", {
+      theme: "dark",
+      styles: { branding: { brandColor: "#1fe47a" } },
+      hideEventTypeDetails: false
     });
+    document.getElementById('book-cal').classList.add('loaded');
+    const fb = document.getElementById('book-fallback');
+    if (fb) fb.querySelector('p').textContent = "Calendar not loading? Email me and I'll send times.";
   })();
 </script>
 </body>
