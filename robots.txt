@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://velonieb-droid.github.io/velonie-portfolio/sitemap.xml
