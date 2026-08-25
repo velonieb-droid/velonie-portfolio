@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Velonie Baluarte — GHL CRM automation specialist, website developer, and AI systems builder for service businesses.">
+<meta name="description" content="GoHighLevel systems for service businesses: follow-up in under a minute, automated booking, and documented handover. Systems audits, full GHL builds, ongoing management. Book a free 20-minute systems call.">
 <title>Velonie Baluarte | GHL CRM Automation, Web & AI Systems</title>
 <link rel="icon" type="image/png" href="assets/vab-logo.png">
 <link rel="canonical" href="https://velonieb-droid.github.io/velonie-portfolio/">
@@ -38,6 +38,17 @@
       "founder": { "@type": "Person", "name": "Velonie Baluarte" },
       "areaServed": "Worldwide",
       "serviceType": ["CRM Automation", "GoHighLevel Buildout", "Workflow Automation", "Website & Funnel Design", "SEO/AEO Audit"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Do I need a GoHighLevel account before we start?", "acceptedAnswer": { "@type": "Answer", "text": "No. On the call I'll tell you whether GHL is the right tool for your situation; if it is, I'll walk you through getting the account and take it from there." } },
+        { "@type": "Question", "name": "My GHL is half-built and half-working. Do you fix or rebuild?", "acceptedAnswer": { "@type": "Answer", "text": "Usually fix. The Systems Audit maps what's there, finds where leads and follow-ups leak, and ranks fixes by business impact. Rebuilds only happen when the underlying logic can't be trusted." } },
+        { "@type": "Question", "name": "How do you price?", "acceptedAnswer": { "@type": "Answer", "text": "Fixed scope for audits and builds, quoted in writing after the systems call. Ongoing management is a flat monthly rate." } },
+        { "@type": "Question", "name": "What time zone are you in?", "acceptedAnswer": { "@type": "Answer", "text": "Philippines (GMT+8). Calls are scheduled around the client's calendar; day-to-day progress is shared in written updates." } },
+        { "@type": "Question", "name": "What happens after handover?", "acceptedAnswer": { "@type": "Answer", "text": "You receive SOPs, annotated workflows, and a recorded walkthrough. Account access stays with you; nothing depends on me staying in the loop." } },
+        { "@type": "Question", "name": "What do I get on the free systems call?", "acceptedAnswer": { "@type": "Answer", "text": "A 20-minute review of your current lead flow and a written next-step plan, whether or not we work together." } }
+      ]
     }
   ]
 }
@@ -1715,9 +1726,307 @@ h2 {
 .book-fallback p { color: var(--soft); font-size: 14px; }
 
 ::selection { background: rgba(31,228,122,0.25); color: var(--ink); }
+
+/* ── MOTION LAYER: workflow-graph background + scroll effects ── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+#bgCanvas.ready { opacity: 1; }
+
+/* Ambient glows: slow drift + light scroll parallax (JS sets --sy) */
+body::before {
+  transform: translate3d(0, calc(var(--sy, 0) * -0.05px), 0);
+  animation: ambientDrift 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes ambientDrift {
+  from { filter: hue-rotate(0deg) saturate(1); }
+  to   { filter: hue-rotate(-18deg) saturate(1.15); }
+}
+
+/* Reading progress line */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 200;
+  pointer-events: none;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--progress, 0));
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+  box-shadow: 0 0 12px rgba(31, 228, 122, 0.55);
+}
+
+/* Topbar deepens once you leave the hero */
+.topbar { transition: box-shadow 0.3s ease, background 0.3s ease; }
+.topbar.scrolled {
+  background: rgba(6, 14, 10, 0.94);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Hero parallax (JS sets --py after the intro fade completes) */
+.hero-grid > .parallax {
+  transform: translate3d(0, var(--py, 0px), 0) !important;
+  opacity: var(--po, 1) !important;
+  transition: none !important;
+}
+
+/* Staggered card reveal: parent fades, children cascade up */
+.fade-in.stagger { transform: none; }
+.stagger > * {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.stagger.visible > * { opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.stagger.visible > *:nth-child(2) { transition-delay: 0.14s; }
+.stagger.visible > *:nth-child(3) { transition-delay: 0.23s; }
+.stagger.visible > *:nth-child(4) { transition-delay: 0.32s; }
+.stagger.visible > *:nth-child(5) { transition-delay: 0.41s; }
+.stagger.visible > *:nth-child(6) { transition-delay: 0.50s; }
+.stagger.visible > *:nth-child(7) { transition-delay: 0.59s; }
+.stagger.visible > *:nth-child(8) { transition-delay: 0.68s; }
+
+/* Project cards slide in from alternating sides */
+.project-card.fade-in {
+  transform: translateX(-48px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+              transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+              border-color 0.2s;
+}
+.project-card.fade-in:nth-child(even) { transform: translateX(48px); }
+.project-card.fade-in.visible { transform: translateX(0); }
+
+/* Section headings: eyebrow rule draws in */
+.section-tag { position: relative; }
+.section-head.fade-in .section-tag::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 0;
+  margin-top: 10px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  transition: width 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s;
+}
+.section-head.fade-in.visible .section-tag::after { width: 120px; }
+
+/* Process: a signal line runs across the four steps */
+.process-grid { position: relative; }
+.process-grid::before {
+  content: "";
+  position: absolute;
+  top: 44px; left: 0;
+  height: 1px;
+  width: 0;
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+  opacity: 0.45;
+  transition: width 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s;
+  pointer-events: none;
+}
+.process-grid.visible::before { width: 100%; }
+.process-card { position: relative; z-index: 1; }
+
+/* Stat counters */
+.stat-num { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 960px) {
+  .process-grid::before { display: none; }
+  .project-card.fade-in,
+  .project-card.fade-in:nth-child(even) { transform: translateY(24px); }
+  .project-card.fade-in.visible { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #bgCanvas { display: none; }
+  body::before { animation: none; transform: none; }
+  .stagger > * { opacity: 1; transform: none; }
+  .project-card.fade-in, .project-card.fade-in:nth-child(even) { transform: none; }
+  .hero-grid > .parallax { transform: none !important; opacity: 1 !important; }
+  .process-grid::before, .section-head.fade-in .section-tag::after { transition: none; }
+}
+
+
+/* ── CONVERSION LAYER ── */
+.cta-trust {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+.client-strip {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.client-strip-label {
+  color: var(--soft);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+.client-strip > span:not(.client-strip-label) {
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  white-space: nowrap;
+}
+
+/* Nav CTA */
+.nav .nav-cta {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 13px;
+  margin-left: 6px;
+}
+.nav .nav-cta:hover { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #031809; }
+
+/* Packages */
+.packages-grid { align-items: stretch; }
+.package { display: flex; flex-direction: column; position: relative; }
+.package.featured {
+  border-color: rgba(31, 228, 122, 0.35);
+  background:
+    linear-gradient(180deg, rgba(31, 228, 122, 0.07), transparent 40%),
+    var(--panel);
+}
+.package-tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 14px;
+}
+.package-for { color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 16px; }
+.package .deliverable-list { margin-bottom: 18px; }
+.package-meta {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line2);
+  font-size: 12.5px;
+  color: var(--soft);
+  margin-bottom: 14px;
+}
+.package-cta { width: 100%; }
+
+/* FAQ */
+.faq-list { display: grid; gap: 10px; max-width: 860px; }
+.faq {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  padding: 0 22px;
+  transition: border-color 0.2s;
+}
+.faq[open] { border-color: rgba(31, 228, 122, 0.3); }
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 32px 18px 0;
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--ink);
+  position: relative;
+  min-height: 44px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--green);
+  transition: transform 0.25s ease;
+}
+.faq[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.faq p { color: var(--muted); font-size: 14.5px; line-height: 1.7; padding: 0 0 20px; max-width: 720px; }
+.faq summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; border-radius: 6px; }
+
+/* Booking micro-proof */
+.book-proof {
+  margin-top: 22px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 10px;
+  background: rgba(31, 228, 122, 0.05);
+  max-width: 620px;
+}
+.book-proof-num {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--green);
+  letter-spacing: -0.02em;
+}
+.book-proof-txt { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+.book-proof-txt a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.book-fallback .cta-trust { margin-top: 2px; }
+
+/* Testimonial styles (for when the section is enabled) */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.testi p { font-size: 15px; line-height: 1.65; color: var(--text); }
+.testi-who { margin-top: 16px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.testi-who strong { color: var(--ink); }
+.testi-who span { color: var(--soft); }
+
+/* Sticky mobile CTA */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 150;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(6, 14, 10, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  transform: translateY(110%);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sticky-cta.show { transform: translateY(0); }
+.sticky-cta-txt { font-size: 13px; color: var(--text); font-weight: 500; }
+.sticky-cta .btn { min-height: 42px; padding: 0 16px; font-size: 13px; white-space: nowrap; }
+
+@media (max-width: 960px) {
+  .sticky-cta { display: flex; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .nav .nav-cta { margin-left: 0; margin-top: 6px; }
+}
+@media (max-width: 640px) {
+  .book-proof { flex-direction: column; gap: 8px; }
+  .client-strip { gap: 6px 8px; }
+}
+
 </style>
 </head>
 <body>
+<canvas id="bgCanvas" aria-hidden="true"></canvas>
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- VIDEO MODAL -->
 <div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Introduction video">
@@ -1737,7 +2046,7 @@ h2 {
     </div>
     <div class="video-modal-footer">
       <p>👋 <strong>Velonie Baluarte</strong> — GHL CRM Specialist · Automation · Web & AI Systems</p>
-      <a class="btn primary" style="min-height:36px;font-size:12px;padding:0 14px;white-space:nowrap" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Hire Me</a>
+      <a class="btn primary" style="min-height:36px;font-size:12px;padding:0 14px;white-space:nowrap" href="#book" id="modalBookBtn">Book a Call</a>
     </div>
   </div>
 </div>
@@ -1753,7 +2062,7 @@ h2 {
       <span></span><span></span><span></span>
     </button>
     <nav class="nav" id="siteNav" aria-label="Portfolio navigation">
-      <a href="#projects">Projects</a>
+      <a href="#projects">Work</a>
       <div class="nav-dropdown">
         <a href="#projects" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</a>
         <div class="nav-dropdown-menu">
@@ -1761,12 +2070,11 @@ h2 {
           <a href="case-study-automation-build.html">Automation Build<span class="cs-tag">n8n + GHL, Nonprofit Client</span></a>
         </div>
       </div>
-      <a href="#sample-works">Builds</a>
       <a href="#why">Why Me</a>
-      <a href="#works">Live Sites</a>
-      <a href="#background">Background</a>
+      <a href="#packages">Packages</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
-      <span class="avail">Available now</span>
+      <a class="btn primary nav-cta" href="#book">Book a call</a>
     </nav>
   </div>
 </header>
@@ -1777,13 +2085,13 @@ h2 {
   <section class="wrap hero">
     <div class="hero-grid">
       <div class="fade-in">
-        <div class="kicker">GHL Automation Specialist</div>
-        <h1>I build GHL systems that eliminate manual work, missed leads, and <em>disconnected workflows.</em></h1>
+        <div class="kicker">GHL Automation Specialist · for service businesses</div>
+        <h1>A GHL system that follows up in under a minute, books the call, and <em>runs without you.</em></h1>
         <p class="lead">
-          GoHighLevel CRM built end-to-end — pipelines, automations, funnels, and follow-up sequences. Service businesses hire me when leads are falling through the cracks and they need a clean system that runs itself.
+          For service businesses losing leads to slow replies, spreadsheets, and disconnected tools. I build the pipelines, automations, funnels, and follow-up end-to-end — then test every trigger and document it so your team can run it.
         </p>
         <div class="hero-cta">
-          <a class="btn primary" href="#book">Book a Free Systems Call</a>
+          <a class="btn primary" href="#book">Book My Free Systems Call</a>
           <a class="btn secondary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
           <button class="btn watch-intro" id="watchIntroBtn" aria-label="Watch introduction video">
             <span class="play-icon">
@@ -1791,6 +2099,11 @@ h2 {
             </span>
             Watch My Intro
           </button>
+        </div>
+        <p class="cta-trust">20 minutes · no pitch · you leave with a written next-step plan, whether or not we work together.</p>
+        <div class="client-strip" aria-label="Businesses running systems I built">
+          <span class="client-strip-label">Systems live for</span>
+          <span>Scott Kiere</span><span>Build Human</span><span>Sarah DeVido Health</span><span>HHP Pelvic Health</span><span>Alain Martinez Studio</span><span>Kensing LoHi</span>
         </div>
       </div>
 
@@ -1963,7 +2276,7 @@ h2 {
         <p class="section-copy">Real deliverables for real businesses — CRM setups, automated follow-up, landing pages, content systems, and operational workflows from setup through handover.</p>
       </div>
 
-      <div class="fade-in">
+      <div class="project-list">
 
         <article class="project-card">
           <div class="project-left">
@@ -2103,17 +2416,22 @@ h2 {
 
   <!-- HOW I WORK -->
   <!-- TESTIMONIALS — uncomment and fill when quotes are collected
+  <!-- TESTIMONIALS — hidden until real quotes exist. Uncomment and fill in.
+       Each quote should contain a specific result (a number, a timeframe, or a before/after).
   <section class="wrap" id="testimonials">
-    <div style="margin-bottom:28px">
-      <div class="section-tag">Client words</div>
-      <h2>What clients say after handover.</h2>
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Client words</div>
+        <h2>What clients say after handover.</h2>
+      </div>
     </div>
-    <div class="testi-grid">
-      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
-      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
-      <div class="card fade-in"><p>"QUOTE HERE."</p><p style="margin-top:12px;color:var(--soft);font-size:13px">— Name, Business type</p></div>
+    <div class="testi-grid fade-in stagger">
+      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
+      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
+      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
     </div>
   </section>
+  -->
   -->
 
   <section class="process-section" id="process">
@@ -2478,35 +2796,53 @@ h2 {
   </section>
 
   <!-- DELIVERABLES -->
-  <section class="wrap">
+  <section class="wrap" id="packages">
     <div class="section-head fade-in">
       <div>
-        <div class="section-tag">Deliverables</div>
-        <h2>Specific work I own from setup to handover.</h2>
+        <div class="section-tag">Ways to work together</div>
+        <h2>Three engagements. Pick the one that matches where you are.</h2>
       </div>
-      <p class="section-copy">Every engagement ends with working systems, documented logic, and a clean handoff — not just a build that lives and dies with one person knowing how it works.</p>
+      <p class="section-copy">Fixed scope, quoted after the systems call — no hourly surprises. Not sure which fits? Book the call and I'll tell you which one you actually need. Sometimes it's none.</p>
     </div>
 
-    <div class="grid-3 fade-in">
-      <article class="card deliverables-card">
-        <h3>Website & Funnel Build</h3>
-        <p>Homepage, landing page, service page, booking page, contact page, inquiry form, and CTA structure — responsive and conversion-focused.</p>
+    <div class="grid-3 fade-in packages-grid">
+      <article class="card package">
+        <div class="package-tag">Start here if GHL is already set up</div>
+        <h3>Systems Audit</h3>
+        <p class="package-for">For businesses whose GHL account "works" but leaks — missed follow-ups, dead automations, unclear access.</p>
+        <ul class="deliverable-list">
+          <li>Full account review — pipelines, workflows, calendars, forms, A2P/SMS, user access</li>
+          <li>Findings ranked by business risk, not by feature</li>
+          <li>Scoped remediation plan with hour estimates you can act on with me or anyone else</li>
+        </ul>
+        <div class="package-meta">Typical turnaround: 1–2 weeks</div>
+        <a class="btn secondary package-cta" href="#book">Book My Free Systems Call</a>
       </article>
-      <article class="card deliverables-card">
-        <h3>GHL CRM & Pipeline</h3>
-        <p>Pipeline creation, lead source tagging, automation triggers, email/SMS sequences, calendar booking, and contact cleanup.</p>
+
+      <article class="card package featured">
+        <div class="package-tag">Most common</div>
+        <h3>GHL System Build</h3>
+        <p class="package-for">For businesses starting from scratch or replacing spreadsheets, WhatsApp threads, and manual follow-up.</p>
+        <ul class="deliverable-list">
+          <li>Pipeline, lead-source tagging, and automated email/SMS follow-up</li>
+          <li>Calendar booking, forms, funnel or landing page, and integrations (Zapier / n8n / Pabbly)</li>
+          <li>Every trigger tested against real scenarios, then SOPs and a recorded handover</li>
+        </ul>
+        <div class="package-meta">Typical turnaround: 2–6 weeks depending on scope</div>
+        <a class="btn primary package-cta" href="#book">Book My Free Systems Call</a>
       </article>
-      <article class="card deliverables-card">
-        <h3>AI Prompt Systems</h3>
-        <p>Prompt libraries for content, email replies, client summaries, SOPs, meeting notes, research workflows, and website copy.</p>
-      </article>
-      <article class="card deliverables-card">
-        <h3>SEO / AEO Setup</h3>
-        <p>Content outlines, FAQ sections, keyword-intent mapping, local service wording, metadata drafts, and AI-answer-optimized page structure.</p>
-      </article>
-      <article class="card deliverables-card">
-        <h3>Operations & EA Support</h3>
-        <p>Schedule coordination, task tracking, business documentation, client updates, workflow reports, and SOP creation for smooth handoffs.</p>
+
+      <article class="card package">
+        <div class="package-tag">After the build</div>
+        <h3>Ongoing GHL Management</h3>
+        <p class="package-for">For businesses that want the system to keep improving without hiring an in-house operator.</p>
+        <ul class="deliverable-list">
+          <li>Workflow changes, new campaigns, and calendar/form updates as your offers change</li>
+          <li>Monthly pipeline and automation health report</li>
+          <li>Documentation kept current so nothing depends on me</li>
+        </ul>
+        <div class="package-meta">Monthly, cancel anytime</div>
+        <a class="btn secondary package-cta" href="#book">Book My Free Systems Call</a>
       </article>
     </div>
   </section>
@@ -2571,17 +2907,58 @@ h2 {
 
   <!-- CONTACT -->
   <!-- BOOKING -->
+  <section class="wrap" id="faq">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Before you book</div>
+        <h2>The questions I get on almost every first call.</h2>
+      </div>
+      <p class="section-copy">Short answers so you can decide whether a call is worth your time.</p>
+    </div>
+    <div class="faq-list fade-in stagger">
+      <details class="faq">
+        <summary>Do I need a GoHighLevel account before we start?</summary>
+        <p>No. If you don't have one, I'll tell you on the call whether GHL is even the right tool for your situation. If it is, I'll walk you through getting the account and take it from there.</p>
+      </details>
+      <details class="faq">
+        <summary>My GHL is half-built and half-working. Do you fix or rebuild?</summary>
+        <p>Usually fix. The Systems Audit exists for exactly this — I map what's there, find where leads and follow-ups are leaking, and rank the fixes by business impact. Rebuilding only happens when the logic underneath can't be trusted, and I'll show you why before touching it.</p>
+      </details>
+      <details class="faq">
+        <summary>How do you price?</summary>
+        <p>Fixed scope for audits and builds, quoted in writing after the systems call once I've seen your account and workflow. Ongoing management is a flat monthly rate. You won't get an hourly bill that grows.</p>
+      </details>
+      <details class="faq">
+        <summary>What time zone are you in, and will we overlap?</summary>
+        <p>I'm in the Philippines (GMT+8) and schedule calls around your calendar — US, UK, and Australian clients all work. Day-to-day, you get written progress updates so nothing waits on a meeting.</p>
+      </details>
+      <details class="faq">
+        <summary>What happens after handover? Do you keep access?</summary>
+        <p>You get SOPs, annotated workflows, and a recorded walkthrough so your team can run the system without me. Access stays with you — I'm removed or downgraded at handover unless you choose ongoing management. Every build is designed so nothing depends on me staying in the loop.</p>
+      </details>
+      <details class="faq">
+        <summary>What do I actually get on the free call?</summary>
+        <p>20 minutes on your current lead flow — where leads come from, where they stall, what's manual. You leave with a written next-step plan: what to fix first, what it involves, and whether I'm the right person for it. No slides, no pressure.</p>
+      </details>
+    </div>
+  </section>
+
   <section class="wrap" id="book">
     <div class="book-section fade-in">
       <div>
         <div class="section-tag">Book a call</div>
-        <h2>Pick a time to talk.</h2>
-        <p class="book-copy">A quick call to understand what you need &mdash; whether that's a GHL build, a workflow fix, or a project you're hiring for. You'll leave with clear next steps.</p>
+        <h2>Find out what's leaking in your lead flow — in 20 minutes.</h2>
+        <p class="book-copy">Pick a time below. You'll leave with a written next-step plan whether or not we work together.</p>
+        <div class="book-proof">
+          <span class="book-proof-num">46%</span>
+          <span class="book-proof-txt">missed-call rate uncovered in a credit-repair client's account on a "simple cleanup" request — surfaced in the first review. <a href="case-study-systems-audit.html">Read the case study →</a></span>
+        </div>
       </div>
       <div id="book-cal" class="book-cal" aria-label="Booking calendar"></div>
       <div id="book-fallback" class="book-fallback">
-        <p>Prefer email? Send me a note and I'll reply with available times.</p>
+        <p>Prefer email? Send me a note and I'll reply within one business day with available times.</p>
         <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Systems%20Call%20Request">Email Me for Times</a>
+        <p class="cta-trust">No pitch deck. No obligation. Your account details stay confidential.</p>
       </div>
     </div>
   </section>
@@ -2589,15 +2966,14 @@ h2 {
   <section class="wrap" id="contact">
     <div class="contact-section fade-in">
       <div>
-        <div class="section-tag">Open for work — remote, freelance, or project-based</div>
-        <h2>Still losing leads to manual follow-up?</h2>
-        <p>If your business is buried in spreadsheets, missing follow-ups, or running on disconnected tools — I build the GHL system that fixes it. Clean pipelines, automated sequences, and everything documented so it runs without hand-holding.</p>
+        <div class="section-tag">Taking new projects now</div>
+        <h2>Every lead that waits hours for a reply is a lead you already paid for.</h2>
+        <p>If follow-up still depends on someone remembering, the system is the problem — not your team. I build the GHL system that answers, books, and hands off automatically, then document it so it keeps running after I'm gone.</p>
       </div>
       <div class="contact-actions">
-        <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
+        <a class="btn primary" href="#book">Book My Free Systems Call</a>
         <a class="btn secondary" href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp Me</a>
-        <a class="btn ghost" href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="btn ghost" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">Download Resume</a>
+        <a class="btn ghost" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
       </div>
     </div>
   </section>
@@ -2613,8 +2989,15 @@ h2 {
     <a href="mailto:velonieb@gmail.com">Email</a>
     <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
   </div>
 </footer>
+
+<!-- Sticky mobile CTA (appears after hero, hides while the booking section is on screen) -->
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <span class="sticky-cta-txt">Losing leads to slow follow-up?</span>
+  <a class="btn primary" href="#book">Book a free call</a>
+</div>
 
 <script>
   // ── CONFIG ─────────────────────────────────────────────
@@ -2817,5 +3200,289 @@ h2 {
     if (fb) fb.querySelector('p').textContent = "Calendar not loading? Email me and I'll send times.";
   })();
 </script>
+
+<script>
+/* ── MOTION LAYER ─────────────────────────────────────────────
+   1. Workflow-graph background canvas (nodes, links, data packets)
+   2. Scroll: progress line, topbar state, hero parallax, packets on scroll
+   3. Reveal: staggered grids, alternating project cards, stat counters
+   ------------------------------------------------------------ */
+(function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const topbar = document.querySelector('.topbar');
+  const progressBar = document.querySelector('.scroll-progress');
+
+  /* ── 1. BACKGROUND CANVAS ── */
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas && canvas.getContext('2d', { alpha: true });
+  let W = 0, H = 0, DPR = 1, WORLD_H = 0;
+  let nodes = [], edges = [], packets = [];
+  let scrollY = window.scrollY, lastScrollY = scrollY, scrollVel = 0;
+  let mouse = { x: -9999, y: -9999, active: false };
+  let running = false, lastT = 0, packetClock = 0;
+  const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  const GREEN = [31, 228, 122], CYAN = [61, 217, 240];
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const mixRGB = (t) => GREEN.map((c, i) => Math.round(lerp(c, CYAN[i], t)));
+
+  function sizeCanvas() {
+    W = window.innerWidth; H = window.innerHeight;
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    WORLD_H = H * 1.5;                       // extra room so parallax has somewhere to go
+    buildNodes();
+  }
+
+  function buildNodes() {
+    const target = Math.round(Math.min(120, Math.max(36, (W * H) / 16000)));
+    const count = W < 700 ? Math.min(target, 48) : target;
+    nodes = [];
+    for (let i = 0; i < count; i++) {
+      const hub = Math.random() < 0.14;
+      nodes.push({
+        x: Math.random() * W,
+        y: Math.random() * WORLD_H,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.12,
+        r: hub ? 2.6 + Math.random() * 1.4 : 1.1 + Math.random() * 1.2,
+        hub,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+    packets = [];
+  }
+
+  const LINK = () => (W < 700 ? 120 : 150);
+  const PARALLAX = 0.18;                     // background moves at 18% of scroll speed
+
+  // Screen position of a node, wrapped vertically so the field is endless
+  function screenY(n) {
+    const y = (n.y - scrollY * PARALLAX) % WORLD_H;
+    return (y < 0 ? y + WORLD_H : y) - (WORLD_H - H) / 2;
+  }
+
+  function spawnPacket() {
+    if (!edges.length) return;
+    const e = edges[(Math.random() * edges.length) | 0];
+    packets.push({ a: e.a, b: e.b, t: 0, speed: 0.55 + Math.random() * 0.7, flip: Math.random() < 0.5 });
+  }
+
+  function frame(t) {
+    if (!running) return;
+    const dt = Math.min(48, t - lastT || 16) / 16.67;   // in "frames"
+    lastT = t;
+
+    // scroll velocity (decays)
+    scrollVel = lerp(scrollVel, Math.abs(scrollY - lastScrollY), 0.4);
+    lastScrollY = scrollY;
+
+    const maxScroll = Math.max(1, root.scrollHeight - H);
+    const hueT = Math.min(1, scrollY / maxScroll);      // green at top → cyan at bottom
+    const rgb = mixRGB(hueT);
+    const link = LINK();
+
+    ctx.clearRect(0, 0, W, H);
+
+    // move nodes
+    for (const n of nodes) {
+      n.x += n.vx * dt; n.y += n.vy * dt;
+      if (n.x < -20) n.x = W + 20; else if (n.x > W + 20) n.x = -20;
+      if (n.y < 0) n.y += WORLD_H; else if (n.y > WORLD_H) n.y -= WORLD_H;
+      n.sx = n.x; n.sy = screenY(n);
+      // cursor attraction (desktop only)
+      if (mouse.active) {
+        const dx = mouse.x - n.sx, dy = mouse.y - n.sy, d2 = dx * dx + dy * dy;
+        if (d2 < 180 * 180 && d2 > 1) {
+          const d = Math.sqrt(d2), f = (1 - d / 180) * 0.35 * dt;
+          n.sx += dx / d * f * 8; n.sy += dy / d * f * 8;
+          n.x += dx / d * f * 0.6; 
+        }
+      }
+    }
+
+    // edges
+    edges = [];
+    ctx.lineWidth = 1;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      if (a.sy < -link || a.sy > H + link) continue;
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.sx - b.sx, dy = a.sy - b.sy, d2 = dx * dx + dy * dy;
+        if (d2 > link * link) continue;
+        const d = Math.sqrt(d2);
+        let alpha = (1 - d / link) * 0.22;
+        if (mouse.active) {
+          const mx = (a.sx + b.sx) / 2 - mouse.x, my = (a.sy + b.sy) / 2 - mouse.y;
+          const md = Math.sqrt(mx * mx + my * my);
+          if (md < 200) alpha += (1 - md / 200) * 0.35;
+        }
+        edges.push({ a, b });
+        ctx.strokeStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${alpha.toFixed(3)})`;
+        ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke();
+      }
+    }
+
+    // nodes
+    for (const n of nodes) {
+      if (n.sy < -10 || n.sy > H + 10) continue;
+      const pulse = n.hub ? 0.75 + 0.25 * Math.sin(t / 900 + n.phase) : 1;
+      ctx.beginPath();
+      ctx.arc(n.sx, n.sy, n.r * pulse, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${n.hub ? 0.55 : 0.32})`;
+      ctx.fill();
+      if (n.hub) {
+        ctx.beginPath();
+        ctx.arc(n.sx, n.sy, n.r * 2.6 * pulse, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.14)`;
+        ctx.stroke();
+      }
+    }
+
+    // packets: baseline trickle + burst proportional to scroll speed
+    packetClock += dt;
+    const idleEvery = 70, scrollBonus = Math.min(6, scrollVel / 9);
+    if (packetClock >= idleEvery) { packetClock = 0; spawnPacket(); }
+    if (scrollBonus > 0.4 && Math.random() < scrollBonus * 0.12 * dt) spawnPacket();
+
+    for (let i = packets.length - 1; i >= 0; i--) {
+      const p = packets[i];
+      p.t += (p.speed / 60) * dt * (1 + scrollBonus * 0.35);
+      if (p.t >= 1) { packets.splice(i, 1); continue; }
+      const from = p.flip ? p.b : p.a, to = p.flip ? p.a : p.b;
+      const x = lerp(from.sx, to.sx, p.t), y = lerp(from.sy, to.sy, p.t);
+      const tx = lerp(from.sx, to.sx, Math.max(0, p.t - 0.18)), ty = lerp(from.sy, to.sy, Math.max(0, p.t - 0.18));
+      // trail
+      const g = ctx.createLinearGradient(tx, ty, x, y);
+      g.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
+      g.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.9)`);
+      ctx.strokeStyle = g; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(x, y); ctx.stroke();
+      // head
+      ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,249,244,0.95)`; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.25)`; ctx.fill();
+    }
+    if (packets.length > 60) packets.length = 60;
+
+    requestAnimationFrame(frame);
+  }
+
+  function start() { if (running) return; running = true; lastT = 0; requestAnimationFrame(frame); }
+  function stop() { running = false; }
+
+  if (canvas && ctx && !reduceMotion) {
+    sizeCanvas();
+    canvas.classList.add('ready');
+    start();
+    window.addEventListener('resize', debounce(sizeCanvas, 150));
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    if (finePointer) {
+      window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }, { passive: true });
+      window.addEventListener('mouseleave', () => { mouse.active = false; });
+    }
+  }
+
+  /* ── 2. SCROLL-LINKED STATE ── */
+  const heroText = document.querySelector('.hero-grid > .fade-in');
+  const heroCard = document.querySelector('.hero-grid > .hero-card');
+  let heroParallaxOn = false;
+  if (!reduceMotion && heroText && heroCard) {
+    setTimeout(() => {           // hand over transform control after the intro fade
+      heroText.classList.add('parallax');
+      heroCard.classList.add('parallax');
+      heroParallaxOn = true;
+    }, 900);
+  }
+
+  let ticking = false;
+  function onScroll() {
+    scrollY = window.scrollY;
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const maxScroll = Math.max(1, root.scrollHeight - H);
+      root.style.setProperty('--sy', scrollY);
+      root.style.setProperty('--progress', Math.min(1, scrollY / maxScroll).toFixed(4));
+      if (topbar) topbar.classList.toggle('scrolled', scrollY > 24);
+      if (heroParallaxOn && scrollY < H * 1.2) {
+        const p = scrollY / H;
+        heroText.style.setProperty('--py', (scrollY * 0.22).toFixed(1) + 'px');
+        heroText.style.setProperty('--po', Math.max(0, 1 - p * 1.4).toFixed(3));
+        heroCard.style.setProperty('--py', (scrollY * 0.1).toFixed(1) + 'px');
+        heroCard.style.setProperty('--po', Math.max(0, 1 - p * 1.2).toFixed(3));
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── 3. REVEALS ── */
+  // Stagger grids
+  document.querySelectorAll('.grid-4.fade-in, .grid-3.fade-in, .grid-5.fade-in, .whyme-grid.fade-in, .process-grid.fade-in, .ai-builds-grid.fade-in, .story-grid.fade-in')
+    .forEach(el => el.classList.add('stagger'));
+  const statsInner = document.querySelector('.stats-bar .stats-inner');
+  if (statsInner) { statsInner.classList.add('stagger'); statsInner.classList.add('fade-in'); }
+
+  // Project cards reveal individually (alternating sides via CSS)
+  document.querySelectorAll('.project-card').forEach(c => c.classList.add('fade-in'));
+
+  // Re-observe anything the first observer pass missed (cards/grids just tagged)
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el => observer.observe(el));
+
+  // Stat counters (8+, 6+, 4+ …)
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      counterObs.unobserve(el);
+      const m = el.textContent.trim().match(/^(\d+)(.*)$/);
+      if (!m || reduceMotion) return;
+      const end = +m[1], suffix = m[2];
+      const dur = 1100, t0 = performance.now();
+      (function tick(now) {
+        const k = Math.min(1, (now - t0) / dur);
+        const eased = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(end * eased) + suffix;
+        if (k < 1) requestAnimationFrame(tick);
+      })(t0);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.stat-num').forEach(el => counterObs.observe(el));
+})();
+</script>
+
+<script>
+/* ── CONVERSION LAYER: sticky mobile CTA + modal booking link ── */
+(function () {
+  const bar = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  const book = document.getElementById('book');
+  const contact = document.getElementById('contact');
+  if (!bar || !hero) return;
+  let pastHero = false, onBook = false, onContact = false;
+  const update = () => {
+    const show = pastHero && !onBook && !onContact;
+    bar.classList.toggle('show', show);
+    bar.setAttribute('aria-hidden', String(!show));
+  };
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.bottom < 0; update(); }, { threshold: 0 }).observe(hero);
+  if (book) new IntersectionObserver(([e]) => { onBook = e.isIntersecting; update(); }, { threshold: 0.15 }).observe(book);
+  if (contact) new IntersectionObserver(([e]) => { onContact = e.isIntersecting; update(); }, { threshold: 0.3 }).observe(contact);
+
+  // "Book a Call" inside the intro video modal: close the modal, then jump to booking
+  const modalBtn = document.getElementById('modalBookBtn');
+  const closeBtn = document.getElementById('videoModalClose');
+  if (modalBtn && closeBtn) modalBtn.addEventListener('click', () => closeBtn.click());
+})();
+</script>
+
+
 </body>
 </html>
