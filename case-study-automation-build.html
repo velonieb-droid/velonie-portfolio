@@ -153,8 +153,24 @@ h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03e
 
 ::selection { background: rgba(31,228,122,0.25); color: var(--ink); }
 </style>
+<style id="shared-motion-styles">
+#serviceBgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity .8s ease}
+#serviceBgCanvas.ready{opacity:.72}
+body{background-color:#060e0a!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 12%,rgba(31,228,122,.075),transparent 34%),radial-gradient(circle at 88% 82%,rgba(61,217,240,.055),transparent 36%),linear-gradient(180deg,rgba(6,14,10,.2),rgba(6,14,10,.78))}
+body>header,body>main,body>footer{position:relative;z-index:1}
+.motion-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1)}
+.motion-reveal.motion-visible{opacity:1;transform:none}
+.card,.finding-card,.metric-card,.phase-card,.result-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.card:hover,.finding-card:hover,.metric-card:hover,.phase-card:hover,.result-card:hover{transform:translateY(-5px);border-color:rgba(31,228,122,.3)!important;box-shadow:0 16px 42px rgba(0,0,0,.24)}
+.flow{position:relative;overflow:hidden}
+.flow::after{content:"";position:absolute;top:0;bottom:0;width:90px;left:-110px;background:linear-gradient(90deg,transparent,rgba(61,217,240,.12),transparent);animation:flowSweep 5s ease-in-out infinite}
+@keyframes flowSweep{0%,20%{left:-110px}70%,100%{left:calc(100% + 110px)}}
+@media(prefers-reduced-motion:reduce){#serviceBgCanvas{opacity:.32!important}.motion-reveal{opacity:1;transform:none;transition:none}.flow::after{display:none}.card,.finding-card,.metric-card,.phase-card,.result-card{transition:none}}
+</style>
 </head>
 <body>
+<canvas id="serviceBgCanvas" aria-hidden="true"></canvas>
 
 <div class="topbar">
   <div class="wrap topbar-inner">
@@ -382,5 +398,49 @@ h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03e
   </div>
 </footer>
 
+<script id="shared-motion-script">
+(function(){
+  const canvas=document.getElementById('serviceBgCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d',{alpha:true});
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w=0,h=0,dpr=1,nodes=[],raf=0,last=0,mouse={x:-9999,y:-9999};
+  function resize(){
+    w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,2);
+    canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count=Math.max(34,Math.min(86,Math.round(w*h/19000)));
+    nodes=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,r:Math.random()<.15?2.8:1.35,p:Math.random()*6.28}));
+    draw(0,true);canvas.classList.add('ready');
+  }
+  function draw(t,once){
+    ctx.clearRect(0,0,w,h);
+    const scroll=window.scrollY||0, max=Math.max(1,document.documentElement.scrollHeight-h), mix=Math.min(1,scroll/max);
+    const rgb=[Math.round(31+(61-31)*mix),Math.round(228+(217-228)*mix),Math.round(122+(240-122)*mix)];
+    const link=w<700?105:145;
+    nodes.forEach(n=>{
+      if(!once){n.x+=n.vx;n.y+=n.vy;if(n.x<-10)n.x=w+10;if(n.x>w+10)n.x=-10;if(n.y<-10)n.y=h+10;if(n.y>h+10)n.y=-10}
+      const dx=mouse.x-n.x,dy=mouse.y-n.y,d2=dx*dx+dy*dy;
+      if(d2<160*160&&d2>1){const d=Math.sqrt(d2),f=(1-d/160)*1.4;n.sx=n.x+dx/d*f;n.sy=n.y+dy/d*f}else{n.sx=n.x;n.sy=n.y}
+    });
+    ctx.lineWidth=1;
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],dx=a.sx-b.sx,dy=a.sy-b.sy,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<link){ctx.strokeStyle='rgba('+rgb.join(',')+','+((1-d/link)*.2).toFixed(3)+')';ctx.beginPath();ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);ctx.stroke()}
+    }
+    nodes.forEach(n=>{const pulse=n.r>2?1+.18*Math.sin(t/850+n.p):1;ctx.beginPath();ctx.arc(n.sx,n.sy,n.r*pulse,0,Math.PI*2);ctx.fillStyle='rgba('+rgb.join(',')+','+(n.r>2?.62:.34)+')';ctx.fill();if(n.r>2){ctx.beginPath();ctx.arc(n.sx,n.sy,n.r*2.6*pulse,0,Math.PI*2);ctx.strokeStyle='rgba('+rgb.join(',')+',.12)';ctx.stroke()}});
+    if(!reduce)raf=requestAnimationFrame(draw);
+  }
+  let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(resize,140)},{passive:true});
+  if(matchMedia('(pointer:fine)').matches)addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(!reduce)raf=requestAnimationFrame(draw)});
+  resize();if(!reduce)raf=requestAnimationFrame(draw);
+  const targets=document.querySelectorAll('main section, main .card, main .finding-card, main .metric-card, main .phase-card, main .result-card');
+  targets.forEach((el,i)=>{el.classList.add('motion-reveal');el.style.transitionDelay=Math.min(i%3,2)*80+'ms'});
+  if(reduce){targets.forEach(el=>el.classList.add('motion-visible'));return}
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motion-visible');obs.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -35px'});
+  targets.forEach(el=>obs.observe(el));
+})();
+</script>
 </body>
 </html>
