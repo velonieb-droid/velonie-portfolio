@@ -224,6 +224,20 @@ a { color: inherit; text-decoration: none; }
   margin-top: 2px;
 }
 
+.service-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 18px;
+}
+.service-links a {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 600;
+}
+.service-links a:hover { color: var(--cyan); }
+
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.55; transform: scale(0.8); }
@@ -2065,6 +2079,16 @@ body::before {
     <nav class="nav" id="siteNav" aria-label="Portfolio navigation">
       <a href="#projects">Work</a>
       <div class="nav-dropdown">
+        <a href="#roles" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Services</a>
+        <div class="nav-dropdown-menu">
+          <a href="go-highlevel-automation-specialist/">GHL Automation Specialist<span class="cs-tag">Complete CRM and automation systems</span></a>
+          <a href="ghl-crm-setup/">GHL CRM Setup<span class="cs-tag">Pipelines, fields, calendars, and routing</span></a>
+          <a href="ghl-workflow-automation/">GHL Workflow Automation<span class="cs-tag">Follow-up, booking, nurture, and handoffs</span></a>
+          <a href="n8n-go-highlevel-integration/">n8n + GoHighLevel Integration<span class="cs-tag">APIs, webhooks, AI, and external tools</span></a>
+          <a href="ghl-systems-audit/">GHL Systems Audit<span class="cs-tag">Find gaps, risks, and broken workflows</span></a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
         <a href="#projects" class="nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">Case Studies</a>
         <div class="nav-dropdown-menu">
           <a href="case-study-systems-audit.html">Systems Audit<span class="cs-tag">GHL + Website Audit, Credit Repair Client</span></a>
@@ -2189,16 +2213,19 @@ body::before {
         <div class="accent-line"></div>
         <h3>GoHighLevel CRM Systems</h3>
         <p>Pipelines, lead routing, automated follow-up, calendars, booking workflows, forms, funnels, and lifecycle automation built around how your business actually operates.</p>
+        <div class="service-links"><a href="go-highlevel-automation-specialist/">GHL specialist overview →</a><a href="ghl-crm-setup/">CRM setup →</a><a href="ghl-workflow-automation/">Workflow automation →</a></div>
       </article>
       <article class="card">
         <div class="accent-line"></div>
         <h3>Automation & Integrations</h3>
         <p>n8n, Zapier, Pabbly, APIs, webhooks, and AI workflows that connect your systems and eliminate repetitive manual work.</p>
+        <div class="service-links"><a href="n8n-go-highlevel-integration/">Explore n8n + GHL integrations →</a><a href="ghl-systems-audit/">Explore systems audits →</a></div>
       </article>
       <article class="card">
         <div class="accent-line"></div>
         <h3>Websites & Conversion</h3>
         <p>Landing pages, funnels, lead forms, booking experiences, SEO/AEO structure, and conversion-focused websites connected directly to your CRM.</p>
+        <div class="service-links"><a href="#projects">See conversion-focused work →</a></div>
       </article>
     </div>
   </section>
@@ -3115,11 +3142,19 @@ body::before {
   (function() {
     const toggle = document.getElementById('navToggle');
     const nav = document.getElementById('siteNav');
-    const drop = document.querySelector('.nav-dropdown');
-    const trigger = document.querySelector('.nav-dropdown-trigger');
+    const dropdowns = nav.querySelectorAll('.nav-dropdown');
 
+    function closeDropdowns(except) {
+      dropdowns.forEach(drop => {
+        if (drop === except) return;
+        drop.classList.remove('open');
+        const trigger = drop.querySelector('.nav-dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
     function closeNav() {
       nav.classList.remove('open');
+      closeDropdowns();
       toggle.setAttribute('aria-expanded', 'false');
       toggle.setAttribute('aria-label', 'Open menu');
     }
@@ -3128,27 +3163,33 @@ body::before {
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
-    // Close panel after choosing a link
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       if (window.innerWidth <= 860 && !a.classList.contains('nav-dropdown-trigger')) closeNav();
     }));
 
-    // Case Studies: tap-to-open on touch / small screens instead of navigating away
+    // Each dropdown opens independently on touch and small screens.
     const touchLike = () => window.innerWidth <= 860 || window.matchMedia('(hover: none)').matches;
-    trigger.addEventListener('click', e => {
-      if (!touchLike()) return; // desktop hover behavior unchanged
-      if (!drop.classList.contains('open')) {
-        e.preventDefault();
-        drop.classList.add('open');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-      // second tap follows the link (#projects) naturally
+    dropdowns.forEach(drop => {
+      const trigger = drop.querySelector('.nav-dropdown-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', e => {
+        if (!touchLike()) return;
+        if (!drop.classList.contains('open')) {
+          e.preventDefault();
+          closeDropdowns(drop);
+          drop.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
     });
     document.addEventListener('click', e => {
-      if (!drop.contains(e.target)) {
-        drop.classList.remove('open');
-        trigger.setAttribute('aria-expanded', 'false');
-      }
+      dropdowns.forEach(drop => {
+        if (!drop.contains(e.target)) {
+          drop.classList.remove('open');
+          const trigger = drop.querySelector('.nav-dropdown-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
     });
   })();
 
