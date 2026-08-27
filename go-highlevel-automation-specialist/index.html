@@ -47,8 +47,24 @@
 <style>
 :root{--bg:#060e0a;--panel:#0a1610;--ink:#f0f9f4;--text:#cce0d6;--muted:#8aab9c;--line:rgba(180,230,200,.11);--green:#1fe47a;--cyan:#3dd9f0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,sans-serif;line-height:1.65}a{color:inherit;text-decoration:none}.wrap{width:min(1080px,calc(100% - 32px));margin:auto}.top{border-bottom:1px solid var(--line);background:rgba(6,14,10,.94);position:sticky;top:0;z-index:10}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-family:Outfit,sans-serif;font-weight:800;color:var(--ink)}.nav a.cta,.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:8px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#031809;font-weight:700}.hero{padding:88px 0 64px}.eyebrow{color:var(--green);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.hero h1{font-family:Outfit,sans-serif;color:var(--ink);font-size:clamp(42px,7vw,74px);line-height:.98;letter-spacing:-.045em;margin:14px 0 22px}.hero p{max-width:760px;font-size:18px;color:var(--text)}.hero .sub{color:var(--muted);font-size:14px;margin-top:14px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:24px}.card h3,.section h2{font-family:Outfit,sans-serif;color:var(--ink)}.section{padding:72px 0}.section h2{font-size:clamp(30px,4vw,48px);line-height:1.05;margin:0 0 16px}.section-intro{max-width:760px;color:var(--muted);margin-bottom:28px}.flow{padding:18px;border-left:3px solid var(--green);background:rgba(31,228,122,.06);border-radius:0 10px 10px 0;font-weight:600}.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.proof .num{font-family:Outfit,sans-serif;color:var(--green);font-size:34px;font-weight:800}.faq{display:grid;gap:12px}.faq details{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:0 18px}.faq summary{cursor:pointer;color:var(--ink);font-weight:700;padding:18px 0}.faq p{color:var(--muted);margin:0 0 18px}.cta-box{border:1px solid rgba(31,228,122,.28);background:linear-gradient(135deg,rgba(31,228,122,.08),rgba(61,217,240,.04));border-radius:14px;padding:32px}.links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}.ghost{border:1px solid var(--line);padding:12px 18px;border-radius:8px;color:var(--ink)}footer{padding:30px 0 44px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:820px){.grid,.proof{grid-template-columns:1fr}.hero{padding-top:64px}.nav{align-items:flex-start;padding:14px 0}}
 </style>
+<style id="shared-motion-styles">
+#serviceBgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0;transition:opacity .8s ease}
+#serviceBgCanvas.ready{opacity:.72}
+body{background-color:#060e0a!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 12%,rgba(31,228,122,.075),transparent 34%),radial-gradient(circle at 88% 82%,rgba(61,217,240,.055),transparent 36%),linear-gradient(180deg,rgba(6,14,10,.2),rgba(6,14,10,.78))}
+body>header,body>main,body>footer{position:relative;z-index:1}
+.motion-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1)}
+.motion-reveal.motion-visible{opacity:1;transform:none}
+.card,.finding-card,.metric-card,.phase-card,.result-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.card:hover,.finding-card:hover,.metric-card:hover,.phase-card:hover,.result-card:hover{transform:translateY(-5px);border-color:rgba(31,228,122,.3)!important;box-shadow:0 16px 42px rgba(0,0,0,.24)}
+.flow{position:relative;overflow:hidden}
+.flow::after{content:"";position:absolute;top:0;bottom:0;width:90px;left:-110px;background:linear-gradient(90deg,transparent,rgba(61,217,240,.12),transparent);animation:flowSweep 5s ease-in-out infinite}
+@keyframes flowSweep{0%,20%{left:-110px}70%,100%{left:calc(100% + 110px)}}
+@media(prefers-reduced-motion:reduce){#serviceBgCanvas{opacity:.32!important}.motion-reveal{opacity:1;transform:none;transition:none}.flow::after{display:none}.card,.finding-card,.metric-card,.phase-card,.result-card{transition:none}}
+</style>
 </head>
 <body>
+<canvas id="serviceBgCanvas" aria-hidden="true"></canvas>
 <header class="top"><div class="wrap nav"><a class="brand" href="../">Velonie Baluarte</a><a class="cta" href="../#book">Book a Free Systems Call</a></div></header>
 <main>
 <section class="hero"><div class="wrap"><div class="eyebrow">GoHighLevel CRM & Automation Specialist</div><h1>Build a GoHighLevel system that follows up, books, and moves leads without constant manual work.</h1><p>I help service businesses design and implement GoHighLevel CRM systems that capture leads, automate follow-up, manage opportunities, connect calendars and forms, and integrate with tools like n8n, Zapier, and external APIs.</p><div class="links"><a class="btn" href="../#book">Book My Free Systems Call</a><a class="ghost" href="../#projects">See Project Work</a></div><p class="sub">20 minutes · no pitch · written next-step plan after the call</p></div></section>
@@ -61,5 +77,49 @@
 <section class="section"><div class="wrap"><div class="cta-box"><div class="eyebrow">Next step</div><h2>Need someone to audit, repair, or build your GoHighLevel system?</h2><p>Book a 20-minute systems call. I’ll review how leads currently move through your business and give you a written next-step plan whether or not we work together.</p><div class="links"><a class="btn" href="../#book">Book My Free Systems Call</a><a class="ghost" href="mailto:velonieb@gmail.com?subject=GoHighLevel%20Automation%20Inquiry">Email Me</a></div></div></div></section>
 </main>
 <footer><div class="wrap">Velonie Baluarte · GoHighLevel CRM & Automation Specialist · n8n Integrations · Websites & Conversion</div></footer>
+<script id="shared-motion-script">
+(function(){
+  const canvas=document.getElementById('serviceBgCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d',{alpha:true});
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w=0,h=0,dpr=1,nodes=[],raf=0,last=0,mouse={x:-9999,y:-9999};
+  function resize(){
+    w=innerWidth;h=innerHeight;dpr=Math.min(devicePixelRatio||1,2);
+    canvas.width=w*dpr;canvas.height=h*dpr;canvas.style.width=w+'px';canvas.style.height=h+'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count=Math.max(34,Math.min(86,Math.round(w*h/19000)));
+    nodes=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,r:Math.random()<.15?2.8:1.35,p:Math.random()*6.28}));
+    draw(0,true);canvas.classList.add('ready');
+  }
+  function draw(t,once){
+    ctx.clearRect(0,0,w,h);
+    const scroll=window.scrollY||0, max=Math.max(1,document.documentElement.scrollHeight-h), mix=Math.min(1,scroll/max);
+    const rgb=[Math.round(31+(61-31)*mix),Math.round(228+(217-228)*mix),Math.round(122+(240-122)*mix)];
+    const link=w<700?105:145;
+    nodes.forEach(n=>{
+      if(!once){n.x+=n.vx;n.y+=n.vy;if(n.x<-10)n.x=w+10;if(n.x>w+10)n.x=-10;if(n.y<-10)n.y=h+10;if(n.y>h+10)n.y=-10}
+      const dx=mouse.x-n.x,dy=mouse.y-n.y,d2=dx*dx+dy*dy;
+      if(d2<160*160&&d2>1){const d=Math.sqrt(d2),f=(1-d/160)*1.4;n.sx=n.x+dx/d*f;n.sy=n.y+dy/d*f}else{n.sx=n.x;n.sy=n.y}
+    });
+    ctx.lineWidth=1;
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const a=nodes[i],b=nodes[j],dx=a.sx-b.sx,dy=a.sy-b.sy,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<link){ctx.strokeStyle='rgba('+rgb.join(',')+','+((1-d/link)*.2).toFixed(3)+')';ctx.beginPath();ctx.moveTo(a.sx,a.sy);ctx.lineTo(b.sx,b.sy);ctx.stroke()}
+    }
+    nodes.forEach(n=>{const pulse=n.r>2?1+.18*Math.sin(t/850+n.p):1;ctx.beginPath();ctx.arc(n.sx,n.sy,n.r*pulse,0,Math.PI*2);ctx.fillStyle='rgba('+rgb.join(',')+','+(n.r>2?.62:.34)+')';ctx.fill();if(n.r>2){ctx.beginPath();ctx.arc(n.sx,n.sy,n.r*2.6*pulse,0,Math.PI*2);ctx.strokeStyle='rgba('+rgb.join(',')+',.12)';ctx.stroke()}});
+    if(!reduce)raf=requestAnimationFrame(draw);
+  }
+  let timer;addEventListener('resize',()=>{clearTimeout(timer);timer=setTimeout(resize,140)},{passive:true});
+  if(matchMedia('(pointer:fine)').matches)addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY},{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)cancelAnimationFrame(raf);else if(!reduce)raf=requestAnimationFrame(draw)});
+  resize();if(!reduce)raf=requestAnimationFrame(draw);
+  const targets=document.querySelectorAll('main section, main .card, main .finding-card, main .metric-card, main .phase-card, main .result-card');
+  targets.forEach((el,i)=>{el.classList.add('motion-reveal');el.style.transitionDelay=Math.min(i%3,2)*80+'ms'});
+  if(reduce){targets.forEach(el=>el.classList.add('motion-visible'));return}
+  const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motion-visible');obs.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -35px'});
+  targets.forEach(el=>obs.observe(el));
+})();
+</script>
 </body>
 </html>
