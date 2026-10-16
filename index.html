@@ -2037,6 +2037,24 @@ body::before {
   .client-strip { gap: 6px 8px; }
 }
 
+
+/* Portfolio review: readable anchors, accessible focus, and recruiter pathway */
+html { scroll-padding-top: 88px; }
+.hero h1 { text-wrap: balance; }
+.hero .lead { max-width: 690px; }
+.intro-resume-link { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+.intro-resume-link:hover { color: var(--cyan); }
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 4px;
+}
+@media (max-width: 860px) {
+  .nav.open { max-height: calc(100dvh - 64px); overflow-y: auto; overscroll-behavior: contain; }
+}
+@media (max-width: 640px) {
+  #bgCanvas { display: none; }
+  .hero-cta { gap: 10px; }
+}
 </style>
 </head>
 <body>
@@ -2095,9 +2113,8 @@ body::before {
           <a href="case-study-automation-build.html">Automation Build<span class="cs-tag">n8n + GHL, Nonprofit Client</span></a>
         </div>
       </div>
-      <a href="#why">Why Me</a>
-      <a href="#packages">Packages</a>
-      <a href="#faq">FAQ</a>
+      <a href="#about">About</a>
+      <a href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">Resume</a>
       <a href="#contact">Contact</a>
       <a class="btn primary nav-cta" href="#book">Book a call</a>
     </nav>
@@ -2110,14 +2127,14 @@ body::before {
   <section class="wrap hero">
     <div class="hero-grid">
       <div class="fade-in">
-        <div class="kicker">GoHighLevel CRM & Automation Specialist · for service businesses</div>
-        <h1>A GHL system that follows up in under a minute, books the call, and <em>runs without you.</em></h1>
+        <div class="kicker">GoHighLevel · CRM Architecture · n8n · Web & AI Automation</div>
+        <h1>I turn missed leads and disconnected tools into <em>reliable, automated systems.</em></h1>
         <p class="lead">
-          For service businesses losing leads to slow follow-up, spreadsheets, and disconnected tools. I build GoHighLevel CRM systems, automations, booking flows, and integrations end-to-end — then test every trigger and document the system so your team can run it confidently.
+          I’m Velonie Baluarte — an engineering-trained CRM and automation specialist. I build GoHighLevel pipelines, n8n integrations, AI workflows, and conversion-focused websites. Every handoff is tested, every process documented, and every solution built to be maintained by your team.
         </p>
         <div class="hero-cta">
-          <a class="btn primary" href="#book">Book My Free Systems Call</a>
-          <a class="btn secondary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20—%20Velonie%20Baluarte">Email Me</a>
+          <a class="btn primary" href="#projects">Explore Selected Work</a>
+          <a class="btn secondary" href="#book">Book a Systems Call</a>
           <button class="btn watch-intro" id="watchIntroBtn" aria-label="Watch introduction video">
             <span class="play-icon">
               <svg viewBox="0 0 10 12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 10,6 0,12"/></svg>
@@ -2125,7 +2142,7 @@ body::before {
             Watch My Intro
           </button>
         </div>
-        <p class="cta-trust">20 minutes · no pitch · you leave with a written next-step plan, whether or not we work together.</p>
+        <p class="cta-trust">For recruiters: <a class="intro-resume-link" href="Velonie-Baluarte-Digital-Automation-Resume-2026.pdf" target="_blank" rel="noopener">View my resume (PDF) ↗</a> · Open to freelance, contract, and specialist roles.</p>
         <div class="client-strip" aria-label="Businesses running systems I built">
           <span class="client-strip-label">Systems live for</span>
           <span>Scott Kiere</span><span>Build Human</span><span>Sarah DeVido Health</span><span>HHP Pelvic Health</span><span>Alain Martinez Studio</span><span>Kensing LoHi</span>
@@ -2197,96 +2214,6 @@ body::before {
 
   <!-- TOOLS CAROUSEL -->
 
-
-  <!-- ROLES -->
-  <section class="wrap" id="roles">
-    <div class="section-head fade-in">
-      <div>
-        <div class="section-tag">What I do</div>
-        <h2>GHL specialist. With the range to deliver the full system.</h2>
-      </div>
-      <p class="section-copy">I lead with automation and CRM — then extend into websites, AI workflows, and operations so you don't need three separate people to run one system.</p>
-    </div>
-
-    <div class="grid-3 fade-in">
-      <article class="card">
-        <div class="accent-line"></div>
-        <h3>GoHighLevel CRM Systems</h3>
-        <p>Pipelines, lead routing, automated follow-up, calendars, booking workflows, forms, funnels, and lifecycle automation built around how your business actually operates.</p>
-        <div class="service-links"><a href="go-highlevel-automation-specialist/">GHL specialist overview →</a><a href="ghl-crm-setup/">CRM setup →</a><a href="ghl-workflow-automation/">Workflow automation →</a></div>
-      </article>
-      <article class="card">
-        <div class="accent-line"></div>
-        <h3>Automation & Integrations</h3>
-        <p>n8n, Zapier, Pabbly, APIs, webhooks, and AI workflows that connect your systems and eliminate repetitive manual work.</p>
-        <div class="service-links"><a href="n8n-go-highlevel-integration/">Explore n8n + GHL integrations →</a><a href="ghl-systems-audit/">Explore systems audits →</a></div>
-      </article>
-      <article class="card">
-        <div class="accent-line"></div>
-        <h3>Websites & Conversion</h3>
-        <p>Landing pages, funnels, lead forms, booking experiences, SEO/AEO structure, and conversion-focused websites connected directly to your CRM.</p>
-        <div class="service-links"><a href="#projects">See conversion-focused work →</a></div>
-      </article>
-    </div>
-  </section>
-
-  <!-- WHY CLIENTS HIRE ME -->
-  <section class="whyme-section" id="why">
-    <div class="wrap">
-      <div class="section-head fade-in">
-        <div>
-          <div class="section-tag">Why clients hire me</div>
-          <h2>Not just a builder. A systems thinker who documents everything.</h2>
-        </div>
-        <p class="section-copy">Most GHL setups break because the logic was rushed, the triggers weren't tested, or no one documented how it works. I fix all three before you ever see the final build.</p>
-      </div>
-
-      <div class="whyme-grid fade-in">
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          </div>
-          <h3>Engineering Mindset</h3>
-          <p>Most GHL builds break mid-engagement because no one mapped the requirements before opening the tool. I ask those questions first — then test every trigger before handover. That process comes from technical project management, not a YouTube course.</p>
-        </article>
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>End-to-End Execution</h3>
-          <p>CRM, automations, website, integrations — I handle the whole system, not just one piece. You won't need to coordinate three different freelancers for one workflow.</p>
-        </article>
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <h3>Automation-First Design</h3>
-          <p>Every system I build is designed to reduce manual work — not just organize it. If something can be triggered, sequenced, or automated, that's how it gets built.</p>
-        </article>
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <h3>Always Documented</h3>
-          <p>Every build comes with SOPs, annotated workflows, and training notes. Your team can run the system after I'm done — no dependency on me staying in the loop.</p>
-        </article>
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <h3>Reliable Delivery</h3>
-          <p>Clear communication, realistic timelines, no surprises. I treat every client engagement the way I ran technical projects — with a schedule, checkpoints, and a clean handover.</p>
-        </article>
-        <article class="whyme-card">
-          <div class="whyme-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-          </div>
-          <h3>Business-Problem Focused</h3>
-          <p>I don't just build what you asked for — I build what actually solves the problem. That starts with understanding the workflow, not opening a tool.</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <!-- PROJECTS -->
   <section class="projects-section" id="projects">
@@ -2437,26 +2364,98 @@ body::before {
     </div>
   </section>
 
-  <!-- HOW I WORK -->
-  <!-- TESTIMONIALS — uncomment and fill when quotes are collected
-  <!-- TESTIMONIALS — hidden until real quotes exist. Uncomment and fill in.
-       Each quote should contain a specific result (a number, a timeframe, or a before/after).
-  <section class="wrap" id="testimonials">
+
+  <!-- ROLES -->
+  <section class="wrap" id="roles">
     <div class="section-head fade-in">
       <div>
-        <div class="section-tag">Client words</div>
-        <h2>What clients say after handover.</h2>
+        <div class="section-tag">What I do</div>
+        <h2>GHL specialist. With the range to deliver the full system.</h2>
       </div>
+      <p class="section-copy">I lead with automation and CRM — then extend into websites, AI workflows, and operations so you don't need three separate people to run one system.</p>
     </div>
-    <div class="testi-grid fade-in stagger">
-      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
-      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
-      <div class="card testi"><p>"QUOTE WITH A SPECIFIC RESULT."</p><div class="testi-who"><strong>Full Name</strong><span>Role, Company</span></div></div>
+
+    <div class="grid-3 fade-in">
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>GoHighLevel CRM Systems</h3>
+        <p>Pipelines, lead routing, automated follow-up, calendars, booking workflows, forms, funnels, and lifecycle automation built around how your business actually operates.</p>
+        <div class="service-links"><a href="go-highlevel-automation-specialist/">GHL specialist overview →</a><a href="ghl-crm-setup/">CRM setup →</a><a href="ghl-workflow-automation/">Workflow automation →</a></div>
+      </article>
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>Automation & Integrations</h3>
+        <p>n8n, Zapier, Pabbly, APIs, webhooks, and AI workflows that connect your systems and eliminate repetitive manual work.</p>
+        <div class="service-links"><a href="n8n-go-highlevel-integration/">Explore n8n + GHL integrations →</a><a href="ghl-systems-audit/">Explore systems audits →</a></div>
+      </article>
+      <article class="card">
+        <div class="accent-line"></div>
+        <h3>Websites & Conversion</h3>
+        <p>Landing pages, funnels, lead forms, booking experiences, SEO/AEO structure, and conversion-focused websites connected directly to your CRM.</p>
+        <div class="service-links"><a href="#projects">See conversion-focused work →</a></div>
+      </article>
     </div>
   </section>
-  -->
-  -->
 
+  <!-- WHY CLIENTS HIRE ME -->
+  <section class="whyme-section" id="why">
+    <div class="wrap">
+      <div class="section-head fade-in">
+        <div>
+          <div class="section-tag">Why clients hire me</div>
+          <h2>Not just a builder. A systems thinker who documents everything.</h2>
+        </div>
+        <p class="section-copy">Most GHL setups break because the logic was rushed, the triggers weren't tested, or no one documented how it works. I fix all three before you ever see the final build.</p>
+      </div>
+
+      <div class="whyme-grid fade-in">
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Engineering Mindset</h3>
+          <p>Most GHL builds break mid-engagement because no one mapped the requirements before opening the tool. I ask those questions first — then test every trigger before handover. That process comes from technical project management, not a YouTube course.</p>
+        </article>
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>End-to-End Execution</h3>
+          <p>CRM, automations, website, integrations — I handle the whole system, not just one piece. You won't need to coordinate three different freelancers for one workflow.</p>
+        </article>
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Automation-First Design</h3>
+          <p>Every system I build is designed to reduce manual work — not just organize it. If something can be triggered, sequenced, or automated, that's how it gets built.</p>
+        </article>
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3>Always Documented</h3>
+          <p>Every build comes with SOPs, annotated workflows, and training notes. Your team can run the system after I'm done — no dependency on me staying in the loop.</p>
+        </article>
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Reliable Delivery</h3>
+          <p>Clear communication, realistic timelines, no surprises. I treat every client engagement the way I ran technical projects — with a schedule, checkpoints, and a clean handover.</p>
+        </article>
+        <article class="whyme-card">
+          <div class="whyme-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <h3>Business-Problem Focused</h3>
+          <p>I don't just build what you asked for — I build what actually solves the problem. That starts with understanding the workflow, not opening a tool.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I WORK -->
   <section class="process-section" id="process">
     <div class="wrap">
       <div class="section-head fade-in">
@@ -3269,7 +3268,7 @@ body::before {
    3. Reveal: staggered grids, alternating project cards, stat counters
    ------------------------------------------------------------ */
 (function () {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(max-width: 640px)').matches;
   const root = document.documentElement;
   const topbar = document.querySelector('.topbar');
   const progressBar = document.querySelector('.scroll-progress');
