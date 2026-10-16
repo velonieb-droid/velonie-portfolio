@@ -2109,7 +2109,10 @@ body { font-synthesis: none; }
 .site-preview-health { background:radial-gradient(circle at 70% 35%,rgba(235,192,131,.20),transparent 55%),linear-gradient(135deg,#3e362c,#1b1817); }
 .site-preview-pelvic { background:radial-gradient(circle at 70% 35%,rgba(178,219,204,.20),transparent 55%),linear-gradient(135deg,#24443d,#10211f); }
 .site-preview-photo { background:radial-gradient(circle at 70% 35%,rgba(234,177,137,.17),transparent 55%),linear-gradient(135deg,#3d3030,#171516); }
-.site-preview-wrap { overflow:hidden; }
+.site-preview-wrap { aspect-ratio: auto; height: 240px; overflow: hidden; }
+.site-preview-wrap::after { display: none; }
+.site-preview-cover { min-height: 0; }
+.site-preview-foot { flex-shrink: 0; }
 .site-slide:hover .site-preview-center { transform:translateY(-2px); transition:transform .2s ease; }
 .whyme-section .whyme-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 .whyme-section .whyme-card { min-height:100%; }
@@ -2117,13 +2120,14 @@ body { font-synthesis: none; }
 @media(max-width:640px){ .hero { padding-top:55px; padding-bottom:62px; } .hero h1 { font-size:clamp(38px,10.7vw,53px); } .audience-grid,.whyme-section .whyme-grid { grid-template-columns:1fr; } .audience-section { padding-top:18px; } .audience-card { padding:23px; } .project-flow-step { font-size:10px; padding:5px 7px; } .site-preview-cover { min-height:235px; } .sticky-cta-txt { display:none; } .sticky-cta { justify-content:center; } .site-preview-center strong { font-size:32px; } }
 @media(prefers-reduced-motion:reduce){ .site-slide:hover .site-preview-center { transform:none; transition:none; } }
 </style>
+<noscript><style>.fade-in,.stagger > *,.project-card.fade-in {opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 <canvas id="bgCanvas" aria-hidden="true"></canvas>
 <div class="scroll-progress" aria-hidden="true"></div>
 
 <!-- VIDEO MODAL -->
-<div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="Introduction video">
+<div class="video-modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Introduction video">
   <div class="video-modal" id="videoModalBox">
     <div class="video-modal-header">
       <div class="video-modal-label">Meet Velonie — 2 min intro</div>
@@ -2638,7 +2642,7 @@ body { font-synthesis: none; }
           <div class="section-tag">Live work</div>
           <h2>Sites and systems I've personally built.</h2>
         </div>
-        <p class="section-copy">These are just some of the websites, funnels, and AI-powered experiences I've built for real clients — live and running.</p>
+        <p class="section-copy">A selection of live websites, funnels, and AI-powered experiences. These lightweight covers represent each project; use Visit to explore the actual page.</p>
       </div>
 
       <div class="sites-carousel-outer fade-in">
@@ -3273,11 +3277,13 @@ body { font-synthesis: none; }
     function openModal() {
       iframe.src = VIDEO_SRC;
       modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       closeBtn.focus();
     }
     function closeModal() {
       modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
       setTimeout(() => { iframe.src = ''; }, 320);
       openBtn.focus(); // return focus to trigger
@@ -3286,7 +3292,14 @@ body { font-synthesis: none; }
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      if (!modal.classList.contains('open')) return;
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key !== 'Tab') return;
+      const items = Array.from(modal.querySelectorAll('button, a[href], iframe')).filter(el => el.getClientRects().length);
+      if (!items.length) return;
+      const first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     });
   })();
 
@@ -3325,9 +3338,25 @@ body { font-synthesis: none; }
       styles: { branding: { brandColor: "#1fe47a" } },
       hideEventTypeDetails: false
     });
-    document.getElementById('book-cal').classList.add('loaded');
+    // Don't display a large empty calendar placeholder if the third-party embed is blocked.
+    // The email option is always available, regardless of embed status.
+    const calContainer = document.getElementById('book-cal');
     const fb = document.getElementById('book-fallback');
-    if (fb) fb.querySelector('p').textContent = "Calendar not loading? Email me and I'll send times.";
+    if (calContainer) {
+      const markIfRendered = () => {
+        if (!calContainer.querySelector('iframe')) return false;
+        calContainer.classList.add('loaded');
+        return true;
+      };
+      if (!markIfRendered()) {
+        const bookingObserver = new MutationObserver(() => {
+          if (markIfRendered()) bookingObserver.disconnect();
+        });
+        bookingObserver.observe(calContainer, { childList: true, subtree: true });
+        window.setTimeout(() => bookingObserver.disconnect(), 15000);
+      }
+    }
+    if (fb) fb.querySelector('p').textContent = "If the calendar is unavailable, email me and I'll send available times.";
   })();
 </script>
 
