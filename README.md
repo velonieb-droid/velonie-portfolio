@@ -1,4 +1,4 @@
-# Velonie Baluarte — Portfolio
+# Velonie Baluarte: Portfolio
 
 Personal portfolio for CRM, GoHighLevel, n8n, AI automation, web projects and technical operations.
 
@@ -8,12 +8,12 @@ Personal portfolio for CRM, GoHighLevel, n8n, AI automation, web projects and te
 
 Static GitHub Pages site, no build system required.
 
-- `index.html` — homepage HTML, inline styles, scripts and structured data
-- `assets/` — branding, project images and social sharing image
-- `case-study-*.html` — detailed technical case studies
-- `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/` — service-specific landing pages
-- `Velonie-Baluarte-Digital-Automation-Resume-2026.pdf` — recruiter resume
-- `sitemap.xml`, `robots.txt` — indexation support
+- `index.html`: homepage HTML, inline styles, scripts and structured data
+- `assets/`: branding, project images and social sharing image
+- `case-study-*.html`: detailed technical case studies
+- `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
+- Resume buttons link to the current photo resume stored in Google Drive
+- `sitemap.xml`, `robots.txt`: indexation support
 
 ## Homepage journey
 
