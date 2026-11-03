@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nonprofit Automation Build — Donor Engagement Client | Velonie Baluarte</title>
+<title>Nonprofit Automation Build | Donor Engagement Client | Velonie Baluarte</title>
 <meta name="description" content="Full GHL buildout plus an n8n + FastAPI + OpenAI content pipeline that posts, brands, and publishes to Facebook with zero manual steps.">
 <link rel="icon" type="image/png" href="assets/vab-logo.png">
 <link rel="canonical" href="https://velonieb-droid.github.io/velonie-portfolio/case-study-automation-build.html">
 <meta name="theme-color" content="#060e0a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nonprofit Automation Build — Donor Engagement Client | Velonie Baluarte">
+<meta property="og:title" content="Nonprofit Automation Build | Donor Engagement Client | Velonie Baluarte">
 <meta property="og:description" content="Full GHL buildout plus an n8n + FastAPI + OpenAI content pipeline that posts, brands, and publishes to Facebook with zero manual steps.">
 <meta property="og:image" content="https://velonieb-droid.github.io/velonie-portfolio/assets/og-card.png">
 <meta property="og:url" content="https://velonieb-droid.github.io/velonie-portfolio/case-study-automation-build.html">
@@ -181,9 +181,9 @@ body>header,body>main,body>footer{position:relative;z-index:1}
 
 <header class="hero">
   <div class="wrap">
-    <div class="kicker">Case Study &mdash; Automation Architecture Build</div>
-    <h1>Built a self-running content engine so a nonprofit's Facebook page <em>posts, tracks, and reports without anyone touching it.</em></h1>
-    <p class="lead">A full GHL buildout plus a custom n8n automation pipeline for a donor engagement platform &mdash; content rotation, AI image generation, and auto-posting, architected around the client's own Capture &rarr; Automate &rarr; Track &rarr; Show Impact &rarr; Grow model.</p>
+    <div class="kicker">Case Study: CRM and Automation Build</div>
+    <h1>Connected a nonprofit's content queue to <em>image generation, branding and Facebook publishing.</em></h1>
+    <p class="lead">The project combined a GHL setup with n8n content rotation, AI-generated images and Facebook publishing. Its fields and workflows followed the client's Capture, Automate, Track, Show Impact and Grow model.</p>
 
     <div class="client-meta">
       <div><span class="label">Industry</span><span class="val">Nonprofit donor engagement platform</span></div>
@@ -197,8 +197,8 @@ body>header,body>main,body>footer{position:relative;z-index:1}
 <section>
   <div class="wrap">
     <div class="section-tag">The brief</div>
-    <h2>Architected around the client's own methodology, not a generic template</h2>
-    <p class="section-copy">Everything &mdash; pipelines, fields, workflows, content system &mdash; was built to mirror the client's existing donor engagement model, so the CRM matches how the organization actually thinks about a donor relationship.</p>
+    <h2>Built around the client's donor engagement process</h2>
+    <p class="section-copy">I used the client's five-stage donor model to define the GHL fields, workflows and content steps. This kept the CRM familiar to the team.</p>
     <div class="stages">
       <div class="stage"><div class="n">01</div><div class="t">Capture</div></div>
       <div class="stage"><div class="n">02</div><div class="t">Automate</div></div>
@@ -213,7 +213,7 @@ body>header,body>main,body>footer{position:relative;z-index:1}
   <div class="wrap">
     <div class="section-tag">System architecture</div>
     <h2>The Facebook auto-poster pipeline</h2>
-    <p class="section-copy">A content rotation system that generates, brands, and publishes posts with zero manual steps &mdash; built because the client had no consistent posting cadence and no bandwidth to create one manually.</p>
+    <p class="section-copy">The client needed a more consistent posting schedule. The n8n flow reads the content queue, generates an image, adds branding and sends the asset to Facebook.</p>
 
     <div class="pipeline">
       <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pipeline diagram: Google Sheets to OpenAI image generation to FastAPI overlay service to Facebook Graph API">
@@ -263,12 +263,12 @@ body>header,body>main,body>footer{position:relative;z-index:1}
       <div class="card">
         <span class="chip-label">Publishing</span>
         <h3>Fully automated, no manual posting</h3>
-        <p>Final asset is pushed live via the Facebook Graph API &mdash; the client's team never opens Meta Business Suite for routine posts.</p>
+        <p>The workflow uses the Facebook Graph API for posting. The team can still check the results in Meta.</p>
       </div>
       <div class="card">
         <span class="chip-label">Ownership</span>
         <h3>Client-editable, not a black box</h3>
-        <p>Every step is editable from the sheet or n8n canvas &mdash; no dependency on me to keep the pipeline running.</p>
+        <p>The content queue can be edited in Google Sheets, and the workflow logic stays visible in n8n for maintenance.</p>
       </div>
     </div>
   </div>
@@ -278,7 +278,7 @@ body>header,body>main,body>footer{position:relative;z-index:1}
   <div class="wrap">
     <div class="section-tag">Visual proof</div>
     <h2>The build, in the platforms it actually runs in</h2>
-    <p class="section-copy">Redacted views of the live build &mdash; the n8n canvas, the Facebook Page connection in GHL Social Planner, and a sample auto-published post.</p>
+    <p class="section-copy">Redacted screenshots show the n8n canvas, the Facebook Page connection in GHL Social Planner and an example published post.</p>
     <div class="img-row">
       <div>
         <div class="img-slot">
@@ -338,7 +338,7 @@ body>header,body>main,body>footer{position:relative;z-index:1}
     <h2>Debugging the Page-to-Page DM restriction</h2>
     <div class="war-story">
       <p>Meta restricts Page-to-Page direct messaging by default, which broke part of the intended engagement flow once the client's Page was connected to GHL's Social Planner.</p>
-      <p><b>Instead of routing around it with a workaround that would've broken on Meta's next policy update,</b> the connection was diagnosed at the permissions level, confirming exactly which Meta-side restriction was active before adjusting the integration to work within it &mdash; not against it.</p>
+      <p>I checked the Page connection and permissions to confirm the Meta restriction before changing the messaging flow. The revised approach stayed within the platform's rules.</p>
     </div>
   </div>
 </section>
@@ -362,7 +362,7 @@ body>header,body>main,body>footer{position:relative;z-index:1}
 <section>
   <div class="wrap">
     <div class="section-tag">My role</div>
-    <h2>Architect, not just implementer</h2>
+    <h2>What I worked on</h2>
     <ul class="role-list">
       <li><span><b>Designed</b> the CRM structure around the client's own donor engagement methodology instead of a generic nonprofit template.</span></li>
       <li><span><b>Built</b> a custom FastAPI microservice from scratch to handle image branding, deployed and hosted independently on Render.</span></li>
@@ -377,8 +377,8 @@ body>header,body>main,body>footer{position:relative;z-index:1}
     <div class="contact-section">
       <div>
         <div class="section-tag">Open for work</div>
-        <h2>Need a CRM and content system that runs itself?</h2>
-        <p>This build shows the full stack &mdash; GHL structure, custom automation, and a microservice built to solve a specific gap no off-the-shelf tool covered.</p>
+        <h2>Need your CRM and content tools connected?</h2>
+        <p>This project brought together GHL configuration, an n8n posting workflow and a small FastAPI service for image branding.</p>
       </div>
       <div class="contact-actions">
         <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry">Email Me</a>
