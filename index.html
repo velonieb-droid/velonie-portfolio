@@ -3811,5 +3811,46 @@ body { font-synthesis: none; }
 </script>
 
 
+
+<!-- GA4 portfolio intent events: clicks only, not confirmed leads or bookings -->
+<script>
+(function () {
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest('a[href]');
+    if (!link || typeof window.gtag !== 'function') return;
+
+    const href = link.getAttribute('href') || '';
+    const label = (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+    const context = window.location.pathname;
+    let eventName = '';
+    let channel = '';
+
+    if (/^mailto:/i.test(href)) {
+      eventName = 'contact_click';
+      channel = 'email';
+    } else if (/^(https?:\/\/)?(wa\.me|api\.whatsapp\.com)\//i.test(href)) {
+      eventName = 'contact_click';
+      channel = 'whatsapp';
+    } else if (href === '#book' || href === '../#book' || /cal\.com\//i.test(href)) {
+      eventName = 'booking_intent';
+      channel = 'booking';
+    } else if (/drive\.google\.com\/file\//i.test(href) && /resume|cv/i.test(label)) {
+      eventName = 'resume_view_click';
+      channel = 'resume';
+    } else if (/^(?:\.\.\/)?(?:go-highlevel-automation-specialist|ghl-crm-setup|ghl-workflow-automation|n8n-go-highlevel-integration|ghl-systems-audit)\/?(?:index\.html)?$/i.test(href)) {
+      eventName = 'service_interest_click';
+      channel = 'service_page';
+    }
+
+    if (eventName) {
+      window.gtag('event', eventName, {
+        interaction_channel: channel,
+        source_page: context,
+        link_label: label
+      });
+    }
+  });
+})();
+</script>
 </body>
 </html>
