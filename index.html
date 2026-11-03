@@ -2108,6 +2108,8 @@ body { font-synthesis: none; }
 .site-preview-agency { background:radial-gradient(circle at 70% 35%,rgba(198,144,230,.2),transparent 55%),linear-gradient(135deg,#29243e,#111322); }
 .site-preview-health { background:radial-gradient(circle at 70% 35%,rgba(235,192,131,.20),transparent 55%),linear-gradient(135deg,#3e362c,#1b1817); }
 .site-preview-pelvic { background:radial-gradient(circle at 70% 35%,rgba(178,219,204,.20),transparent 55%),linear-gradient(135deg,#24443d,#10211f); }
+.site-preview-driver { background:radial-gradient(circle at 70% 35%,rgba(45,107,240,.24),transparent 55%),linear-gradient(135deg,#1e3a6b,#0e1c2e); }
+.site-preview-pilot { background:radial-gradient(circle at 70% 35%,rgba(245,118,26,.22),transparent 55%),linear-gradient(135deg,#4a2a14,#1a1310); }
 .site-preview-photo { background:radial-gradient(circle at 70% 35%,rgba(234,177,137,.17),transparent 55%),linear-gradient(135deg,#3d3030,#171516); }
 .site-preview-wrap { aspect-ratio: auto; height: 240px; overflow: hidden; }
 .site-preview-wrap::after { display: none; }
@@ -2119,6 +2121,20 @@ body { font-synthesis: none; }
 @media(max-width:960px){ .audience-grid { grid-template-columns:1fr 1fr; } .project-card { grid-template-columns:1fr; } .whyme-section .whyme-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:640px){ .hero { padding-top:55px; padding-bottom:62px; } .hero h1 { font-size:clamp(38px,10.7vw,53px); } .audience-grid,.whyme-section .whyme-grid { grid-template-columns:1fr; } .audience-section { padding-top:18px; } .audience-card { padding:23px; } .project-flow-step { font-size:10px; padding:5px 7px; } .site-preview-cover { min-height:235px; } .sticky-cta-txt { display:none; } .sticky-cta { justify-content:center; } .site-preview-center strong { font-size:32px; } }
 @media(prefers-reduced-motion:reduce){ .site-slide:hover .site-preview-center { transform:none; transition:none; } }
+
+/* Intro video section (directly below the hero) */
+.intro-video-section { padding: 72px 0 80px; }
+.intro-video-frame {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  box-shadow: var(--shadow), 0 0 0 6px var(--surface-glow);
+  aspect-ratio: 16 / 9;
+}
+.intro-video-frame video { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--bg); }
+@media(max-width:640px){ .intro-video-section { padding: 44px 0 52px; } .intro-video-frame { border-radius: 12px; box-shadow: var(--shadow-sm); } }
 </style>
 <noscript><style>.fade-in,.stagger > *,.project-card.fade-in {opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -2200,7 +2216,7 @@ body { font-synthesis: none; }
         <div class="hero-cta">
           <a class="btn primary" href="#projects">Explore Selected Work</a>
           <a class="btn secondary" href="#book">Book a Systems Call</a>
-          <button class="btn watch-intro" id="watchIntroBtn" aria-label="Watch introduction video">
+          <button class="btn watch-intro" id="watchIntroBtn" aria-label="Scroll to and play the introduction video">
             <span class="play-icon">
               <svg viewBox="0 0 10 12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 10,6 0,12"/></svg>
             </span>
@@ -2210,7 +2226,7 @@ body { font-synthesis: none; }
         <p class="cta-trust">For recruiters: <a class="intro-resume-link" href="https://drive.google.com/file/d/1De6E3jw-mAkbq57pzclTnGok3ggXUmvS/view?usp=sharing" target="_blank" rel="noopener">View my resume (PDF) ↗</a> · Open to freelance, contract, and specialist roles.</p>
         <div class="client-strip" aria-label="Businesses running systems I built">
           <span class="client-strip-label">Systems live for</span>
-          <span>Scott Kiere</span><span>Build Human</span><span>Sarah DeVido Health</span><span>HHP Pelvic Health</span><span>Alain Martinez Studio</span><span>Kensing LoHi</span>
+          <span>Scott Kiere</span><span>Build Human</span><span>Sarah DeVido Health</span><span>HHP Pelvic Health</span><span>Alain Martinez Studio</span><span>Kensing LoHi</span><span>Project Driver</span><span>PipelinePilot</span>
         </div>
       </div>
 
@@ -2252,6 +2268,30 @@ body { font-synthesis: none; }
           </div>
         </div>
       </aside>
+    </div>
+  </section>
+
+  <!-- INTRO VIDEO -->
+  <section class="wrap intro-video-section" id="intro-video" aria-label="Introduction video">
+    <div class="section-head fade-in">
+      <div>
+        <div class="section-tag">Meet Velonie</div>
+        <h2>What I do, in under a minute.</h2>
+      </div>
+      <p class="section-copy">A quick look at the CRM, automation and website systems I build, and how I work.</p>
+    </div>
+    <div class="intro-video-frame fade-in">
+      <video
+        id="introVideo"
+        controls
+        playsinline
+        preload="metadata"
+        poster="assets/velonie-intro-poster.jpg"
+        aria-label="Velonie Baluarte introduction video"
+      >
+        <source src="assets/velonie-intro.mp4" type="video/mp4">
+        Your browser does not support video. <a href="assets/velonie-intro.mp4">Download the intro video</a>.
+      </video>
     </div>
   </section>
 
@@ -2722,6 +2762,36 @@ body { font-synthesis: none; }
       <div class="sites-carousel-outer fade-in">
         <div class="sites-carousel-viewport">
           <div class="sites-track" id="sitesTrack">
+
+            <div class="site-slide">
+              <div class="site-preview-wrap">
+                <div class="site-preview-cover site-preview-driver" aria-hidden="true"><div class="site-preview-bar"><span class="site-preview-dots"><i></i><i></i><i></i></span><span class="site-preview-domain">project-driver.com</span></div><div class="site-preview-center"><span class="site-preview-overline">LIVE PROJECT · BUSINESS SYSTEMS</span><strong>Project Driver</strong><span class="site-preview-decor"><span></span><span></span><span></span></span></div><span class="site-preview-foot">SEE LIVE LINK BELOW <span>↓</span></span></div>
+              </div>
+              <div class="site-card-body">
+                <div class="site-type">Website + CRM & Automation</div>
+                <div class="site-title">Project Driver</div>
+                <p class="site-desc">Assisted in building the full website for a business systems firm, and handled the CRM and automation behind it, from lead capture to the discovery-call path.</p>
+                <div class="site-footer">
+                  <span class="site-url">project-driver.com</span>
+                  <a class="site-link" href="https://project-driver.com/" target="_blank" rel="noopener">Visit ↗</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="site-slide">
+              <div class="site-preview-wrap">
+                <div class="site-preview-cover site-preview-pilot" aria-hidden="true"><div class="site-preview-bar"><span class="site-preview-dots"><i></i><i></i><i></i></span><span class="site-preview-domain">pipeline-pilot.ai</span></div><div class="site-preview-center"><span class="site-preview-overline">LIVE PROJECT · GHL SERVICE SITE</span><strong>PipelinePilot</strong><span class="site-preview-decor"><span></span><span></span><span></span></span></div><span class="site-preview-foot">SEE LIVE LINK BELOW <span>↓</span></span></div>
+              </div>
+              <div class="site-card-body">
+                <div class="site-type">Full Site Build + CRM & Automation</div>
+                <div class="site-title">PipelinePilot</div>
+                <p class="site-desc">Built the full website for a part-time GoHighLevel administrator service, plus the CRM and automation behind its GHL health check and first-fix booking flow.</p>
+                <div class="site-footer">
+                  <span class="site-url">pipeline-pilot.ai</span>
+                  <a class="site-link" href="https://pipeline-pilot.ai/" target="_blank" rel="noopener">Visit ↗</a>
+                </div>
+              </div>
+            </div>
 
             <div class="site-slide">
               <div class="site-preview-wrap">
@@ -3362,7 +3432,14 @@ body { font-synthesis: none; }
       setTimeout(() => { iframe.src = ''; }, 320);
       openBtn.focus(); // return focus to trigger
     }
-    openBtn.addEventListener('click', openModal);
+    // "Watch My Intro" now scrolls to the on-page intro video and starts it
+    openBtn.addEventListener('click', () => {
+      const section = document.getElementById('intro-video');
+      const video = document.getElementById('introVideo');
+      if (!section) { openModal(); return; }
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (video) setTimeout(() => { video.play().catch(() => {}); }, 700);
+    });
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
     document.addEventListener('keydown', e => {
@@ -3713,6 +3790,13 @@ body { font-synthesis: none; }
   const modalBtn = document.getElementById('modalBookBtn');
   const closeBtn = document.getElementById('videoModalClose');
   if (modalBtn && closeBtn) modalBtn.addEventListener('click', () => closeBtn.click());
+})();
+
+// Intro video: pause automatically when the visitor scrolls away from it
+(function () {
+  const v = document.getElementById('introVideo');
+  if (!v || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(([e]) => { if (!e.isIntersecting && !v.paused) v.pause(); }, { threshold: 0.25 }).observe(v);
 })();
 </script>
 
