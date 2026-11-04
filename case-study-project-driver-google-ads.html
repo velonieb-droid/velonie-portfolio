@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Driver Google Ads Strategy & Conversion QA | Velonie Baluarte</title>
+  <meta name="description" content="A Project Driver case study on Google Ads keyword forecasts, Auction Insights, conversion tracking, GA4 discrepancies, landing-page QA and a conditional AI receptionist campaign proposal.">
+  <link rel="canonical" href="https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html">
+  <link rel="icon" href="assets/vab-logo.png" type="image/png">
+  <meta name="theme-color" content="#07130e">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Project Driver: Google Ads Research & Conversion QA">
+  <meta property="og:description" content="From keyword forecasts and competitor analysis to booking-event QA and a conditional national campaign recommendation. Research and proposal phase.">
+  <meta property="og:url" content="https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html">
+  <meta property="og:image" content="https://velonieb-droid.github.io/velonie-portfolio/assets/automation-portfolio-hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Project Driver: Google Ads Research, Campaign Strategy and Conversion QA",
+    "description": "A read-only Google Ads and website review covering local and national keyword forecasts, Auction Insights, conversion reporting, landing-page QA and campaign planning.",
+    "author": {"@type": "Person", "name": "Velonie Baluarte", "url": "https://velonieb-droid.github.io/velonie-portfolio/"},
+    "publisher": {"@type": "Person", "name": "Velonie Baluarte"},
+    "datePublished": "2026-11-05",
+    "dateModified": "2026-11-05",
+    "mainEntityOfPage": "https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html",
+    "about": ["Google Ads", "Keyword Planner", "Auction Insights", "GA4", "Conversion tracking", "Landing page optimization", "GoHighLevel CRM"]
+  }
+  </script>
+  <style>
+    :root{color-scheme:dark;--bg:#06100b;--panel:#0e1d15;--panel2:#14271d;--ink:#ecf5ed;--muted:#b0c3b5;--green:#b9f29b;--line:rgba(195,238,187,.18);--yellow:#f8d794}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 92% 0,rgba(72,141,78,.17),transparent 36%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.65}
+    a{color:var(--green)}a:focus-visible{outline:3px solid var(--green);outline-offset:4px;border-radius:3px}
+    .wrap{max-width:1120px;margin:auto;padding-left:28px;padding-right:28px}
+    .topbar{border-bottom:1px solid var(--line);background:rgba(5,16,10,.92)}
+    .nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:800;letter-spacing:.02em;color:#f3faef;text-decoration:none;font-size:15px}
+    .back{font-size:14px;text-decoration:none;color:var(--muted)}
+    .back:hover{color:var(--green)}
+    header.hero{padding:94px 0 65px;border-bottom:1px solid var(--line)}
+    .kicker,.eyebrow{text-transform:uppercase;letter-spacing:.15em;font-size:11px;font-weight:800;color:var(--green)}
+    h1,h2,h3{line-height:1.18;margin:0;font-weight:750;letter-spacing:-.035em}
+    h1{font-size:clamp(34px,5.3vw,60px);max-width:960px;margin:21px 0 24px}
+    h1 em{font-style:normal;color:var(--green)}
+    .lede{font-size:18px;line-height:1.8;color:var(--muted);max-width:865px;margin:0}
+    .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .meta span{border:1px solid var(--line);border-radius:99px;padding:7px 13px;font-size:12px;color:#d2e4d3;background:rgba(18,47,24,.5)}
+    .status{margin-top:26px;border-left:3px solid var(--yellow);background:rgba(248,215,148,.075);padding:17px 19px;border-radius:0 12px 12px 0;color:#f1dfb9;font-size:14px;max-width:900px}
+    main section{padding-top:66px;padding-bottom:12px}
+    h2{font-size:clamp(26px,3.3vw,38px);margin:11px 0 17px}
+    .intro{max-width:830px;color:var(--muted);margin:0 0 26px;font-size:16px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .three{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .card{background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:17px;padding:24px;min-width:0}
+    .card h3{font-size:19px;color:#eff8ea;margin-bottom:13px}
+    .card p,.card li{color:var(--muted);font-size:15px;margin:0}
+    .card ul{padding-left:20px;margin:0}.card li+li{margin-top:10px}
+    .flow{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:rgba(22,50,30,.46);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+    .step{font-size:13px;font-weight:700;color:#ddefdd;border:1px solid rgba(197,242,168,.25);background:rgba(34,79,45,.48);border-radius:9px;padding:10px 12px}
+    .arrow{color:var(--green);font-weight:bold}
+    .note{font-size:14px;color:var(--muted);margin-top:15px}
+    .finding{display:grid;grid-template-columns:minmax(160px,.46fr) 1fr;gap:20px;padding:23px 0;border-top:1px solid var(--line)}
+    .finding h3{font-size:19px}
+    .finding p{margin:0;color:var(--muted);font-size:15px}
+    .finding .flag{font-size:11px;text-transform:uppercase;color:var(--green);font-weight:800;letter-spacing:.08em;margin-bottom:8px}
+    .deliverables{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .deliverables .card{height:100%}
+    .cta{margin:67px 0 70px;padding:32px;background:linear-gradient(115deg,#173922,#112419);border:1px solid rgba(190,255,170,.28);border-radius:20px}
+    .cta h2{margin-top:0}.cta p{max-width:770px;color:var(--muted)}
+    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:21px}
+    .btn{border-radius:9px;padding:12px 18px;text-decoration:none;font-size:14px;font-weight:750;display:inline-flex;align-items:center;justify-content:center}
+    .btn.primary{background:var(--green);color:#102213}.btn.secondary{border:1px solid var(--line);color:#eef7e8}
+    footer{padding:22px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+    footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+    @media(max-width:780px){.grid,.three,.deliverables{grid-template-columns:1fr}.finding{grid-template-columns:1fr;gap:8px}header.hero{padding:62px 0 46px}.wrap{padding-left:19px;padding-right:19px}.card{padding:20px}main section{padding-top:45px}.flow{padding:16px}.step{font-size:12px}h1{font-size:35px}.lede{font-size:16px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><nav class="nav wrap" aria-label="Page navigation"><a class="brand" href="index.html">Velonie Baluarte</a><a class="back" href="index.html#projects">Back to portfolio</a></nav></div>
+  <header class="hero"><div class="wrap">
+    <div class="kicker">Case Study / Google Ads / Marketing Analytics</div>
+    <h1>Project Driver: <em>researching the next Google Ads campaign while checking the current lead-tracking setup.</em></h1>
+    <p class="lede">Project Driver offers several services to businesses across the United States. My assignment was to investigate paid-search opportunities, review the existing local campaign and identify whether the website and CRM could accurately track a new lead through to booking.</p>
+    <div class="meta"><span>Client: Project Driver</span><span>Role: Campaign research and conversion QA</span><span>Period: November 2026</span><span>Tools: Google Ads, Keyword Planner, GA4, GHL</span></div>
+    <div class="status"><strong>Status: Research and proposal preparation.</strong> An existing local Google Search campaign was reviewed. The proposed national campaign was not launched as part of this work. No live advertising settings, conversion actions or CRM automations were changed during this review.</div>
+  </div></header>
+  <main>
+    <section class="wrap" id="scope">
+      <div class="eyebrow">01 / The assignment</div>
+      <h2>Work out where to advertise, then check if results can be measured.</h2>
+      <p class="intro">The business was considering campaigns for different service lines and markets. Before spending more, the team needed a grounded view of search demand, competition, likely click costs and the actual booking path.</p>
+      <div class="grid three">
+        <article class="card"><h3>Search-demand research</h3><p>Compared keyword opportunities and forecasts across five South Florida service categories and national searches for Maya AI Receptionist, PPC Management and CRM Automation.</p></article>
+        <article class="card"><h3>Existing campaign review</h3><p>Examined a live local Search campaign, Auction Insights, impression-share losses, ad relevance, Quality Scores and landing-page destinations.</p></article>
+        <article class="card"><h3>Conversion and website QA</h3><p>Reviewed booking-event discrepancies, GA4 and Ads reporting differences, landing-page experience and mobile usability before proposing additional spend.</p></article>
+      </div>
+    </section>
+
+    <section class="wrap" id="approach">
+      <div class="eyebrow">02 / How the research was structured</div>
+      <h2>From keyword forecast to a potential booked consultation.</h2>
+      <div class="flow" aria-label="Research and validation sequence">
+        <span class="step">Service offer</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Keyword demand</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Competition and CPC</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Ad and landing page</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Booking event</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">CRM qualification</span>
+      </div>
+      <p class="note">A reported conversion is not automatically a qualified lead or a booked client. I kept Google Ads conversions, GA4 key events and CRM outcomes separate during the review.</p>
+    </section>
+
+    <section class="wrap" id="findings">
+      <div class="eyebrow">03 / Findings and implications</div>
+      <h2>Problems to resolve before increasing the budget.</h2>
+      <div class="finding"><div><div class="flag">Market and geography</div><h3>Local targeting versus virtual delivery</h3></div><p>The current campaign focused on Fort Lauderdale. Because several Project Driver services can be delivered remotely, I compared local and national search opportunities rather than assuming the existing geographic boundary was the best fit for every offer.</p></div>
+      <div class="finding"><div><div class="flag">Tracking and attribution</div><h3>Reported conversions need validation</h3></div><p>Google Ads and GA4 reported different interaction and event measures. Booking-event discrepancies remained unresolved. The next step is to validate the event definitions and trace a test booking through the website, analytics and CRM before using conversion counts to optimize a new campaign.</p></div>
+      <div class="finding"><div><div class="flag">Ad experience</div><h3>Landing-page and mobile issues</h3></div><p>The audit surfaced below-average landing-page experience indicators and mobile performance concerns. Those findings matter because paid traffic still needs a usable page and a reliable appointment path after the ad click.</p></div>
+      <div class="finding"><div><div class="flag">Offer selection</div><h3>Conditional Maya AI Receptionist pilot</h3></div><p>Based on the research, the national Maya AI Receptionist offer became the leading candidate for a small controlled test. That was a recommendation, not a published campaign, and it remained subject to margin, budget, capacity and owner approval.</p></div>
+    </section>
+
+    <section class="wrap" id="deliverables">
+      <div class="eyebrow">04 / Work completed and pending</div>
+      <h2>A proposal based on evidence, not assumed returns.</h2>
+      <div class="deliverables">
+        <article class="card">
+          <h3>Completed during the research phase</h3>
+          <ul>
+            <li>Local and national keyword research and forecast comparisons.</li>
+            <li>Auction Insights, Quality Score and campaign review.</li>
+            <li>Ad-to-landing-page and booking-path QA findings.</li>
+            <li>Initial recommendation for a conditional Maya AI Receptionist test.</li>
+            <li>Documentation of questions and risks for the campaign decision.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Not yet complete or approved</h3>
+          <ul>
+            <li>Verified end-to-end booking and qualified-lead conversion tracking.</li>
+            <li>Final campaign budget, target cost per acquisition and offer economics.</li>
+            <li>Client sign-off on campaign scope, geographic targeting and capacity.</li>
+            <li>Launching a new campaign or claiming leads, revenue or ROAS from it.</li>
+            <li>Post-launch performance data, which does not yet exist for the proposal.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap" id="related-work">
+      <div class="eyebrow">05 / Where this fits</div>
+      <h2>SEO, analytics and CRM must tell the same lead story.</h2>
+      <p class="intro">This engagement added paid-search research and conversion review to my work with GoHighLevel and website automation. I also use Google Search Console for search visibility and indexing checks, and GA4 for site activity and event measurement. These tools answer different questions, so their numbers should not be presented as interchangeable.</p>
+      <div class="grid">
+        <article class="card"><h3>Acquisition and measurement</h3><p>Google Ads, Keyword Planner, Auction Insights, SEO/AEO, GSC visibility checks, GA4 events and landing-page quality.</p></article>
+        <article class="card"><h3>What happens after the click</h3><p>Lead capture, GHL contact and opportunity records, Voice AI qualification, booking status, follow-up rules and CRM handoffs.</p></article>
+      </div>
+    </section>
+    <section class="wrap">
+      <div class="cta">
+        <div class="eyebrow">Discuss your lead-to-booking system</div>
+        <h2>Need someone to review both the campaigns and what happens after a click?</h2>
+        <p>I can help map the current Google Ads and website reporting, identify where measurement breaks down and check how inquiries reach your CRM. The next step depends on the evidence in your account.</p>
+        <div class="btns"><a class="btn primary" href="index.html#book">Book a Systems Call</a><a class="btn secondary" href="index.html#projects">See Other Case Studies</a><a class="btn secondary" href="mailto:velonieb@gmail.com?subject=Google%20Ads%20and%20CRM%20Audit">Email Me</a></div>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap"><span>Velonie Baluarte | CRM Automation, SEO/AEO and Marketing Analytics</span><a href="index.html">Portfolio home</a></div></footer>
+</body>
+</html>
