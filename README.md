@@ -1,6 +1,6 @@
 # Velonie Baluarte: Portfolio
 
-Personal portfolio for CRM, GoHighLevel, n8n, AI automation, web projects and technical operations.
+Personal portfolio for GoHighLevel CRM, n8n, AI automation, SEO/AEO, Google Search Console, GA4, Google Ads research and technical operations.
 
 **Live website:** https://velonieb-droid.github.io/velonie-portfolio/
 
@@ -10,7 +10,7 @@ Static GitHub Pages site, no build system required.
 
 - `index.html`: homepage HTML, inline styles, scripts and structured data
 - `assets/`: branding, project images and social sharing image
-- `case-study-*.html`: detailed technical case studies
+- `case-study-*.html`: technical case studies including Project Driver Google Ads research and conversion QA
 - `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
 - Resume buttons link to the current photo resume stored in Google Drive
 - `sitemap.xml`, `robots.txt`: indexation support
