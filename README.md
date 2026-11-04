@@ -29,6 +29,7 @@ Static GitHub Pages site, no build system required.
 
 - **Cal.com** inline booking (check `CAL_LINK` in `index.html`)
 - **Google Drive** introduction video loaded on demand
+- **Self-hosted GoHighLevel explainer video** on `/go-highlevel-automation-specialist/`; MP4 and poster stored under `assets/` with a responsive portrait player
 - **Google Fonts** (Outfit and Inter)
 - Contact methods: email, WhatsApp and LinkedIn
 
