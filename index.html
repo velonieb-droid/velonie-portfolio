@@ -2323,6 +2323,27 @@ body { font-synthesis: none; }
 .project-archive[open] > summary span{transform:rotate(45deg)}
 .project-archive > .project-list{margin-top:20px}
 .project-archive summary:hover{border-color:var(--green)}
+
+/* Mobile reliability: never hide content behind scroll-reveal or stale parallax state.
+   In particular this prevents full-height blank panels when DevTools changes viewport. */
+@media (max-width: 640px) {
+  .hero {
+    min-height: 0;
+    height: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .hero-grid {
+    height: auto;
+  }
+  .fade-in,
+  .project-card.fade-in,
+  .stagger > *,
+  .hero-grid > .parallax {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 </style>
 <noscript><style>.fade-in,.stagger > *,.project-card.fade-in {opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -3988,13 +4009,30 @@ body { font-synthesis: none; }
   const heroText = document.querySelector('.hero-grid > .fade-in');
   const heroCard = document.querySelector('.hero-grid > .hero-card');
   let heroParallaxOn = false;
-  if (!reduceMotion && heroText && heroCard) {
-    setTimeout(() => {           // hand over transform control after the intro fade
-      heroText.classList.add('parallax');
-      heroCard.classList.add('parallax');
-      heroParallaxOn = true;
-    }, 900);
+  // Match motion to the CURRENT viewport, including DevTools/mobile resizing.
+  // Clearing stale opacity prevents the hero from remaining invisible on mobile.
+  function syncHeroParallax() {
+    if (!heroText || !heroCard) return;
+    const allowMotion = window.innerWidth > 640 &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    heroParallaxOn = allowMotion;
+    [heroText, heroCard].forEach(el => {
+      el.classList.toggle('parallax', allowMotion);
+      if (!allowMotion) {
+        el.style.removeProperty('--py');
+        el.style.removeProperty('--po');
+      }
+    });
   }
+  // Let the first reveal finish before enabling the optional desktop effect.
+  setTimeout(() => {
+    syncHeroParallax();
+    onScroll();
+  }, 900);
+  window.addEventListener('resize', debounce(() => {
+    syncHeroParallax();
+    onScroll();
+  }, 140));
 
   let ticking = false;
   function onScroll() {
@@ -4003,12 +4041,13 @@ body { font-synthesis: none; }
     ticking = true;
     requestAnimationFrame(() => {
       ticking = false;
-      const maxScroll = Math.max(1, root.scrollHeight - H);
+      const viewportHeight = Math.max(1, window.innerHeight);
+      const maxScroll = Math.max(1, root.scrollHeight - viewportHeight);
       root.style.setProperty('--sy', scrollY);
       root.style.setProperty('--progress', Math.min(1, scrollY / maxScroll).toFixed(4));
       if (topbar) topbar.classList.toggle('scrolled', scrollY > 24);
-      if (heroParallaxOn && scrollY < H * 1.2) {
-        const p = scrollY / H;
+      if (heroParallaxOn && scrollY < viewportHeight * 1.2) {
+        const p = scrollY / viewportHeight;
         heroText.style.setProperty('--py', (scrollY * 0.22).toFixed(1) + 'px');
         heroText.style.setProperty('--po', Math.max(0, 1 - p * 1.4).toFixed(3));
         heroCard.style.setProperty('--py', (scrollY * 0.1).toFixed(1) + 'px');
