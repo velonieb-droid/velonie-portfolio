@@ -61,6 +61,8 @@ If the calendar embed is blocked or unavailable, the user can still contact via 
 
 - Check markup nesting, duplicate IDs, internal links and inline JavaScript syntax.
 - Test at desktop, tablet and mobile widths; verify navigation dropdowns and carousels.
+- At 375 × 667 and other mobile sizes, verify hero text, featured case-study cards and project content remain visible when scrolling. Resize DevTools from desktop to mobile after the page loads and confirm the hero does not stay invisible.
+- Mobile uses visible content instead of scroll-reveal opacity to avoid blank panels if `IntersectionObserver` or parallax state is delayed. Do not reintroduce mobile-only `opacity: 0` without a non-JS fallback.
 - Test keyboard operation, Escape behavior in the introduction-video modal, and reduced-motion settings.
 - Test that the Cal.com embed can book an actual event and that email fallback stays visible.
 - Verify the intro video is shareable publicly.
