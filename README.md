@@ -9,17 +9,19 @@ Personal portfolio for GoHighLevel CRM, n8n, AI automation, SEO/AEO, Google Sear
 Static GitHub Pages site, no build system required.
 
 - `index.html`: homepage HTML, inline styles, scripts and structured data
+- `hire-me/index.html`: dedicated recruiter/hiring profile with verified project scope, resume and role contact links
 - `assets/`: branding, project images and social sharing image
 - `case-study-*.html`: technical case studies including Project Driver Google Ads research and conversion QA
 - `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
 - Resume buttons link to the current photo resume stored in Google Drive
 - `sitemap.xml`, `robots.txt`: indexation support
+- Legacy `indexnew.html`, `profile-card-v2.html`, and `assets/index.html` have `noindex,follow` and canonical-to-home metadata. Keep them out of the sitemap until archived.
 
 ## Homepage journey
 
-1. Specialist positioning and outcome summary
-2. Paths for hiring teams and business owners
-3. Selected work, real workflow screenshots, and links to live client sites
+1. Specialist positioning and outcome summary, with separate recruiter pathway
+2. Three featured, evidence-led case studies and links to the complete work archive
+3. Paths for hiring teams and business owners; real workflow screenshots and links to live client sites
 4. Core services, reliability/process, and career experience
 5. Engagement options, FAQs, booking calendar and contact
 
@@ -42,6 +44,9 @@ If the calendar embed is blocked or unavailable, the user can still contact via 
 - Remove credentials, contact data, health information and other client-sensitive material from screenshots.
 - Do not treat stylized covers as actual site screenshots.
 - Recheck client links regularly; external projects can move or become temporarily unavailable.
+- Featured case studies distinguish findings from completed work, and proposals from launched campaigns.
+- The homepage and recruiter page share GA4 property `G-WBC8SXEGR3`; verify event flow in GA4 separately.
+- The site social preview image uses `assets/automation-portfolio-hero.png`, since `assets/og-card.png` is not present.
 - Update homepage title, description and structured data when professional positioning changes.
 - Adjust sitemap last-modified entries **only for pages actually changed**.
 
