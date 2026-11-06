@@ -1332,6 +1332,11 @@ h2 {
   * { transition-duration: 0.01ms !important; }
 }
 
+/* Hero reel (9:16, muted autoplay) */
+.hcv-reel { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); aspect-ratio: 9/16; }
+.hcv-reel video { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 960px) { .hcv-reel { max-width: 360px; margin: 0 auto; } }
+
 /* ── HERO VISUAL CARD ── */
 .hero-card-visual {
   border-bottom: 1px solid var(--line);
@@ -2450,25 +2455,12 @@ body { font-synthesis: none; }
             </span>
             <span class="hcv-role-tag">GHL Specialist</span>
           </div>
-          <div class="hcv-stats">
-            <div class="hcv-stat">
-              <span class="hcv-num">GHL</span>
-              <span class="hcv-lbl">CRM and booking workflows</span>
-            </div>
-            <div class="hcv-stat">
-              <span class="hcv-num">GA4</span>
-              <span class="hcv-lbl">events and conversion QA</span>
-            </div>
-            <div class="hcv-stat">
-              <span class="hcv-num">46%</span>
-              <span class="hcv-lbl">missed-call rate uncovered</span>
-            </div>
-          </div>
-          <div class="hcv-delivers">
-            <div class="hcv-item">GHL pipelines, automations &amp; funnels</div>
-            <div class="hcv-item">Websites, landing pages &amp; booking flows</div>
-            <div class="hcv-item">AI prompt systems &amp; content workflows</div>
-            <div class="hcv-item">SOPs, documentation &amp; ops handover</div>
+          <div class="hcv-reel">
+            <video id="heroReel" autoplay muted loop playsinline preload="metadata"
+                   poster="assets/velonie-reel-poster.webp" width="720" height="1280"
+                   aria-label="30-second reel: CRM automations, n8n and Zapier workflows, audit findings and tools I use">
+              <source src="assets/velonie-reel-30s-home.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
         <div class="hero-card-body">
@@ -4115,6 +4107,16 @@ body { font-synthesis: none; }
   const modalBtn = document.getElementById('modalBookBtn');
   const closeBtn = document.getElementById('videoModalClose');
   if (modalBtn && closeBtn) modalBtn.addEventListener('click', () => closeBtn.click());
+})();
+
+// Hero reel: respect reduced motion; pause when scrolled out of view
+(function () {
+  const r = document.getElementById('heroReel');
+  if (!r) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.removeAttribute('autoplay'); r.pause(); r.controls = true; return; }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { e.isIntersecting ? r.play().catch(() => {}) : r.pause(); }, { threshold: 0.2 }).observe(r);
+  }
 })();
 
 // Intro video: pause automatically when the visitor scrolls away from it
