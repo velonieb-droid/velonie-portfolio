@@ -1,8 +1,15 @@
 # Velonie Baluarte: Portfolio
 
-Personal portfolio for GoHighLevel CRM, n8n, AI automation, SEO/AEO, Google Search Console, GA4, Google Ads research and technical operations.
+Personal portfolio for GoHighLevel CRM, cross-platform workflow automation and AI integrations. Tools include n8n, Zapier, Pabbly, APIs and webhooks, with SEO/AEO, analytics and technical QA as supporting capabilities.
 
 **Live website:** https://velonieb-droid.github.io/velonie-portfolio/
+
+## Positioning
+
+- Primary role: **GoHighLevel CRM & AI Automation Specialist**.
+- Supporting value: **Cross-Platform Workflow Automation & Integrations** across n8n, Zapier, Pabbly, native GHL, APIs and webhooks.
+- AI is a capability, not a requirement for every workflow. Keep deterministic automation and platform-specific case-study evidence clearly labeled.
+- Preserve the n8n-specific integration landing page for focused search intent, without making n8n the only advertised platform.
 
 ## Architecture
 
