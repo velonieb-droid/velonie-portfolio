@@ -2311,6 +2311,15 @@ body { font-synthesis: none; }
 .proof-disclaimer{color:var(--soft);font-size:12px;line-height:1.65;margin-top:16px}
 @media(max-width:960px){.featured-proof-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.featured-proof-header{align-items:start}}
 @media(max-width:640px){.featured-proof{padding:18px 0 46px}.featured-proof-grid{grid-template-columns:1fr}.featured-proof-header{display:block}.featured-proof-header p{margin-top:12px}.proof-case{padding:22px}}
+
+/* Detailed work archive remains available without making the homepage overwhelming */
+.project-archive { margin-top:24px; }
+.project-archive > summary { cursor:pointer; list-style:none; display:flex; align-items:center; justify-content:space-between; gap:18px; color:var(--ink); font-family:"Outfit",sans-serif; font-size:18px; font-weight:700; padding:20px 24px; background:rgba(31,228,122,.055); border:1px solid rgba(31,228,122,.22); border-radius:12px; }
+.project-archive > summary::-webkit-details-marker{display:none}
+.project-archive > summary span{color:var(--green);font-size:26px;line-height:1}
+.project-archive[open] > summary span{transform:rotate(45deg)}
+.project-archive > .project-list{margin-top:20px}
+.project-archive summary:hover{border-color:var(--green)}
 </style>
 <noscript><style>.fade-in,.stagger > *,.project-card.fade-in {opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -2566,7 +2575,9 @@ body { font-synthesis: none; }
         <p class="section-copy">Examples of the systems I configured, tested or audited, with delivery status noted. Start with the three evidence-led case studies above.</p>
       </div>
 
-      <div class="project-list">
+      <details class="project-archive">
+        <summary>Browse nine detailed project summaries <span aria-hidden="true">+</span></summary>
+        <div class="project-list">
 
         <!-- Research and proposal stage, not a claimed new campaign launch. -->
         <article class="project-card">
@@ -2804,7 +2815,8 @@ body { font-synthesis: none; }
           </div>
         </article>
 
-      </div>
+        </div>
+      </details>
     </div>
   </section>
 
