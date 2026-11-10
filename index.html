@@ -1904,7 +1904,7 @@ h2 {
 
 ::selection { background: rgba(31,228,122,0.25); color: var(--ink); }
 
-/* ── MOTION LAYER: workflow-graph background + scroll effects ── */
+/* ── MOTION LAYER: workflow-graph background + scroll indicators ── */
 #bgCanvas {
   position: fixed;
   inset: 0;
@@ -1947,13 +1947,6 @@ body::before {
 .topbar.scrolled {
   background: rgba(6, 14, 10, 0.94);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
-}
-
-/* Hero parallax (JS sets --py after the intro fade completes) */
-.hero-grid > .parallax {
-  transform: translate3d(0, var(--py, 0px), 0) !important;
-  opacity: var(--po, 1) !important;
-  transition: none !important;
 }
 
 /* Staggered card reveal: parent fades, children cascade up */
@@ -2028,7 +2021,6 @@ body::before {
   body::before { animation: none; transform: none; }
   .stagger > * { opacity: 1; transform: none; }
   .project-card.fade-in, .project-card.fade-in:nth-child(even) { transform: none; }
-  .hero-grid > .parallax { transform: none !important; opacity: 1 !important; }
   .process-grid::before, .section-head.fade-in .section-tag::after { transition: none; }
 }
 
@@ -2343,8 +2335,7 @@ body { font-synthesis: none; }
   }
   .fade-in,
   .project-card.fade-in,
-  .stagger > *,
-  .hero-grid > .parallax {
+  .stagger > * {
     opacity: 1 !important;
     transform: none !important;
   }
@@ -3813,7 +3804,7 @@ body { font-synthesis: none; }
 <script>
 /* ── MOTION LAYER ─────────────────────────────────────────────
    1. Workflow-graph background canvas (nodes, links, data packets)
-   2. Scroll: progress line, topbar state, hero parallax, packets on scroll
+   2. Scroll: progress line, topbar state, packets on scroll
    3. Reveal: staggered grids, alternating project cards, stat counters
    ------------------------------------------------------------ */
 (function () {
@@ -3998,34 +3989,6 @@ body { font-synthesis: none; }
   }
 
   /* ── 2. SCROLL-LINKED STATE ── */
-  const heroText = document.querySelector('.hero-grid > .fade-in');
-  const heroCard = document.querySelector('.hero-grid > .hero-card');
-  let heroParallaxOn = false;
-  // Match motion to the CURRENT viewport, including DevTools/mobile resizing.
-  // Clearing stale opacity prevents the hero from remaining invisible on mobile.
-  function syncHeroParallax() {
-    if (!heroText || !heroCard) return;
-    const allowMotion = window.innerWidth > 640 &&
-      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    heroParallaxOn = allowMotion;
-    [heroText, heroCard].forEach(el => {
-      el.classList.toggle('parallax', allowMotion);
-      if (!allowMotion) {
-        el.style.removeProperty('--py');
-        el.style.removeProperty('--po');
-      }
-    });
-  }
-  // Let the first reveal finish before enabling the optional desktop effect.
-  setTimeout(() => {
-    syncHeroParallax();
-    onScroll();
-  }, 900);
-  window.addEventListener('resize', debounce(() => {
-    syncHeroParallax();
-    onScroll();
-  }, 140));
-
   let ticking = false;
   function onScroll() {
     scrollY = window.scrollY;
@@ -4038,13 +4001,6 @@ body { font-synthesis: none; }
       root.style.setProperty('--sy', scrollY);
       root.style.setProperty('--progress', Math.min(1, scrollY / maxScroll).toFixed(4));
       if (topbar) topbar.classList.toggle('scrolled', scrollY > 24);
-      if (heroParallaxOn && scrollY < viewportHeight * 1.2) {
-        const p = scrollY / viewportHeight;
-        heroText.style.setProperty('--py', (scrollY * 0.22).toFixed(1) + 'px');
-        heroText.style.setProperty('--po', Math.max(0, 1 - p * 1.4).toFixed(3));
-        heroCard.style.setProperty('--py', (scrollY * 0.1).toFixed(1) + 'px');
-        heroCard.style.setProperty('--po', Math.max(0, 1 - p * 1.2).toFixed(3));
-      }
     });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
