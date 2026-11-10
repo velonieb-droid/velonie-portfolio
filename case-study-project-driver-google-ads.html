@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Project Driver Google Ads Strategy & Conversion QA | Velonie Baluarte</title>
-  <meta name="description" content="A Project Driver case study on Google Ads keyword forecasts, Auction Insights, conversion tracking, GA4 discrepancies, landing-page QA and a conditional AI receptionist campaign proposal.">
+  <title>Google Ads Research & Conversion Tracking QA | Project Driver Case Study</title>
+  <meta name="description" content="How I researched Google Ads opportunities for Project Driver, audited Search and Keyword Planner, validated GA4/GTM booking events, reviewed GHL attribution and prepared a pre-launch campaign proposal.">
   <link rel="canonical" href="https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html">
   <link rel="icon" href="assets/vab-logo.png" type="image/png">
   <meta name="theme-color" content="#07130e">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Project Driver: Google Ads Research & Conversion QA">
-  <meta property="og:description" content="From keyword forecasts and competitor analysis to booking-event QA and a conditional national campaign recommendation. Research and proposal phase.">
+  <meta property="og:title" content="Project Driver: Google Ads Research, Attribution & Booking QA">
+  <meta property="og:description" content="Hands-on Search campaign research, local versus national forecasts, GA4/GTM event checks, GHL direct-booking QA and unresolved attribution risks before launch.">
   <meta property="og:url" content="https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html">
   <meta property="og:image" content="https://velonieb-droid.github.io/velonie-portfolio/assets/automation-portfolio-hero.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -18,14 +18,14 @@
   {
     "@context": "https://schema.org",
     "@type": "Article",
-    "headline": "Project Driver: Google Ads Research, Campaign Strategy and Conversion QA",
-    "description": "A read-only Google Ads and website review covering local and national keyword forecasts, Auction Insights, conversion reporting, landing-page QA and campaign planning.",
+    "headline": "Project Driver: Google Ads Research, Conversion Tracking and Booking QA",
+    "description": "A Google Ads case study covering keyword forecasts, native campaign analysis, GTM/GA4 event validation, GHL calendar attribution, landing page QA and a conditional campaign proposal.",
     "author": {"@type": "Person", "name": "Velonie Baluarte", "url": "https://velonieb-droid.github.io/velonie-portfolio/"},
     "publisher": {"@type": "Person", "name": "Velonie Baluarte"},
     "datePublished": "2026-11-05",
-    "dateModified": "2026-11-05",
+    "dateModified": "2026-11-11",
     "mainEntityOfPage": "https://velonieb-droid.github.io/velonie-portfolio/case-study-project-driver-google-ads.html",
-    "about": ["Google Ads", "Keyword Planner", "Auction Insights", "GA4", "Conversion tracking", "Landing page optimization", "GoHighLevel CRM"]
+    "about": ["Google Ads", "Google Keyword Planner", "Search terms", "Auction Insights", "Google Tag Manager", "Google Analytics 4", "Conversion tracking", "GoHighLevel", "AI receptionist", "Landing-page QA"]
   }
   </script>
   <style>
@@ -80,88 +80,91 @@
 <body>
   <div class="topbar"><nav class="nav wrap" aria-label="Page navigation"><a class="brand" href="index.html">Velonie Baluarte</a><a class="back" href="index.html#projects">Back to portfolio</a></nav></div>
   <header class="hero"><div class="wrap">
-    <div class="kicker">Case Study / Google Ads / Marketing Analytics</div>
-    <h1>Project Driver: <em>researching the next Google Ads campaign while checking the current lead-tracking setup.</em></h1>
-    <p class="lede">Project Driver offers several services to businesses across the United States. My assignment was to investigate paid-search opportunities, review the existing local campaign and identify whether the website and CRM could accurately track a new lead through to booking.</p>
-    <div class="meta"><span>Client: Project Driver</span><span>Role: Campaign research and conversion QA</span><span>Period: November 2026</span><span>Tools: Google Ads, Keyword Planner, GA4, GHL</span></div>
-    <div class="status"><strong>Status: Research and proposal preparation.</strong> An existing local Google Search campaign was reviewed. The proposed national campaign was not launched as part of this work. No live advertising settings, conversion actions or CRM automations were changed during this review.</div>
+    <div class="kicker">Case Study / Google Ads / Conversion Architecture</div>
+    <h1>Project Driver: <em>Google Ads research, conversion tracking and booking-flow QA.</em></h1>
+    <p class="lede">I researched paid-search opportunities for Project Driver, audited its existing Search campaign and traced how ad traffic should become a measurable booking in GoHighLevel. The work connected keyword strategy with hands-on Google Tag Manager, GA4 and calendar validation before recommending additional ad spend.</p>
+    <div class="meta"><span>Client: Project Driver</span><span>Role: PPC Research &amp; Conversion QA</span><span>Period: November 3–10, 2026</span><span>Stack: Google Ads, Keyword Planner, GTM, GA4, GoHighLevel</span></div>
+    <div class="status"><strong>Status: Research and proposal completed; tracking remediation pending.</strong> A controlled Maya AI Receptionist Search pilot was proposed, not launched. The website and booking experience were reviewed and refined, but no Google Ads campaign settings, GTM tracking configuration or CRM automations were changed as part of this research.</div>
   </div></header>
   <main>
     <section class="wrap" id="scope">
-      <div class="eyebrow">01 / The assignment</div>
-      <h2>Work out where to advertise, then check if results can be measured.</h2>
-      <p class="intro">The business was considering campaigns for different service lines and markets. Before spending more, the team needed a grounded view of search demand, competition, likely click costs and the actual booking path.</p>
+      <div class="eyebrow">01 / Business problem &amp; my role</div>
+      <h2>Find qualified demand without treating every conversion as a lead.</h2>
+      <p class="intro">Project Driver serves South Florida and remote US businesses with marketing, CRM automation, websites and Maya AI Receptionist. The assignment was to compare paid-search opportunities, investigate the existing campaign and establish whether a booking could be attributed to an ad click before requesting new spend.</p>
       <div class="grid three">
-        <article class="card"><h3>Search-demand research</h3><p>Compared keyword opportunities and forecasts across five South Florida service categories and national searches for Maya AI Receptionist, PPC Management and CRM Automation.</p></article>
-        <article class="card"><h3>Existing campaign review</h3><p>Examined a live local Search campaign, Auction Insights, impression-share losses, ad relevance, Quality Scores and landing-page destinations.</p></article>
-        <article class="card"><h3>Conversion and website QA</h3><p>Reviewed booking-event discrepancies, GA4 and Ads reporting differences, landing-page experience and mobile usability before proposing additional spend.</p></article>
+        <article class="card"><h3>Search strategy</h3><p>Researched five South Florida service categories and compared national demand for AI receptionist, PPC management and CRM automation using Keyword Planner forecasts.</p></article>
+        <article class="card"><h3>Campaign diagnostics</h3><p>Reviewed Search terms, negative-keyword opportunities, Auction Insights, ad relevance, Quality Scores, impression-share losses and landing-page alignment.</p></article>
+        <article class="card"><h3>Measurement QA</h3><p>Investigated Google Ads conversion actions, GTM and GA4 events, GHL direct-booking behavior, referral parameters and CRM-to-Ads reporting gaps.</p></article>
       </div>
     </section>
 
     <section class="wrap" id="approach">
-      <div class="eyebrow">02 / How the research was structured</div>
-      <h2>From keyword forecast to a potential booked consultation.</h2>
-      <div class="flow" aria-label="Research and validation sequence">
-        <span class="step">Service offer</span><span class="arrow" aria-hidden="true">→</span>
-        <span class="step">Keyword demand</span><span class="arrow" aria-hidden="true">→</span>
-        <span class="step">Competition and CPC</span><span class="arrow" aria-hidden="true">→</span>
-        <span class="step">Ad and landing page</span><span class="arrow" aria-hidden="true">→</span>
-        <span class="step">Booking event</span><span class="arrow" aria-hidden="true">→</span>
-        <span class="step">CRM qualification</span>
+      <div class="eyebrow">02 / Audit methodology</div>
+      <h2>Follow the entire journey from search intent to a verified appointment.</h2>
+      <div class="flow" aria-label="Lead attribution audit sequence">
+        <span class="step">Search term / ad click</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Landing page</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">GTM / GA4 event</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">GHL booking</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Qualified lead</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="step">Attributable customer</span>
       </div>
-      <p class="note">A reported conversion is not automatically a qualified lead or a booked client. I kept Google Ads conversions, GA4 key events and CRM outcomes separate during the review.</p>
+      <p class="note">Each step needs its own evidence. A button click or GA4 event is not proof of a completed appointment; a CRM stage is not proof of collected revenue. Full click-to-customer attribution remains unverified.</p>
     </section>
 
     <section class="wrap" id="findings">
-      <div class="eyebrow">03 / Findings and implications</div>
-      <h2>Problems to resolve before increasing the budget.</h2>
-      <div class="finding"><div><div class="flag">Market and geography</div><h3>Local targeting versus virtual delivery</h3></div><p>The current campaign focused on Fort Lauderdale. Because several Project Driver services can be delivered remotely, I compared local and national search opportunities rather than assuming the existing geographic boundary was the best fit for every offer.</p></div>
-      <div class="finding"><div><div class="flag">Tracking and attribution</div><h3>Reported conversions need validation</h3></div><p>Google Ads and GA4 reported different interaction and event measures. Booking-event discrepancies remained unresolved. The next step is to validate the event definitions and trace a test booking through the website, analytics and CRM before using conversion counts to optimize a new campaign.</p></div>
-      <div class="finding"><div><div class="flag">Ad experience</div><h3>Landing-page and mobile issues</h3></div><p>The audit surfaced below-average landing-page experience indicators and mobile performance concerns. Those findings matter because paid traffic still needs a usable page and a reliable appointment path after the ad click.</p></div>
-      <div class="finding"><div><div class="flag">Offer selection</div><h3>Conditional Maya AI Receptionist pilot</h3></div><p>Based on the research, the national Maya AI Receptionist offer became the leading candidate for a small controlled test. That was a recommendation, not a published campaign, and it remained subject to margin, budget, capacity and owner approval.</p></div>
+      <div class="eyebrow">03 / Research &amp; technical findings</div>
+      <h2>What I investigated and what the evidence showed.</h2>
+      <div class="finding"><div><div class="flag">Keyword Planner / Forecasts</div><h3>Local versus national opportunity</h3></div><p>Compared regional and US-wide search demand and forecast assumptions across Project Driver's service lines. Maya AI Receptionist became the leading candidate for a limited national pilot, subject to offer economics, budget and owner approval. Forecasts were treated as estimates, not guaranteed leads.</p></div>
+      <div class="finding"><div><div class="flag">Existing Search campaign</div><h3>Query quality, competition and ad relevance</h3></div><p>Reviewed campaign performance alongside actual search-query themes, existing negatives, Auction Insights, impression-share constraints, Quality Scores and landing-page experience. The analysis helped frame whether improving the existing campaign or testing a separate service-specific campaign would be more appropriate.</p></div>
+      <div class="finding"><div><div class="flag">GTM Preview / GA4 DebugView</div><h3>A booking-intent event was observed</h3></div><p>Confirmed Google Ads auto-tagging and the Ads-to-GA4 account link, then observed the <code>book_discovery_call</code> event in GTM Preview and GA4 DebugView. This verified an event path, not that an appointment was actually booked or attributed to a Google ad.</p></div>
+      <div class="finding"><div><div class="flag">GHL Direct Booking</div><h3>The calendar path worked; attribution still had gaps</h3></div><p>Checked Maya booking CTAs, the direct GHL calendar, booking form, staff assignment, notifications and confirmation routing. The CTAs reached the intended booking flow, but passing ad identifiers and UTM parameters into that external calendar and tying events to completed appointments still required a validated fix.</p></div>
+      <div class="finding"><div><div class="flag">Google Ads / CRM conversions</div><h3>Tag and offline-conversion integrity needed repair</h3></div><p>Reviewed GTM tag coverage, legacy booking-event behavior and CRM-to-Google Ads conversion diagnostics. The audit identified configuration and deduplication risks. API events reported as sent were not treated as accepted, matched or attributable Google Ads conversions.</p></div>
+      <div class="finding"><div><div class="flag">Maya landing page / Mobile</div><h3>Booking UX and mobile presentation</h3></div><p>Worked on the Maya AI landing experience, including mobile video playback and responsive presentation, and verified updated booking redirects. Performance and end-to-end conversion reliability still needed additional QA before campaign activation.</p></div>
     </section>
 
     <section class="wrap" id="deliverables">
-      <div class="eyebrow">04 / Work completed and pending</div>
-      <h2>A proposal based on evidence, not assumed returns.</h2>
+      <div class="eyebrow">04 / Deliverables &amp; remaining work</div>
+      <h2>A documented recommendation and a concrete pre-launch QA list.</h2>
       <div class="deliverables">
         <article class="card">
-          <h3>Completed during the research phase</h3>
+          <h3>Completed or observed</h3>
           <ul>
-            <li>Local and national keyword research and forecast comparisons.</li>
-            <li>Auction Insights, Quality Score and campaign review.</li>
-            <li>Ad-to-landing-page and booking-path QA findings.</li>
-            <li>Initial recommendation for a conditional Maya AI Receptionist test.</li>
-            <li>Documentation of questions and risks for the campaign decision.</li>
+            <li>Local and national keyword forecasts and service-intent comparisons.</li>
+            <li>Existing Search campaign, Search terms, negatives, Auction Insights and ad-quality review.</li>
+            <li>Ads auto-tagging and GA4 link checks; event observation in GTM Preview and GA4 DebugView.</li>
+            <li>GHL direct-booking CTA and calendar settings QA, plus Maya mobile experience improvements.</li>
+            <li>Client-facing proposal comparing existing Search optimization with a conditional Maya AI pilot.</li>
           </ul>
         </article>
         <article class="card">
-          <h3>Not yet complete or approved</h3>
+          <h3>Pending validation / approval</h3>
           <ul>
-            <li>Verified end-to-end booking and qualified-lead conversion tracking.</li>
-            <li>Final campaign budget, target cost per acquisition and offer economics.</li>
-            <li>Client sign-off on campaign scope, geographic targeting and capacity.</li>
-            <li>Launching a new campaign or claiming leads, revenue or ROAS from it.</li>
-            <li>Post-launch performance data, which does not yet exist for the proposal.</li>
+            <li>Reliable GCLID/UTM transfer from the landing page to direct GHL booking.</li>
+            <li>Appointment-level event validation, legacy conversion safeguards and deduplication.</li>
+            <li>Offline CRM-to-Google Ads conversion configuration and acceptance checks.</li>
+            <li>Approved offer economics, spend cap and explicit campaign go/no-go decision.</li>
+            <li>Any new campaign launch, post-launch lead results, customer acquisition or ROAS claim.</li>
           </ul>
         </article>
       </div>
     </section>
 
-    <section class="wrap" id="related-work">
-      <div class="eyebrow">05 / Where this fits</div>
-      <h2>SEO, analytics and CRM must tell the same lead story.</h2>
-      <p class="intro">This engagement added paid-search research and conversion review to my work with GoHighLevel and website automation. I also use Google Search Console for search visibility and indexing checks, and GA4 for site activity and event measurement. These tools answer different questions, so their numbers should not be presented as interchangeable.</p>
+    <section class="wrap" id="outcome">
+      <div class="eyebrow">05 / Value of the work</div>
+      <h2>The outcome was clearer decisions and fewer measurement assumptions.</h2>
+      <p class="intro">The project produced a research-backed campaign direction, an audit of the current Search setup and a prioritized list of conversion-tracking issues that should be resolved before optimizing for bookings. Rather than reporting hypothetical revenue or mixing clicks with qualified leads, the proposal kept observed account data, forecast scenarios and unverified attribution separate.</p>
       <div class="grid">
-        <article class="card"><h3>Acquisition and measurement</h3><p>Google Ads, Keyword Planner, Auction Insights, SEO/AEO, GSC visibility checks, GA4 events and landing-page quality.</p></article>
-        <article class="card"><h3>What happens after the click</h3><p>Lead capture, GHL contact and opportunity records, Voice AI qualification, booking status, follow-up rules and CRM handoffs.</p></article>
+        <article class="card"><h3>Marketing &amp; analytics skills</h3><p>Google Ads Search, Keyword Planner, search-query analysis, Auction Insights, campaign diagnostics, GTM, GA4, event QA and landing-page conversion review.</p></article>
+        <article class="card"><h3>CRM &amp; systems skills</h3><p>GoHighLevel direct booking, lead-source continuity, CRM conversion mapping, Voice AI intake, appointment validation, attribution boundaries and safe pre-launch QA.</p></article>
       </div>
+      <p class="note">This is a research and pre-launch QA case study, not a claim that a new campaign generated leads or revenue. Account credentials, customer information and restricted operational details are intentionally omitted.</p>
     </section>
     <section class="wrap">
       <div class="cta">
         <div class="eyebrow">Discuss your lead-to-booking system</div>
-        <h2>Need someone to review both the campaigns and what happens after a click?</h2>
-        <p>I can help map the current Google Ads and website reporting, identify where measurement breaks down and check how inquiries reach your CRM. The next step depends on the evidence in your account.</p>
+        <h2>Need Google Ads research that also checks what happens after the click?</h2>
+        <p>I can help investigate search intent and campaign diagnostics, review GTM/GA4 conversion signals, and trace the booking handoff into your CRM. Recommendations are based on what the account and tests actually support.</p>
         <div class="btns"><a class="btn primary" href="index.html#book">Book a Systems Call</a><a class="btn secondary" href="index.html#projects">See Other Case Studies</a><a class="btn secondary" href="mailto:velonieb@gmail.com?subject=Google%20Ads%20and%20CRM%20Audit">Email Me</a></div>
       </div>
     </section>
