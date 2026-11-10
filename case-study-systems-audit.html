@@ -153,7 +153,10 @@ h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.03e
 #serviceBgCanvas.ready{opacity:.72}
 body{background-color:#060e0a!important}
 body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 12%,rgba(31,228,122,.075),transparent 34%),radial-gradient(circle at 88% 82%,rgba(61,217,240,.055),transparent 36%),linear-gradient(180deg,rgba(6,14,10,.2),rgba(6,14,10,.78))}
-body>header,body>main,body>footer{position:relative;z-index:1}
+/* Keep content sections above the animation, with enough translucency to retain the moving background. */
+body>header,body>main,body>footer,body>section{position:relative;z-index:1}
+body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.66))}
+@media(max-width:720px){body>section{background:rgba(6,14,10,.80)}}
 .motion-reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.75,.25,1)}
 .motion-reveal.motion-visible{opacity:1;transform:none}
 .card,.finding-card,.metric-card,.phase-card,.result-card{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
