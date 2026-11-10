@@ -86,6 +86,20 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--green), va
 .client-meta .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
 .client-meta .val { color: var(--ink); font-size: 13.5px; font-weight: 500; }
 
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; align-items: center; }
+.hero-video-wrap { width: 100%; }
+.hero-video { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--bg); border: 1px solid rgba(31, 228, 122, 0.28); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(31, 228, 122, 0.1); }
+.hero-video video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.sound-btn { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(31, 228, 122, 0.35); background: rgba(6, 14, 10, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--ink); font: 600 12px "Inter", sans-serif; cursor: pointer; transition: border-color .15s, background .15s; }
+.sound-btn:hover { border-color: var(--green); }
+.sound-btn[aria-pressed="true"] { background: rgba(31, 228, 122, 0.16); border-color: var(--green); }
+.sound-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.video-cap { margin-top: 12px; font-size: 12.5px; color: var(--muted); text-align: center; }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .hero-video-wrap { max-width: 300px; margin: 0 auto; }
+}
+
 section { padding: 72px 0; border-bottom: 1px solid var(--line); }
 section:last-of-type { border-bottom: none; }
 .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); margin-bottom: 10px; }
@@ -192,7 +206,8 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
 </div>
 
 <header class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+    <div>
     <div class="kicker">Case Study: CRM and Automation Build</div>
     <h1>Connected a nonprofit's content queue to <em>image generation, branding and Facebook publishing.</em></h1>
     <p class="lead">The project combined a GHL setup with n8n content rotation, AI-generated images and Facebook publishing. Its fields and workflows followed the client's Capture, Automate, Track, Show Impact and Grow model.</p>
@@ -202,6 +217,19 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
       <div><span class="label">Engagement</span><span class="val">GHL buildout + n8n automation architecture</span></div>
       <div><span class="label">Role</span><span class="val">Automation architect, GHL specialist</span></div>
       <div><span class="label">Stack</span><span class="val">GHL, n8n, FastAPI, OpenAI, Facebook Graph API</span></div>
+    </div>
+    </div>
+
+    <div class="hero-video-wrap">
+      <div class="hero-video">
+        <video id="buildVideo" autoplay muted loop playsinline preload="metadata"
+               poster="assets/velonie-automation-build-poster.webp" width="720" height="1280"
+               aria-label="30-second walkthrough of this build: the five-stage donor model, the Facebook auto-poster pipeline, screenshots and what shipped">
+          <source src="assets/velonie-automation-build-30s-web.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="sound-btn" id="buildSound" aria-pressed="false">&#128264; Tap for sound</button>
+      </div>
+      <p class="video-cap">30-second walkthrough of this build</p>
     </div>
   </div>
 </header>
@@ -409,6 +437,23 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
     <a href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20read%20your%20case%20study" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </footer>
+
+<script id="build-video-script">
+(function(){
+  const v=document.getElementById('buildVideo'), b=document.getElementById('buildSound');
+  if(!v||!b)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
+  let heard=false;
+  function setLabel(){const on=!v.muted;b.setAttribute('aria-pressed',on);b.innerHTML=on?'&#128266; Sound on':'&#128264; Tap for sound';}
+  b.addEventListener('click',function(){
+    v.muted=!v.muted;
+    if(!v.muted&&!heard){heard=true;v.currentTime=0;}
+    if(v.paused)v.play().catch(function(){});
+    setLabel();
+  });
+  v.addEventListener('click',function(){if(v.paused)v.play().catch(function(){});else v.pause();});
+})();
+</script>
 
 <script id="shared-motion-script">
 (function(){
