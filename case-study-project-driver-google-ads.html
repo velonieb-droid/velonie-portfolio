@@ -73,18 +73,39 @@
     .btn.primary{background:var(--green);color:#102213}.btn.secondary{border:1px solid var(--line);color:#eef7e8}
     footer{padding:22px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
     footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:52px;align-items:center}
+    .hero-grid h1{max-width:none}
+    .hero-video{position:relative;width:100%;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--bg);border:1px solid rgba(185,242,155,.32);box-shadow:0 24px 60px rgba(0,0,0,.45),0 0 50px rgba(72,141,78,.18)}
+    .hero-video video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
+    .sound-btn{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:99px;border:1px solid rgba(185,242,155,.38);background:rgba(6,16,11,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ink);font:700 12px Inter,system-ui,sans-serif;cursor:pointer}
+    .sound-btn:hover,.sound-btn[aria-pressed="true"]{border-color:var(--green);background:rgba(185,242,155,.14)}
+    .sound-btn:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+    .video-cap{margin:12px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+    @media(max-width:900px){.hero-grid{grid-template-columns:minmax(0,1fr);gap:36px}.hero-video-wrap{max-width:300px;width:100%;margin:0 auto}}
     @media(max-width:780px){.grid,.three,.deliverables{grid-template-columns:1fr}.finding{grid-template-columns:1fr;gap:8px}header.hero{padding:62px 0 46px}.wrap{padding-left:19px;padding-right:19px}.card{padding:20px}main section{padding-top:45px}.flow{padding:16px}.step{font-size:12px}h1{font-size:35px}.lede{font-size:16px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
 </head>
 <body>
   <div class="topbar"><nav class="nav wrap" aria-label="Page navigation"><a class="brand" href="index.html">Velonie Baluarte</a><a class="back" href="index.html#projects">Back to portfolio</a></nav></div>
-  <header class="hero"><div class="wrap">
+  <header class="hero"><div class="wrap hero-grid"><div>
     <div class="kicker">Case Study / Google Ads / Conversion Architecture</div>
     <h1>Project Driver: <em>Google Ads research, conversion tracking and booking-flow QA.</em></h1>
     <p class="lede">I researched paid-search opportunities for Project Driver, audited its existing Search campaign and traced how ad traffic should become a measurable booking in GoHighLevel. The work connected keyword strategy with hands-on Google Tag Manager, GA4 and calendar validation before recommending additional ad spend.</p>
     <div class="meta"><span>Client: Project Driver</span><span>Role: PPC Research &amp; Conversion QA</span><span>Period: November 3–10, 2026</span><span>Stack: Google Ads, Keyword Planner, GTM, GA4, GoHighLevel</span></div>
     <div class="status"><strong>Status: Research and proposal completed; tracking remediation pending.</strong> A controlled Maya AI Receptionist Search pilot was proposed, not launched. The website and booking experience were reviewed and refined, but no Google Ads campaign settings, GTM tracking configuration or CRM automations were changed as part of this research.</div>
+  </div>
+    <div class="hero-video-wrap">
+      <div class="hero-video">
+        <video id="adsVideo" autoplay muted loop playsinline preload="metadata"
+               poster="assets/velonie-google-ads-poster.webp" width="720" height="1280"
+               aria-label="30-second walkthrough of this case study: the ad-click-to-booking audit, research direction and pre-launch status">
+          <source src="assets/velonie-google-ads-30s-web.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="sound-btn" id="adsSound" aria-pressed="false">&#128264; Tap for sound</button>
+      </div>
+      <p class="video-cap">30-second walkthrough of this case study</p>
+    </div>
   </div></header>
   <main>
     <section class="wrap" id="scope">
@@ -170,5 +191,21 @@
     </section>
   </main>
   <footer><div class="wrap"><span>Velonie Baluarte | CRM Automation, SEO/AEO and Marketing Analytics</span><a href="index.html">Portfolio home</a></div></footer>
+  <script id="ads-video-script">
+  (function(){
+    const v=document.getElementById('adsVideo'), b=document.getElementById('adsSound');
+    if(!v||!b)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
+    let heard=false;
+    function setLabel(){const on=!v.muted;b.setAttribute('aria-pressed',on);b.innerHTML=on?'&#128266; Sound on':'&#128264; Tap for sound';}
+    b.addEventListener('click',function(){
+      v.muted=!v.muted;
+      if(!v.muted&&!heard){heard=true;v.currentTime=0;}
+      if(v.paused)v.play().catch(function(){});
+      setLabel();
+    });
+    v.addEventListener('click',function(){if(v.paused)v.play().catch(function(){});else v.pause();});
+  })();
+  </script>
 </body>
 </html>
