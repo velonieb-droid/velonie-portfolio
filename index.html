@@ -1333,8 +1333,12 @@ h2 {
 }
 
 /* Hero reel (9:16, muted autoplay) */
-.hcv-reel { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); aspect-ratio: 9/16; }
-.hcv-reel video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hcv-reel { position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--bg); aspect-ratio: 9/16; }
+.hcv-reel video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.hcv-reel .sound-btn { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(31, 228, 122, 0.35); background: rgba(6, 14, 10, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--ink); font: 600 12px "Inter", sans-serif; cursor: pointer; transition: border-color .15s, background .15s; }
+.hcv-reel .sound-btn:hover { border-color: var(--green); }
+.hcv-reel .sound-btn[aria-pressed="true"] { background: rgba(31, 228, 122, 0.16); border-color: var(--green); }
+.hcv-reel .sound-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 @media (max-width: 960px) { .hcv-reel { max-width: 360px; margin: 0 auto; } }
 
 /* ── HERO VISUAL CARD ── */
@@ -2448,10 +2452,11 @@ body { font-synthesis: none; }
           </div>
           <div class="hcv-reel">
             <video id="heroReel" autoplay muted loop playsinline preload="metadata"
-                   poster="assets/velonie-reel-poster.webp" width="720" height="1280"
-                   aria-label="30-second reel: CRM automations, n8n and Zapier workflows, audit findings and tools I use">
-              <source src="assets/velonie-reel-30s-home.mp4" type="video/mp4">
+                   poster="assets/velonie-home-explainer-poster.webp" width="720" height="1280"
+                   aria-label="30-second narrated overview: what I build, three featured case studies, how I work and ways to work together">
+              <source src="assets/velonie-home-explainer-30s-web.mp4" type="video/mp4">
             </video>
+            <button type="button" class="sound-btn" id="heroSound" aria-pressed="false">&#128264; Tap for sound</button>
           </div>
         </div>
         <div class="hero-card-body">
@@ -4065,14 +4070,26 @@ body { font-synthesis: none; }
   if (modalBtn && closeBtn) modalBtn.addEventListener('click', () => closeBtn.click());
 })();
 
-// Hero reel: respect reduced motion; pause when scrolled out of view
+// Hero reel: respect reduced motion; pause when scrolled out of view; tap-for-sound voiceover
 (function () {
   const r = document.getElementById('heroReel');
   if (!r) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.removeAttribute('autoplay'); r.pause(); r.controls = true; return; }
+  const b = document.getElementById('heroSound');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.removeAttribute('autoplay'); r.pause(); r.controls = true; if (b) b.hidden = true; return; }
+  let userPaused = false;
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { e.isIntersecting ? r.play().catch(() => {}) : r.pause(); }, { threshold: 0.2 }).observe(r);
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!userPaused) r.play().catch(() => {}); } else r.pause(); }, { threshold: 0.2 }).observe(r);
   }
+  let heard = false;
+  const setLabel = () => { const on = !r.muted; if (b) { b.setAttribute('aria-pressed', on); b.innerHTML = on ? '&#128266; Sound on' : '&#128264; Tap for sound'; } };
+  if (b) b.addEventListener('click', () => {
+    r.muted = !r.muted;
+    if (!r.muted && !heard) { heard = true; r.currentTime = 0; }
+    userPaused = false;
+    if (r.paused) r.play().catch(() => {});
+    setLabel();
+  });
+  r.addEventListener('click', () => { if (r.paused) { userPaused = false; r.play().catch(() => {}); } else { userPaused = true; r.pause(); } });
 })();
 
 // Intro video: pause automatically when the visitor scrolls away from it
