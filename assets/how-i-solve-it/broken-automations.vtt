@@ -1,0 +1,50 @@
+WEBVTT
+
+1
+00:00:00.346 --> 00:00:02.267
+Automation should save time,
+
+2
+00:00:02.317 --> 00:00:04.047
+not create mistakes.
+
+3
+00:00:05.346 --> 00:00:07.556
+If customers receive duplicate messages
+
+4
+00:00:07.606 --> 00:00:09.299
+or follow-ups after booking,
+
+5
+00:00:09.349 --> 00:00:10.573
+I audit the trigger,
+
+6
+00:00:10.623 --> 00:00:13.939
+filters, timing, and exit conditions.
+
+7
+00:00:13.989 --> 00:00:15.826
+I add checks for duplicates,
+
+8
+00:00:15.876 --> 00:00:18.278
+opt-outs, and appointment status,
+
+9
+00:00:18.328 --> 00:00:21.741
+then test normal and failure scenarios before launch.
+
+10
+00:00:21.791 --> 00:00:23.304
+That creates workflows your team can
+
+11
+00:00:23.354 --> 00:00:25.203
+understand, troubleshoot,
+
+12
+00:00:25.253 --> 00:00:27.583
+and maintain with more confidence.
+

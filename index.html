@@ -2344,7 +2344,60 @@ body { font-synthesis: none; }
     transform: none !important;
   }
 }
+/* BEGIN HOW I SOLVE IT */
+.his { padding: 64px 0 56px; } /* sticky-header offset comes from the page's existing html { scroll-padding-top: 88px } */
+.his-head { max-width: 760px; margin-bottom: 28px; }
+.his-head h2 { font-family: "Outfit", sans-serif; color: var(--ink); font-size: clamp(30px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -.03em; margin-top: 8px; }
+.his-head p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-top: 14px; max-width: 640px; }
+.his-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
+.his-tab { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 10px 14px; border-radius: 12px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--muted); font: 600 14px/1.25 "Inter", sans-serif; text-align: left; cursor: pointer; transition: border-color .15s, background .15s, color .15s; }
+.his-tab svg { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.his-tab:hover { color: var(--ink); border-color: rgba(31,228,122,.35); }
+.his-tab[aria-selected="true"] { color: var(--ink); border-color: var(--green); background: linear-gradient(145deg, rgba(31,228,122,.14), rgba(61,217,240,.06)); }
+.his-tab[aria-selected="true"] svg { color: var(--green); }
+.his-tab:focus-visible, .his-panel:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.his-panel { display: grid; grid-template-columns: minmax(0, 45fr) minmax(0, 55fr); gap: clamp(24px, 3.5vw, 44px); align-items: start; padding: clamp(20px, 2.6vw, 32px); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(145deg, rgba(31,228,122,.05), rgba(10,22,16,.96) 70%); }
+.his-panel[hidden] { display: none; }
+.his-copy { min-width: 0; }
+.his-copy h3 { font-family: "Outfit", sans-serif; color: var(--ink); font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; }
+.his-copy h4 { margin-top: 20px; color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.his-copy p { color: var(--text); font-size: 15px; line-height: 1.7; margin-top: 8px; }
+.his-copy .his-desc { color: var(--ink); font-size: 16px; margin-top: 10px; }
+.his-steps { list-style: none; counter-reset: his; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.his-steps li { counter-increment: his; position: relative; padding-left: 40px; color: var(--text); font-size: 15px; line-height: 1.6; }
+.his-steps li::before { content: counter(his); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: rgba(31,228,122,.14); border: 1px solid rgba(31,228,122,.4); color: var(--green); font: 700 12px "Inter", sans-serif; }
+.his-copy .his-outcome { margin-top: 20px; padding: 14px 16px; border-radius: 12px; border: 1px solid rgba(31,228,122,.22); background: rgba(31,228,122,.06); color: var(--ink); }
+.his-outcome strong { color: var(--green); }
+.his-links { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+.his-links a { color: var(--green); font-weight: 700; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; padding: 4px 0; }
+.his-links a:hover { color: var(--cyan); }
+.his-media { margin: 0; min-width: 0; }
+.his-frame { position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; border: 1px solid rgba(31,228,122,.32); background: var(--bg); box-shadow: 0 24px 60px rgba(0,0,0,.4), 0 0 50px rgba(31,228,122,.06); }
+.his-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: var(--bg); display: block; }
+.his-state { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; background: rgba(6,14,10,.88); border: 1px solid var(--line); color: var(--ink); font: 600 13px "Inter", sans-serif; pointer-events: none; }
+.his-state.is-on { display: inline-flex; }
+.his-state.is-error { pointer-events: auto; border-color: rgba(240,96,112,.5); }
+.his-state button { font: inherit; color: var(--green); background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 4px; }
+.his-spin { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.2); border-top-color: var(--cyan); animation: his-spin .8s linear infinite; }
+@keyframes his-spin { to { transform: rotate(360deg); } }
+.his-media figcaption { margin-top: 10px; color: var(--soft); font-size: 12px; }
+.his-note { margin-top: 14px; color: var(--soft); font-size: 12px; line-height: 1.6; }
+@media (max-width: 1100px) { .his-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 960px) { .his-panel { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  .his { padding: 44px 0 40px; }
+  .his-tabs { display: flex; overflow-x: auto; scroll-snap-type: x proximity; gap: 8px; margin: 0 0 18px; padding: 2px 2px 8px; scrollbar-width: thin; }
+  .his-tab { flex: 0 0 auto; scroll-snap-align: start; min-height: 48px; white-space: nowrap; }
+  .his-panel { padding: 18px; border-radius: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .his-tab { transition: none; }
+  .his-spin { animation: none; }
+}
+/* END HOW I SOLVE IT */
 </style>
+<noscript><style>.his-panel[hidden]{display:grid!important}.his-panel+.his-panel{margin-top:16px}.his-tabs{display:none}</style></noscript>
 <noscript><style>.fade-in,.stagger > *,.project-card.fade-in {opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
@@ -2425,7 +2478,7 @@ body { font-synthesis: none; }
           I help businesses and agencies build, fix and connect GoHighLevel CRM systems, booking flows and automated follow-up. I use n8n, Zapier, Pabbly, APIs and Voice AI where they fit, with clear testing, troubleshooting and handover. My engineering project management background helps me trace dependencies before changing working systems.
         </p>
         <div class="hero-cta">
-          <a class="btn primary" href="#featured-work">See Case Study Evidence</a>
+          <a class="btn primary" href="#how-i-solve-it">See How I Solve It</a>
           <a class="btn secondary" href="#book">Book a 20-Minute Call</a>
           <button class="btn watch-intro" id="watchIntroBtn" aria-label="Scroll to and play the introduction video">
             <span class="play-icon">
@@ -2470,6 +2523,212 @@ body { font-synthesis: none; }
       </aside>
     </div>
   </section>
+
+  <!-- BEGIN HOW I SOLVE IT -->
+  <section class="wrap his" id="how-i-solve-it" aria-labelledby="his-title">
+    <div class="his-head">
+      <div class="section-tag">Problems I help solve</div>
+      <h2 id="his-title">Your Business Problems. My Solutions.</h2>
+      <p>From missed leads and broken automations to disconnected systems, explore the problems I solve and see how I approach each one.</p>
+    </div>
+    <div class="his-tabs" role="tablist" aria-label="Business problems">
+        <button type="button" class="his-tab" role="tab" id="his-tab-missing-leads" aria-controls="his-panel-missing-leads" aria-selected="true" tabindex="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7M12 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8"/></svg><span>Missing Leads</span></button>
+        <button type="button" class="his-tab" role="tab" id="his-tab-booking-problems" aria-controls="his-panel-booking-problems" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v16H3zM3 10h18M8 3v4M16 3v4"/></svg><span>Booking Problems</span></button>
+        <button type="button" class="his-tab" role="tab" id="his-tab-broken-automations" aria-controls="his-panel-broken-automations" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg><span>Broken Automations</span></button>
+        <button type="button" class="his-tab" role="tab" id="his-tab-manual-work" aria-controls="his-panel-manual-work" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 9h16M4 14.5h16M10 9v11"/></svg><span>Too Much Manual Work</span></button>
+        <button type="button" class="his-tab" role="tab" id="his-tab-conversion-tracking" aria-controls="his-panel-conversion-tracking" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 7-6 2-2 6L5 3zM13 13l5 5"/></svg><span>Clicks But No Bookings</span></button>
+        <button type="button" class="his-tab" role="tab" id="his-tab-ai-assistance" aria-controls="his-panel-ai-assistance" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4zM12 4v4M9 13v1.5M15 13v1.5"/></svg><span>Need AI Assistance</span></button>
+    </div>
+    <div class="his-panels">
+      <div class="his-panel" role="tabpanel" id="his-panel-missing-leads" aria-labelledby="his-tab-missing-leads" tabindex="0">
+        <div class="his-copy">
+          <h3>Missing Leads</h3>
+          <p class="his-desc">Inquiries come in through calls, website forms and ads, but follow-up is delayed, inconsistent or never happens.</p>
+          <h4>Why it matters</h4>
+          <p>A lead who doesn&#x27;t hear back quickly often moves on. When inquiries land in different places with no owner, no one knows who should respond.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Connect calls, forms and landing pages to one CRM so every inquiry is captured in the same place.</li>
+            <li>Check for duplicates and consent, then assign a clear owner to each new contact.</li>
+            <li>Trigger the right SMS and email follow-up, and stop the sequence when the lead replies or books.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> Faster responses and fewer overlooked inquiries.</p>
+          <div class="his-links">
+            <a href="case-study-systems-audit.html">Related case study: GHL systems audit →</a>
+            <a href="ghl-crm-setup/">Service: GHL CRM setup →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" poster="assets/how-i-solve-it/missing-leads.webp"
+                   aria-label="Missing Leads explainer: connecting lead sources to one CRM, checking duplicates and consent, assigning an owner and automating follow-up until the lead replies or books." data-video="missing-leads">
+              <source src="assets/how-i-solve-it/missing-leads.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/missing-leads.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/missing-leads.mp4">Download the Missing Leads video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+      <div class="his-panel" role="tabpanel" id="his-panel-booking-problems" aria-labelledby="his-tab-booking-problems" tabindex="0" hidden>
+        <div class="his-copy">
+          <h3>Booking Problems</h3>
+          <p class="his-desc">Booking forms fail, calendar availability is wrong, or customers never receive a confirmation.</p>
+          <h4>Why it matters</h4>
+          <p>Interested customers can drop off at the last step, and the team may not find out until someone complains.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Test the live booking page and calendar the way a customer uses them, including staff availability and blocked time.</li>
+            <li>Trace the confirmation and reminder actions to make sure they fire for every appointment.</li>
+            <li>Verify reschedules, cancellations and CRM updates so the next step stays clear for everyone.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> A booking process that&#x27;s easier to use, monitor and fix.</p>
+          <div class="his-links">
+            <a href="case-study-systems-audit.html">Related case study: GHL systems audit →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" data-poster="assets/how-i-solve-it/booking-problems.webp"
+                   aria-label="Booking Problems explainer: testing the booking page and calendar availability, tracing confirmations and reminders, and verifying reschedules, cancellations and CRM updates." data-video="booking-problems">
+              <source src="assets/how-i-solve-it/booking-problems.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/booking-problems.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/booking-problems.mp4">Download the Booking Problems video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+      <div class="his-panel" role="tabpanel" id="his-panel-broken-automations" aria-labelledby="his-tab-broken-automations" tabindex="0" hidden>
+        <div class="his-copy">
+          <h3>Broken Automations</h3>
+          <p class="his-desc">Contacts get duplicate messages, the wrong follow-up, or reminders after they&#x27;ve already booked.</p>
+          <h4>Why it matters</h4>
+          <p>Mistimed automation erodes trust and creates extra work, and it&#x27;s hard to fix when no one can see why a message was sent.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Audit the triggers, filters, timing and exit conditions to find overlaps and gaps.</li>
+            <li>Add checks for duplicates, opt-outs and DND, and appointment status before any message goes out.</li>
+            <li>Test normal and failure scenarios before launch, and document how the workflow behaves.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> Workflows your team can understand, troubleshoot and maintain.</p>
+          <div class="his-links">
+            <a href="ghl-workflow-automation/">Service: GHL workflow automation →</a>
+            <a href="ghl-systems-audit/">Service: GHL systems audit →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" data-poster="assets/how-i-solve-it/broken-automations.webp"
+                   aria-label="Broken Automations explainer: auditing triggers and exit conditions, adding duplicate, opt-out and appointment-status checks, and testing before launch." data-video="broken-automations">
+              <source src="assets/how-i-solve-it/broken-automations.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/broken-automations.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/broken-automations.mp4">Download the Broken Automations video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+      <div class="his-panel" role="tabpanel" id="his-panel-manual-work" aria-labelledby="his-tab-manual-work" tabindex="0" hidden>
+        <div class="his-copy">
+          <h3>Too Much Manual Work</h3>
+          <p class="his-desc">Your team copies the same information between forms, spreadsheets, email, the CRM and other apps.</p>
+          <h4>Why it matters</h4>
+          <p>Repeated data entry takes time away from customers and invites typos, missed handoffs and conflicting records.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Map where each record begins, which tool owns it and what needs to happen next.</li>
+            <li>Connect the steps with the simplest reliable option: GHL workflows, n8n, Zapier, Pabbly or an API.</li>
+            <li>Add validation, approvals and error logging so exceptions reach a person for review.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> Less repetitive work and fewer handoff mistakes.</p>
+          <div class="his-links">
+            <a href="case-study-automation-build.html">Related case study: GHL + n8n automation build →</a>
+            <a href="n8n-go-highlevel-integration/">Service: n8n + GoHighLevel integration →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" data-poster="assets/how-i-solve-it/manual-work.webp"
+                   aria-label="Too Much Manual Work explainer: mapping where records start, connecting tools with simple automation, and adding validation, approvals and error logging." data-video="manual-work">
+              <source src="assets/how-i-solve-it/manual-work.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/manual-work.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/manual-work.mp4">Download the Too Much Manual Work video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+      <div class="his-panel" role="tabpanel" id="his-panel-conversion-tracking" aria-labelledby="his-tab-conversion-tracking" tabindex="0" hidden>
+        <div class="his-copy">
+          <h3>Clicks But No Bookings</h3>
+          <p class="his-desc">You&#x27;re paying for ads and website traffic, but you can&#x27;t tell which campaigns lead to completed bookings.</p>
+          <h4>Why it matters</h4>
+          <p>A button click isn&#x27;t a booked appointment. If tracking counts the wrong action, budget decisions rest on unreliable data.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Trace the journey from ad click to landing page, calendar and CRM.</li>
+            <li>Check GTM and GA4 events, UTM and GCLID handling, and duplicate conversions.</li>
+            <li>Compare tracked conversions with the bookings actually completed in the CRM.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> A clearer picture of what marketing produces, before you spend more.</p>
+          <div class="his-links">
+            <a href="case-study-google-ads-conversion-qa.html">Related case study: Google Ads and conversion QA →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" data-poster="assets/how-i-solve-it/conversion-tracking.webp"
+                   aria-label="Clicks But No Bookings explainer: tracing the journey from ad click to CRM, checking GTM, GA4, UTM and GCLID tracking, and matching conversions to completed bookings." data-video="conversion-tracking">
+              <source src="assets/how-i-solve-it/conversion-tracking.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/conversion-tracking.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/conversion-tracking.mp4">Download the Clicks But No Bookings video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+      <div class="his-panel" role="tabpanel" id="his-panel-ai-assistance" aria-labelledby="his-tab-ai-assistance" tabindex="0" hidden>
+        <div class="his-copy">
+          <h3>Need AI Assistance</h3>
+          <p class="his-desc">Routine questions, missed calls and lead qualification pile up while your team is busy.</p>
+          <h4>Why it matters</h4>
+          <p>Customers expect a timely answer, but an AI assistant without clear limits can give wrong answers or mishandle sensitive requests.</p>
+          <h4>How I solve it</h4>
+          <ol class="his-steps">
+            <li>Define approved answers for routine questions and the details to capture in the CRM.</li>
+            <li>Add qualification questions and calendar checks so qualified contacts can book.</li>
+            <li>Hand off uncertain or sensitive requests to a person, and test edge cases and failures before launch.</li>
+          </ol>
+          <p class="his-outcome"><strong>Intended improvement:</strong> Routine inquiries handled, with people in charge of anything sensitive.</p>
+          <div class="his-links">
+            <a href="n8n-go-highlevel-integration/">Service: n8n + GoHighLevel integration (APIs, webhooks, AI) →</a>
+          </div>
+        </div>
+        <figure class="his-media">
+          <div class="his-frame">
+            <video class="his-video" controls playsinline preload="none" width="1440" height="1080" data-poster="assets/how-i-solve-it/ai-assistance.webp"
+                   aria-label="Need AI Assistance explainer: an AI assistant that answers approved questions, qualifies leads, checks the calendar, and hands uncertain or sensitive requests to a person." data-video="ai-assistance">
+              <source src="assets/how-i-solve-it/ai-assistance.mp4" type="video/mp4">
+              <track kind="captions" src="assets/how-i-solve-it/ai-assistance.vtt" srclang="en" label="English" default>
+              Your browser can't play this video. <a href="assets/how-i-solve-it/ai-assistance.mp4">Download the Need AI Assistance video (MP4)</a>.
+            </video>
+            <div class="his-state" role="status" aria-live="polite"></div>
+          </div>
+          <figcaption>30-second explainer · voiceover with captions</figcaption>
+        </figure>
+      </div>
+    </div>
+    <p class="his-note">Videos describe my approach and the intended improvement. They are not guarantees or client results.</p>
+  </section>
+  <!-- END HOW I SOLVE IT -->
+
+
 
 
   <!-- VERIFIED CASE STUDIES -->
@@ -4143,5 +4402,86 @@ body { font-synthesis: none; }
   });
 })();
 </script>
+<!-- BEGIN HOW I SOLVE IT SCRIPT -->
+<script>
+// How I Solve It: accessible tabs + lazy, sound-safe video players
+(function () {
+  const root = document.getElementById('how-i-solve-it');
+  if (!root) return;
+  const tabs = Array.from(root.querySelectorAll('[role="tab"]'));
+  const panels = tabs.map(t => document.getElementById(t.getAttribute('aria-controls')));
+  const videos = panels.map(p => p.querySelector('video'));
+  const track = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, params); };
+
+  function pauseAll() { videos.forEach(v => { if (v && !v.paused) v.pause(); }); }
+
+  function select(i, focus) {
+    pauseAll();
+    tabs.forEach((t, k) => {
+      const on = k === i;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      panels[k].hidden = !on;
+    });
+    const v = videos[i];
+    // Poster is attached only when its tab is shown, so hidden tabs download nothing
+    if (v && !v.getAttribute('poster') && v.dataset.poster) v.setAttribute('poster', v.dataset.poster);
+    if (focus) tabs[i].focus();
+    tabs[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    track('how_i_solve_it_tab', { tab: tabs[i].textContent.trim() });
+  }
+
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(i, false));
+    t.addEventListener('keydown', e => {
+      let k = null;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') k = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') k = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') k = 0;
+      else if (e.key === 'End') k = tabs.length - 1;
+      if (k !== null) { e.preventDefault(); select(k, true); }
+    });
+  });
+
+  videos.forEach((v, i) => {
+    if (!v) return;
+    const state = panels[i].querySelector('.his-state');
+    const show = (html, err) => { state.innerHTML = html; state.classList.add('is-on'); state.classList.toggle('is-error', !!err); };
+    const hide = () => { state.classList.remove('is-on', 'is-error'); state.innerHTML = ''; };
+    let started = false;
+    const fail = () => {
+      show('Video couldn’t load. <button type="button">Try again</button>', true);
+      state.querySelector('button').addEventListener('click', () => { hide(); v.load(); v.play().catch(() => {}); });
+    };
+    v.addEventListener('play', () => {
+      started = true;
+      videos.forEach(o => { if (o !== v && !o.paused) o.pause(); }); // one video at a time
+      track('how_i_solve_it_video_play', { video: v.dataset.video });
+    });
+    v.addEventListener('waiting', () => { if (started) show('<span class="his-spin" aria-hidden="true"></span> Loading video…'); });
+    v.addEventListener('playing', hide);
+    v.addEventListener('canplay', hide);
+    v.addEventListener('pause', hide);
+    v.addEventListener('error', fail);
+    const src = v.querySelector('source');
+    if (src) src.addEventListener('error', fail);
+  });
+
+  // Pause when the section scrolls out of view
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => { if (!e.isIntersecting) pauseAll(); }, { threshold: 0 }).observe(root);
+  }
+
+  // Hero CTA: smooth scroll (sticky-header offset from the page's scroll-padding-top), focus the active tab
+  document.querySelectorAll('a[href="#how-i-solve-it"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    history.replaceState(null, '', '#how-i-solve-it');
+    tabs.find(t => t.getAttribute('aria-selected') === 'true').focus({ preventScroll: true });
+  }));
+})();
+</script>
+<!-- END HOW I SOLVE IT SCRIPT -->
 </body>
 </html>
