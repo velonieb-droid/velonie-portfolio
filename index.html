@@ -2452,9 +2452,10 @@ body { font-synthesis: none; }
           </div>
           <div class="hcv-reel">
             <video id="heroReel" autoplay muted loop playsinline preload="metadata"
-                   poster="assets/velonie-home-explainer-poster.webp" width="720" height="1280"
-                   aria-label="30-second narrated overview: what I build, three featured case studies, how I work and ways to work together">
-              <source src="assets/velonie-home-explainer-30s-web.mp4" type="video/mp4">
+                   poster="assets/velonie-hero-vertical-poster.webp" width="720" height="1280"
+                   aria-label="30-second animation: common lead and workflow problems, then a connected CRM workflow that captures, qualifies, follows up, books and notifies the team">
+              <source src="assets/velonie-hero-vertical-30s-web.webm" type="video/webm">
+              <source src="assets/velonie-hero-vertical-30s-web.mp4" type="video/mp4">
             </video>
             <button type="button" class="sound-btn" id="heroSound" aria-pressed="false">&#128264; Tap for sound</button>
           </div>
@@ -4078,7 +4079,7 @@ body { font-synthesis: none; }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.removeAttribute('autoplay'); r.pause(); r.controls = true; if (b) b.hidden = true; return; }
   let userPaused = false;
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!userPaused) r.play().catch(() => {}); } else r.pause(); }, { threshold: 0.2 }).observe(r);
+    new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!userPaused) r.play().catch(() => { r.controls = true; }); } else r.pause(); }, { threshold: 0.2 }).observe(r);
   }
   let heard = false;
   const setLabel = () => { const on = !r.muted; if (b) { b.setAttribute('aria-pressed', on); b.innerHTML = on ? '&#128266; Sound on' : '&#128264; Tap for sound'; } };
