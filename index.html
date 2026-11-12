@@ -4044,6 +4044,29 @@ body { font-synthesis: none; }
       styles: { branding: { brandColor: "#1fe47a" } },
       hideEventTypeDetails: false
     });
+
+    // Actual lead conversion: track a newly created Cal.com booking, not a CTA click.
+    // Cal.com's booking-success event may represent a pending organizer approval.
+    const trackedCalBookings = new Set();
+    Cal("on", {
+      action: "bookingSuccessfulV2",
+      callback: function (event) {
+        const booking = event && event.detail && event.detail.data;
+        if (!booking || typeof window.gtag !== "function") return;
+
+        // The booking identifier stays in the browser for duplicate suppression;
+        // do not send booking IDs, names, email addresses, or other PII to GA4.
+        if (booking.uid && trackedCalBookings.has(booking.uid)) return;
+        if (booking.uid) trackedCalBookings.add(booking.uid);
+
+        window.gtag("event", "generate_lead", {
+          lead_source: "portfolio_cal_embed",
+          interaction_channel: "booking",
+          booking_status: booking.status || "unknown",
+          source_page: window.location.pathname
+        });
+      }
+    });
     // Don't display a large empty calendar placeholder if the third-party embed is blocked.
     // The email option is always available, regardless of embed status.
     const calContainer = document.getElementById('book-cal');
