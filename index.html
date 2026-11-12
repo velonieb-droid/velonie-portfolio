@@ -4506,5 +4506,52 @@ body { font-synthesis: none; }
 })();
 </script>
 <!-- END HOW I SOLVE IT SCRIPT -->
+
+<!-- GA4: count each intentionally started portfolio video once per page load. -->
+<script>
+(function () {
+  const counted = new WeakSet();
+  const record = (video, title, context) => {
+    if (counted.has(video) || typeof window.gtag !== 'function') return;
+    counted.add(video);
+    window.gtag('event', 'portfolio_video_start', {
+      video_title: title,
+      video_provider: 'html5',
+      video_context: context,
+      source_page: window.location.pathname
+    });
+  };
+
+  // These videos do not autoplay. Only count playback after it actually starts.
+  const intro = document.getElementById('introVideo');
+  if (intro) intro.addEventListener('playing', () => record(intro, 'portfolio_introduction', 'introduction'));
+  document.querySelectorAll('.his-video').forEach(video => {
+    video.addEventListener('playing', () => {
+      record(video, video.dataset.video || 'how_i_solve_it', 'how_i_solve_it');
+    });
+  });
+
+  // The muted, looping hero reel is not a conversion on page load.
+  // A visitor must explicitly turn on sound or restart playback to count.
+  const hero = document.getElementById('heroReel');
+  if (!hero) return;
+  let userRequestedPlay = false;
+  const sound = document.getElementById('heroSound');
+  if (sound) sound.addEventListener('click', () => {
+    if (!hero.muted) {
+      if (hero.paused) userRequestedPlay = true;
+      else record(hero, 'hero_reel', 'hero_interaction');
+    }
+  });
+  hero.addEventListener('click', () => {
+    if (!hero.paused) record(hero, 'hero_reel', 'hero_interaction');
+    else userRequestedPlay = false;
+  });
+  hero.addEventListener('playing', () => {
+    if (userRequestedPlay || !hero.muted) record(hero, 'hero_reel', 'hero_interaction');
+    userRequestedPlay = false;
+  });
+})();
+</script>
 </body>
 </html>
