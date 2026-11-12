@@ -277,5 +277,36 @@ body>header,body>main,body>footer{position:relative;z-index:1}
   }
 })();
 </script>
+
+<!-- GA4: count intentional explainer playback, not muted background autoplay. -->
+<script>
+(function () {
+  const video = document.getElementById('ghlHeroVideo');
+  if (!video) return;
+  let counted = false;
+  let userRequestedPlay = false;
+  const record = () => {
+    if (counted || typeof window.gtag !== 'function') return;
+    counted = true;
+    window.gtag('event', 'portfolio_video_start', {
+      video_title: 'ghl_specialist_explainer',
+      video_provider: 'html5',
+      video_context: 'service_page',
+      source_page: window.location.pathname
+    });
+  };
+  video.addEventListener('pointerdown', () => { userRequestedPlay = true; }, { passive: true });
+  video.addEventListener('keydown', event => {
+    if (event.key === ' ' || event.key === 'Enter' || event.key.toLowerCase() === 'k') userRequestedPlay = true;
+  });
+  video.addEventListener('playing', () => {
+    if (userRequestedPlay || !video.muted) record();
+    userRequestedPlay = false;
+  });
+  video.addEventListener('volumechange', () => {
+    if (!video.muted && !video.paused) record();
+  });
+})();
+</script>
 </body>
 </html>
