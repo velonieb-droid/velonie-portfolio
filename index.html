@@ -2381,9 +2381,7 @@ body { font-synthesis: none; }
 /* END HERO V2 */
 /* BEGIN FREE TOOLS STRIP */
 .ft-strip {
-  display: flex; align-items: center; gap: 16px;
-  width: 100%; margin: 0;
-  padding: 13px 24px;
+  display: block; width: 100%; margin: 0; padding: 13px 0;
   border: solid rgba(31, 228, 122, 0.28); border-width: 1px 0;
   background: linear-gradient(90deg, rgba(31, 228, 122, 0.10), rgba(61, 217, 240, 0.06));
   color: var(--ink); overflow: hidden;
@@ -2391,38 +2389,34 @@ body { font-synthesis: none; }
 }
 .ft-strip:hover, .ft-strip:focus-visible { border-color: rgba(31, 228, 122, 0.65); background: linear-gradient(90deg, rgba(31, 228, 122, 0.16), rgba(61, 217, 240, 0.10)); }
 .ft-strip:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; }
+.ft-viewport { display: block; overflow: hidden; }
+.ft-track { display: flex; width: max-content; animation: ft-scroll 80s linear infinite; }
+.ft-strip:hover .ft-track, .ft-strip:focus-visible .ft-track { animation-play-state: paused; }
+.ft-set { display: flex; flex: none; align-items: center; }
 .ft-badge {
-  flex: none; padding: 6px 12px; border-radius: 999px;
+  flex: none; margin-right: 28px; padding: 6px 12px; border-radius: 999px;
   background: var(--green); color: #031809;
   font: 800 12px "Outfit", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
 }
-.ft-viewport {
-  flex: 1; min-width: 0; overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-.ft-track { display: flex; width: max-content; animation: ft-scroll 36s linear infinite; }
-.ft-strip:hover .ft-track, .ft-strip:focus-visible .ft-track { animation-play-state: paused; }
-.ft-set { display: flex; flex: none; }
 .ft-chip {
   display: inline-flex; align-items: center; gap: 9px; margin-right: 28px;
   font: 600 14px "Inter", sans-serif; color: var(--ink); white-space: nowrap;
 }
 .ft-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
-.ft-cta { flex: none; font: 700 13px "Inter", sans-serif; color: var(--green); white-space: nowrap; }
-.ft-strip:hover .ft-arrow { display: inline-block; transform: translateX(3px); }
-.ft-arrow { display: inline-block; transition: transform 0.2s; }
+.ft-cta { flex: none; margin-right: 44px; font: 700 13px "Inter", sans-serif; color: var(--green); white-space: nowrap; }
+.ft-arrow { display: inline-block; }
 @keyframes ft-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (max-width: 640px) {
-  .ft-strip { gap: 10px; padding: 11px 16px; }
-  .ft-badge { font-size: 11px; padding: 5px 10px; }
+  .ft-strip { padding: 11px 0; }
+  .ft-badge { font-size: 11px; padding: 5px 10px; margin-right: 22px; }
   .ft-chip { font-size: 13px; margin-right: 22px; }
-  .ft-cta { font-size: 0; }
-  .ft-cta .ft-arrow { font-size: 18px; }
+  .ft-cta { margin-right: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ft-track { animation: none; }
+  /* No movement: show one set, wrapped and centred, so every tool name is still readable. */
+  .ft-track { animation: none; width: auto; justify-content: center; }
   .ft-set + .ft-set { display: none; }
+  .ft-set { flex-wrap: wrap; justify-content: center; row-gap: 8px; padding: 0 16px; }
 }
 /* END FREE TOOLS STRIP */
 /* BEGIN HOW I SOLVE IT */
@@ -2608,14 +2602,14 @@ body { font-synthesis: none; }
 
   <!-- BEGIN FREE TOOLS STRIP -->
   <a class="ft-strip" id="freeToolsStrip" href="tools/" aria-label="Free tools: Invoice Generator, Automation ROI Calculator, SMS Cost Calculator, SEO Meta Tag Generator, FAQ Schema Generator and AI Prompt Builder. Open the Free Tools page.">
-    <span class="ft-badge">Free Tools</span>
     <span class="ft-viewport" aria-hidden="true">
       <span class="ft-track">
-        <span class="ft-set"><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span></span>
-        <span class="ft-set"><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span></span>
+        <span class="ft-set"><span class="ft-badge">Free Tools</span><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span><span class="ft-cta">Try them free <span class="ft-arrow">→</span></span></span>
+        <span class="ft-set"><span class="ft-badge">Free Tools</span><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span><span class="ft-cta">Try them free <span class="ft-arrow">→</span></span></span>
+        <span class="ft-set"><span class="ft-badge">Free Tools</span><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span><span class="ft-cta">Try them free <span class="ft-arrow">→</span></span></span>
+        <span class="ft-set"><span class="ft-badge">Free Tools</span><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span><span class="ft-cta">Try them free <span class="ft-arrow">→</span></span></span>
       </span>
     </span>
-    <span class="ft-cta" aria-hidden="true">Try them free <span class="ft-arrow">→</span></span>
   </a>
   <!-- END FREE TOOLS STRIP -->
 
