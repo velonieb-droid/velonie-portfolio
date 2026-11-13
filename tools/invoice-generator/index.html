@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBC8SXEGR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WBC8SXEGR3');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Invoice Generator with Logo and PDF | Velonie Baluarte</title>
+<meta name="description" content="Create a professional invoice with your logo, line items, tax and discount, then save it as a PDF. Free, no sign-up, and nothing leaves your browser.">
+<link rel="canonical" href="https://velonieautomation.com/tools/invoice-generator/">
+<link rel="icon" type="image/png" href="../../assets/vab-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Invoice Generator with Logo and PDF">
+<meta property="og:description" content="Create a branded invoice with line items, tax and discount and save it as a PDF. No sign-up. Runs in your browser.">
+<meta property="og:url" content="https://velonieautomation.com/tools/invoice-generator/">
+<meta property="og:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<meta property="og:site_name" content="Velonie Baluarte">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Invoice Generator with Logo and PDF">
+<meta name="twitter:description" content="Create a branded invoice with line items, tax and discount and save it as a PDF. No sign-up. Runs in your browser.">
+<meta name="twitter:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://velonieautomation.com/tools/invoice-generator/#app",
+      "name": "Invoice Generator",
+      "url": "https://velonieautomation.com/tools/invoice-generator/",
+      "description": "Creates an invoice with a logo, line items, discount and tax in the browser, for printing or saving as PDF.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Velonie Baluarte",
+        "url": "https://velonieautomation.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://velonieautomation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Free Tools",
+          "item": "https://velonieautomation.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Invoice Generator",
+          "item": "https://velonieautomation.com/tools/invoice-generator/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/tools/css/tools.css">
+</head>
+<body class="invoice-page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="../../" aria-label="Velonie Baluarte portfolio home">
+      <img src="../../assets/vab-logo.png" alt="" class="brand-mark" width="36" height="36">
+      <span>Velonie Baluarte</span>
+    </a>
+    <nav class="tnav" aria-label="Tools navigation">
+      <a href="../">Free Tools</a>
+      <a href="../../">Portfolio</a>
+      <a class="btn primary sm" href="../../#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Portfolio</a></li>
+      <li><a href="../">Free Tools</a></li>
+      <li aria-current="page">Invoice Generator</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <span class="eyebrow">Free business tool</span>
+    <h1>Invoice Generator</h1>
+    <p class="lead">Build a clean, branded invoice with your logo, line items, tax and discount. Watch it update as you type, then save it as a PDF.</p>
+    <p class="local-note">Runs in your browser. Your details, your client's details and your logo are never uploaded or stored.</p>
+  </header>
+
+  <noscript><p class="notice">This tool needs JavaScript to work. The guide further down the page explains how the numbers are worked out.</p></noscript>
+
+  <div class="tool-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Invoice details</h2>
+      <form id="invoiceForm" novalidate>
+        <h3 class="group-title first">From</h3>
+        <div class="field">
+          <div class="field-row"><label for="fromName">Your business or name <span class="req" aria-hidden="true">*</span></label></div>
+          <input type="text" id="fromName" aria-describedby="fromNameErr" autocomplete="off">
+          <p class="err" id="fromNameErr" role="alert"></p>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="fromDetails">Address and contact details <span class="opt">(optional)</span></label></div>
+          <textarea id="fromDetails" rows="3" placeholder="Address, email, phone, tax number"></textarea>
+        </div>
+        <div class="grid2">
+          <div class="field">
+            <div class="field-row"><span class="label">Logo <span class="opt">(optional)</span></span></div>
+            <div class="actions tight">
+              <label class="btn sm" for="logo">Choose image</label>
+              <input type="file" id="logo" class="sr-only" accept="image/png,image/jpeg,image/webp,image/gif" aria-describedby="logoHint logoErr">
+              <button type="button" class="btn sm ghost" id="removeLogo" hidden>Remove logo</button>
+            </div>
+            <p class="hint" id="logoHint">PNG, JPG, WebP or GIF, up to 1 MB. It stays on your device.</p>
+            <p class="err" id="logoErr" role="alert"></p>
+          </div>
+          <div class="field">
+            <div class="field-row"><label for="accent">Accent colour</label></div>
+            <input type="color" id="accent" value="#0f9d58">
+          </div>
+        </div>
+
+        <h3 class="group-title">Bill to</h3>
+        <div class="field">
+          <div class="field-row"><label for="toName">Client name <span class="req" aria-hidden="true">*</span></label></div>
+          <input type="text" id="toName" aria-describedby="toNameErr" autocomplete="off">
+          <p class="err" id="toNameErr" role="alert"></p>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="toDetails">Client address and details <span class="opt">(optional)</span></label></div>
+          <textarea id="toDetails" rows="3" ></textarea>
+        </div>
+
+        <h3 class="group-title">Invoice</h3>
+        <div class="grid2">
+        <div class="field">
+          <div class="field-row"><label for="number">Invoice number <span class="opt">(optional)</span></label></div>
+          <input type="text" id="number" autocomplete="off" placeholder="INV-0001">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="currency">Currency</label></div>
+          <select id="currency"></select>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="issueDate">Issue date</label></div>
+          <input type="date" id="issueDate" >
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="dueDate">Due date <span class="opt">(optional)</span></label></div>
+          <input type="date" id="dueDate" aria-describedby="dueDateErr" >
+          <p class="err" id="dueDateErr" role="alert"></p>
+        </div>
+        </div>
+
+        <h3 class="group-title">Line items</h3>
+        <ol class="item-list" id="itemList"></ol>
+        <p class="err" id="itemsErr" role="alert"></p>
+        <div class="actions tight"><button type="button" class="btn sm primary" id="addItemBtn">+ Add item</button></div>
+
+        <h3 class="group-title">Discount and tax</h3>
+        <div class="grid2">
+        <div class="field">
+          <div class="field-row"><label for="discountType">Discount type</label></div>
+          <select id="discountType"><option value="percent">Percentage (%)</option><option value="fixed">Fixed amount</option></select>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="discountValue">Discount <span class="opt">(optional)</span></label></div>
+          <input type="number" id="discountValue" aria-describedby="discountValueErr" min="0" step="any" inputmode="decimal" autocomplete="off">
+          <p class="err" id="discountValueErr" role="alert"></p>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="taxLabel">Tax name <span class="opt">(optional)</span></label></div>
+          <input type="text" id="taxLabel" autocomplete="off" placeholder="VAT, GST, Sales tax">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="taxRate">Tax rate (%) <span class="opt">(optional)</span></label></div>
+          <input type="number" id="taxRate" aria-describedby="taxRateErr" min="0" step="any" inputmode="decimal" autocomplete="off">
+          <p class="err" id="taxRateErr" role="alert"></p>
+        </div>
+        </div>
+
+        <h3 class="group-title">Notes</h3>
+        <div class="field">
+          <div class="field-row"><label for="notes">Notes and payment terms <span class="opt">(optional)</span></label></div>
+          <textarea id="notes" rows="3" placeholder="Payment terms, bank details, thank-you note"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn sm" id="exampleBtn">Load example</button>
+          <button type="button" class="btn sm ghost" id="resetBtn">Clear invoice</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel output" aria-labelledby="output-title">
+      <h2 id="output-title">Invoice preview</h2>
+      <p class="empty" id="emptyState">Fill in your details, the client and at least one line item to see the invoice.</p>
+      <div id="resultState" hidden>
+        <div id="invoicePaper" class="paper-wrap"></div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="printBtn" disabled>Save as PDF / Print</button>
+        <button type="button" class="btn" id="downloadBtn" disabled>Download .html</button>
+      </div>
+      <p class="hint">To get a PDF, choose <strong>Save as PDF</strong> as the destination in the print window.</p>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <article class="prose">
+    <h2>How to create an invoice</h2>
+    <ol>
+      <li>Enter your business name and contact details, and add a logo and accent colour if you want your branding on it.</li>
+      <li>Enter the client, an invoice number, the dates and the currency.</li>
+      <li>Add a line for each service or product with a quantity and a unit price. Amounts and totals update as you type.</li>
+      <li>Add a discount or tax if they apply, and any payment terms in the notes.</li>
+      <li>Click <strong>Save as PDF / Print</strong> and choose Save as PDF, or download the invoice as a standalone HTML file.</li>
+    </ol>
+
+    <h2>How the totals are calculated</h2>
+    <ul>
+      <li><strong>Line amount</strong> = quantity × unit price.</li>
+      <li><strong>Subtotal</strong> = the sum of all line amounts.</li>
+      <li><strong>Discount</strong> is taken off the subtotal, as a percentage or a fixed amount.</li>
+      <li><strong>Tax</strong> = tax rate × (subtotal − discount).</li>
+      <li><strong>Total due</strong> = subtotal − discount + tax.</li>
+    </ul>
+    <p>Amounts are rounded to two decimal places at each step.</p>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li>Nothing is saved. If you close or reload the page the invoice is gone, so download or print it first.</li>
+      <li>Your details, your client's details and your logo are processed on your device and are never uploaded.</li>
+      <li>This tool formats an invoice. It is not accounting software and it is not tax or legal advice. Invoice requirements, such as tax numbers and wording, differ by country, so check what applies to you.</li>
+    </ul>
+
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../automation-roi-calculator/">Automation ROI Calculator</a>: estimate what manual work costs each year.</li>
+      <li><a href="../sms-segment-calculator/">SMS Segment and Cost Calculator</a>: check message length and campaign cost.</li>
+      <li><a href="../">Back to all free tools</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte · Free tools that run in your browser</span>
+  <nav aria-label="Footer">
+    <a href="../">All free tools</a>
+    <a href="../../">Portfolio</a>
+    <a href="../../#contact">Contact</a>
+  </nav>
+</footer>
+<script type="module" src="../../assets/tools/js/invoice.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBC8SXEGR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WBC8SXEGR3');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free SMS Segment and Cost Calculator | Velonie Baluarte</title>
+<meta name="description" content="Count SMS characters and segments, find the emoji or curly quotes that raise the cost, and estimate the price of a campaign. Free and browser-based.">
+<link rel="canonical" href="https://velonieautomation.com/tools/sms-segment-calculator/">
+<link rel="icon" type="image/png" href="../../assets/vab-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free SMS Segment and Cost Calculator">
+<meta property="og:description" content="Count SMS segments, spot characters that raise the cost and estimate campaign price. Runs in your browser.">
+<meta property="og:url" content="https://velonieautomation.com/tools/sms-segment-calculator/">
+<meta property="og:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<meta property="og:site_name" content="Velonie Baluarte">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free SMS Segment and Cost Calculator">
+<meta name="twitter:description" content="Count SMS segments, spot characters that raise the cost and estimate campaign price. Runs in your browser.">
+<meta name="twitter:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://velonieautomation.com/tools/sms-segment-calculator/#app",
+      "name": "SMS Segment and Cost Calculator",
+      "url": "https://velonieautomation.com/tools/sms-segment-calculator/",
+      "description": "Counts SMS characters and segments using GSM-7 and UCS-2 rules, flags characters that change the encoding and estimates campaign cost.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Velonie Baluarte",
+        "url": "https://velonieautomation.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://velonieautomation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Free Tools",
+          "item": "https://velonieautomation.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SMS Segment and Cost Calculator",
+          "item": "https://velonieautomation.com/tools/sms-segment-calculator/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/tools/css/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="../../" aria-label="Velonie Baluarte portfolio home">
+      <img src="../../assets/vab-logo.png" alt="" class="brand-mark" width="36" height="36">
+      <span>Velonie Baluarte</span>
+    </a>
+    <nav class="tnav" aria-label="Tools navigation">
+      <a href="../">Free Tools</a>
+      <a href="../../">Portfolio</a>
+      <a class="btn primary sm" href="../../#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Portfolio</a></li>
+      <li><a href="../">Free Tools</a></li>
+      <li aria-current="page">SMS Segment and Cost Calculator</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <span class="eyebrow">Free CRM and messaging tool</span>
+    <h1>SMS Segment and Cost Calculator</h1>
+    <p class="lead">Paste a text message to see how many segments it uses, which characters are making it more expensive, and what the campaign will cost to send.</p>
+    <p class="local-note">Runs in your browser. Nothing you type is uploaded or stored.</p>
+  </header>
+
+  <noscript><p class="notice">This tool needs JavaScript to work. The guide further down the page explains how the numbers are worked out.</p></noscript>
+
+  <div class="tool-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Your message</h2>
+      <form id="smsForm" novalidate>
+        <div class="field">
+          <div class="field-row">
+            <label for="message">Text message</label>
+            <span class="count" id="liveCount" aria-live="off"></span>
+          </div>
+          <textarea id="message" rows="7" aria-describedby="messageHint liveCount" placeholder="Type or paste your SMS here"></textarea>
+          <p class="hint" id="messageHint">Paste it exactly as you will send it, including any opt-out line.</p>
+        </div>
+        <h3 class="group-title">Campaign cost <span class="opt">(optional)</span></h3>
+        <div class="grid3">
+        <div class="field">
+          <div class="field-row"><label for="recipients">Recipients</label></div>
+          <input type="number" id="recipients" min="0" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="rate">Your price per segment</label></div>
+          <input type="number" id="rate" min="0" step="any" inputmode="decimal">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="currency">Currency</label></div>
+          <select id="currency"></select>
+        </div>
+        </div>
+        <p class="hint">Use the per-segment rate from your own provider or CRM billing page. Rates differ by provider, country and plan.</p>
+        <div class="actions">
+          <button type="button" class="btn sm" id="exampleBtn">Load example</button>
+          <button type="button" class="btn sm ghost" id="resetBtn">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel output" aria-labelledby="output-title">
+      <h2 id="output-title">Result</h2>
+      <p class="empty" id="emptyState">Type or paste a message to see its length, segments and cost.</p>
+      <div id="resultState" hidden>
+        <dl class="tiles">
+          <div class="tile"><dt>Segments</dt><dd id="outSegments"></dd><dd class="tile-note" id="outSegmentsNote"></dd></div>
+          <div class="tile"><dt>Length</dt><dd id="outLength"></dd><dd class="tile-note" id="outLengthNote"></dd></div>
+          <div class="tile"><dt>Encoding</dt><dd id="outEncoding"></dd><dd class="tile-note" id="outEncodingNote"></dd></div>
+          <div class="tile"><dt>Estimated cost</dt><dd id="outCost"></dd><dd class="tile-note" id="outCostNote"></dd></div>
+        </dl>
+        <ul class="findings" id="issues"></ul>
+        <div class="actions tight"><button type="button" class="btn sm primary" id="fixBtn" hidden>Replace typographic characters</button></div>
+        <p class="sub" style="margin-top:18px">How the message is split</p>
+        <ol class="segs" id="segments"></ol>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copyBtn" disabled>Copy message</button>
+        <button type="button" class="btn" id="downloadBtn" disabled>Download report</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <article class="prose">
+    <h2>How to use the calculator</h2>
+    <ol>
+      <li>Paste your text message. The counter shows the length, the number of segments and how much room is left.</li>
+      <li>Check the notes for characters that push the message into the shorter format, and replace them with one click where a plain version exists.</li>
+      <li>Enter how many people you are sending to and your price per segment to estimate the cost of the send.</li>
+    </ol>
+
+    <h2>How SMS segments work</h2>
+    <p>A text message is sent in pieces called segments, and providers bill per segment, not per message.</p>
+    <ul>
+      <li><strong>Standard text (GSM-7):</strong> one segment holds 160 characters. A longer message is split into segments of 153, because each piece carries a small header so the phone can join them back together.</li>
+      <li><strong>Special characters (UCS-2):</strong> if the message contains even one character outside the standard set, such as an emoji, a curly quote or a non-Latin letter, the whole message switches format. One segment then holds 70 characters, or 67 each when split.</li>
+      <li><strong>Double-counted characters:</strong> in standard text, <code>^ { } [ ] \ ~ |</code> and <code>€</code> each use two character spaces.</li>
+    </ul>
+
+    <h2>Example</h2>
+    <p>A 150-character message in plain text is 1 segment. Add a single emoji and it becomes UCS-2, where 150 characters need 3 segments. For a send to 2,000 people, that is 6,000 billed segments instead of 2,000.</p>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li>Curly quotes, long dashes and the single-character ellipsis often arrive unnoticed when text is pasted from a document or typed on a phone.</li>
+      <li>Merge fields such as <code>{{contact.first_name}}</code> are counted as typed. The real length depends on each contact, so leave some room.</li>
+      <li>The cost is an estimate from the rate you enter. Your provider's billing log is the final word, and some carriers handle encoding differently.</li>
+      <li>Your message is processed on your device and is not uploaded or stored.</li>
+    </ul>
+
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../automation-roi-calculator/">Automation ROI Calculator</a>: estimate what manual work costs each year.</li>
+      <li><a href="../ai-prompt-builder/">AI Prompt Builder</a>: includes a template for follow-up message sequences.</li>
+      <li><a href="../">Back to all free tools</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte · Free tools that run in your browser</span>
+  <nav aria-label="Footer">
+    <a href="../">All free tools</a>
+    <a href="../../">Portfolio</a>
+    <a href="../../#contact">Contact</a>
+  </nav>
+</footer>
+<script type="module" src="../../assets/tools/js/sms-calculator.js"></script>
+</body>
+</html>

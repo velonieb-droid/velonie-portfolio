@@ -238,3 +238,143 @@ test('Analyzer: an empty page produces no suggestions and does not throw', () =>
   assert.deepEqual([r.keywords.length, r.titles.length, r.descriptions.length], [0, 0, 0]);
   assert.ok(r.findings.some((f) => f.level === 'bad'));
 });
+
+// ── Invoice Generator ──
+const { computeInvoice, validateInvoice, formatMoney, formatDate, buildInvoiceDocument } = await import('../assets/tools/js/invoice.js');
+
+test('Invoice: totals with percentage discount and tax', () => {
+  const t = computeInvoice({ items: [{ description: 'A', quantity: '1', price: '650' }, { description: 'B', quantity: '3', price: '180' }, { description: 'C', quantity: '2', price: '75' }, { description: '', quantity: '', price: '' }], discountType: 'percent', discountValue: '10', taxRate: '8.25' });
+  assert.equal(t.lines.length, 3);
+  assert.deepEqual([t.subtotal, t.discount, t.taxable, t.tax, t.total], [1340, 134, 1206, 99.5, 1305.5]);
+});
+
+test('Invoice: fixed discount is capped at the subtotal; rounding to cents', () => {
+  const capped = computeInvoice({ items: [{ description: 'A', quantity: '1', price: '50' }], discountType: 'fixed', discountValue: '80', taxRate: '20' });
+  assert.deepEqual([capped.discount, capped.tax, capped.total], [50, 0, 0]);
+  const cents = computeInvoice({ items: [{ description: 'A', quantity: '3', price: '0.1' }, { description: 'B', quantity: '1.5', price: '19.99' }], discountType: 'fixed', discountValue: '', taxRate: '7.5' });
+  assert.deepEqual([cents.lines[0].amount, cents.lines[1].amount, cents.subtotal, cents.tax, cents.total], [0.3, 29.99, 30.29, 2.27, 32.56]);
+});
+
+test('Invoice: validation of required fields, rows, dates and rates', () => {
+  const base = { fromName: 'Me', toName: 'Client', issueDate: '2026-11-14', dueDate: '', taxRate: '', discountType: 'percent', discountValue: '', items: [{ description: 'Work', quantity: '1', price: '100' }] };
+  assert.equal(validateInvoice(base).valid, true);
+  assert.ok(validateInvoice({ ...base, fromName: ' ' }).errors.fromName);
+  assert.ok(validateInvoice({ ...base, toName: '' }).errors.toName);
+  assert.ok(validateInvoice({ ...base, dueDate: '2026-11-01' }).errors.dueDate);
+  assert.ok(validateInvoice({ ...base, taxRate: '140' }).errors.taxRate);
+  assert.ok(validateInvoice({ ...base, discountValue: '120' }).errors.discountValue);
+  assert.ok(validateInvoice({ ...base, items: [{ description: '', quantity: '', price: '' }] }).errors.items);
+  const partial = validateInvoice({ ...base, items: [{ description: 'Work', quantity: '0', price: '' }] });
+  assert.equal(partial.valid, false);
+  assert.ok(partial.rows[0].quantity && partial.rows[0].price);
+  assert.equal(validateInvoice({ ...base, items: [{ description: 'Free item', quantity: '1', price: '0' }] }).valid, true);
+});
+
+test('Invoice: money, dates and the downloaded document', () => {
+  assert.equal(formatMoney(1305.5, 'USD'), '$1,305.50');
+  assert.equal(formatMoney(1200, 'JPY'), '¥1,200');
+  assert.equal(formatDate('2026-11-14'), 'Nov 14, 2026');
+  assert.equal(formatDate('not a date'), '');
+  const doc = buildInvoiceDocument('<div class="inv">x</div>', 'Invoice </title><script>alert(1)</script>');
+  assert.ok(doc.startsWith('<!DOCTYPE html>') && doc.includes('<div class="inv">x</div>'));
+  assert.ok(doc.includes('<title>Invoice &lt;/title&gt;&lt;script&gt;alert(1)&lt;/script&gt;</title>'));
+  assert.equal((doc.match(/<script/g) || []).length, 0);
+});
+
+// ── Automation ROI Calculator ──
+const { computeRoi, roiProblem, buildRoiSummary, paybackText } = await import('../assets/tools/js/roi-calculator.js');
+
+test('ROI: worked example matches hand calculation', () => {
+  const input = {
+    tasks: [{ name: 'Follow-up', hours: '6', people: '1', automatable: '80' }, { name: 'Booking', hours: '4', people: '1', automatable: '70' }, { name: 'Data entry', hours: '3', people: '2', automatable: '90' }],
+    hourlyCost: '28', weeksPerYear: '48', missedLeads: '10', recoverable: '30', closeRate: '20', averageSale: '400', setupCost: '2500', monthlyCost: '150'
+  };
+  const r = computeRoi(input);
+  const close = (a, b) => assert.ok(Math.abs(a - b) < 1e-6, `${a} vs ${b}`);
+  close(r.hoursSaved, (4.8 + 2.8 + 5.4) * 48);          // 624 hours
+  close(r.labourValue, 624 * 28);                        // 17,472
+  close(r.recoveredRevenue, 10 * 0.3 * 0.2 * 400 * 12);  // 2,880
+  close(r.benefit, 20352);
+  close(r.cost, 2500 + 1800);
+  close(r.net, 16052);
+  close(r.roiPercent, (16052 / 4300) * 100);
+  close(r.paybackMonths, 2500 / (20352 / 12 - 150));
+  assert.equal(roiProblem(input), '');
+  const summary = buildRoiSummary(r, 'USD');
+  assert.ok(summary.includes('Total: 624 hours') && summary.includes('$20,352.00') && summary.includes('not a guarantee'));
+});
+
+test('ROI: empty and incomplete input give a clear message, not numbers', () => {
+  const empty = { tasks: [{ name: '', hours: '', people: '1', automatable: '70' }] };
+  assert.equal(computeRoi(empty).valid, false);
+  assert.match(roiProblem(empty), /Add at least one task/);
+  assert.match(roiProblem({ tasks: [{ hours: '5' }], hourlyCost: '' }), /hourly cost/);
+  assert.match(roiProblem({ tasks: [], missedLeads: '5' }), /close rate/);
+});
+
+test('ROI: no cost means no ROI figure; costs above benefit never pay back', () => {
+  const free = computeRoi({ tasks: [{ hours: '2', people: '', automatable: '' }], hourlyCost: '20', weeksPerYear: '' });
+  assert.equal(free.hoursSaved, 96);
+  assert.equal(free.roiPercent, null);
+  assert.equal(paybackText(free.paybackMonths), 'Immediate (no setup cost)');
+  const bad = computeRoi({ tasks: [{ hours: '1' }], hourlyCost: '10', setupCost: '5000', monthlyCost: '500' });
+  assert.ok(bad.net < 0 && bad.paybackMonths === null);
+  assert.equal(paybackText(null), 'Not reached at these numbers');
+  assert.equal(computeRoi({ tasks: [{ hours: '-5' }], hourlyCost: '-3' }).valid, false);
+});
+
+// ── SMS Segment and Cost Calculator ──
+const { analyzeSms, plainText, campaignCost, describeChar, buildSmsReport } = await import('../assets/tools/js/sms-calculator.js');
+
+test('SMS: GSM-7 boundaries at 160 and 153', () => {
+  assert.equal(analyzeSms('').segmentCount, 0);
+  const a160 = analyzeSms('a'.repeat(160));
+  assert.deepEqual([a160.encoding, a160.segmentCount, a160.remaining], ['GSM-7', 1, 0]);
+  const a161 = analyzeSms('a'.repeat(161));
+  assert.deepEqual([a161.segmentCount, a161.perSegment, a161.segments[0].units, a161.segments[1].units], [2, 153, 153, 8]);
+  assert.equal(analyzeSms('a'.repeat(306)).segmentCount, 2);
+  assert.equal(analyzeSms('a'.repeat(307)).segmentCount, 3);
+});
+
+test('SMS: extension characters count double and are not split across segments', () => {
+  const euro = analyzeSms('€'.repeat(80));
+  assert.deepEqual([euro.encoding, euro.units, euro.segmentCount], ['GSM-7', 160, 1]);
+  const split = analyzeSms('a'.repeat(152) + '€' + 'a'.repeat(10));
+  assert.equal(split.segmentCount, 2);
+  assert.equal(split.segments[0].units, 152);
+  assert.ok(split.segments[1].text.startsWith('€'));
+  assert.equal(analyzeSms('[test] {x}').doubleCount, 4);
+});
+
+test('SMS: one non-GSM character switches to UCS-2 with 70 and 67 limits', () => {
+  const curly = analyzeSms('It’s ready');
+  assert.equal(curly.encoding, 'UCS-2');
+  assert.deepEqual(curly.nonGsm, [{ char: '’', count: 1, fixable: true }]);
+  assert.equal(analyzeSms('я'.repeat(70)).segmentCount, 1);
+  const u71 = analyzeSms('я'.repeat(71));
+  assert.deepEqual([u71.segmentCount, u71.perSegment], [2, 67]);
+  const emoji = analyzeSms('😀'.repeat(36));
+  assert.deepEqual([emoji.units, emoji.characters, emoji.segmentCount], [72, 36, 2]);
+  assert.equal(emoji.segments[0].units, 66, 'surrogate pair not split');
+  assert.equal(emoji.nonGsm[0].fixable, false);
+  assert.equal(analyzeSms('a'.repeat(150) + '😀').segmentCount, 3);
+});
+
+test('SMS: plainText replaces typographic characters and restores GSM-7', () => {
+  const messy = 'Hi – it’s “here”… ok now​';
+  assert.equal(plainText(messy), 'Hi - it\'s "here"... ok now');
+  assert.equal(analyzeSms(plainText(messy)).encoding, 'GSM-7');
+  assert.equal(plainText('Olá 😀'), 'Olá 😀');
+  assert.equal(describeChar('’'), '’ (U+2019)');
+  assert.equal(describeChar(' '), 'non-breaking space (U+00A0)');
+});
+
+test('SMS: campaign cost, merge fields and line endings', () => {
+  assert.deepEqual(campaignCost(2, '2500', '0.01'), { recipients: 2500, totalSegments: 5000, cost: 50 });
+  assert.deepEqual(campaignCost(3, '', ''), { recipients: 0, totalSegments: 0, cost: 0 });
+  assert.equal(campaignCost(1, '-5', '-1').cost, 0);
+  assert.equal(analyzeSms('Hi {{contact.first_name}}').hasMergeFields, true);
+  assert.equal(analyzeSms('a\r\nb').units, 3);
+  const a = analyzeSms('Hello');
+  assert.ok(buildSmsReport('Hello', a, campaignCost(1, '10', '0.02'), 'USD').includes('Estimated cost: USD 0.20'));
+});

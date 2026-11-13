@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBC8SXEGR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WBC8SXEGR3');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Automation ROI Calculator | Velonie Baluarte</title>
+<meta name="description" content="Estimate the hours and money manual work costs each year, and the return and payback period of automating it. Free, and it shows the formula it uses.">
+<link rel="canonical" href="https://velonieautomation.com/tools/automation-roi-calculator/">
+<link rel="icon" type="image/png" href="../../assets/vab-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Automation ROI Calculator">
+<meta property="og:description" content="Estimate hours saved, yearly benefit, ROI and payback from automating manual work. Shows its formula. Runs in your browser.">
+<meta property="og:url" content="https://velonieautomation.com/tools/automation-roi-calculator/">
+<meta property="og:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<meta property="og:site_name" content="Velonie Baluarte">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Automation ROI Calculator">
+<meta name="twitter:description" content="Estimate hours saved, yearly benefit, ROI and payback from automating manual work. Shows its formula. Runs in your browser.">
+<meta name="twitter:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://velonieautomation.com/tools/automation-roi-calculator/#app",
+      "name": "Automation ROI Calculator",
+      "url": "https://velonieautomation.com/tools/automation-roi-calculator/",
+      "description": "Estimates hours saved, yearly benefit, first-year ROI and payback period for automating manual tasks, from numbers the visitor enters.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Velonie Baluarte",
+        "url": "https://velonieautomation.com/"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Portfolio",
+          "item": "https://velonieautomation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Free Tools",
+          "item": "https://velonieautomation.com/tools/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Automation ROI Calculator",
+          "item": "https://velonieautomation.com/tools/automation-roi-calculator/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/tools/css/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="../../" aria-label="Velonie Baluarte portfolio home">
+      <img src="../../assets/vab-logo.png" alt="" class="brand-mark" width="36" height="36">
+      <span>Velonie Baluarte</span>
+    </a>
+    <nav class="tnav" aria-label="Tools navigation">
+      <a href="../">Free Tools</a>
+      <a href="../../">Portfolio</a>
+      <a class="btn primary sm" href="../../#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Portfolio</a></li>
+      <li><a href="../">Free Tools</a></li>
+      <li aria-current="page">Automation ROI Calculator</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <span class="eyebrow">Free business calculator</span>
+    <h1>Automation ROI Calculator</h1>
+    <p class="lead">List the tasks your team does by hand and see how many hours and how much money they cost each year, and how quickly automating them would pay back.</p>
+    <p class="local-note">Runs in your browser. Nothing you type is uploaded or stored. The result is arithmetic on your own numbers, not a prediction.</p>
+  </header>
+
+  <noscript><p class="notice">This tool needs JavaScript to work. The guide further down the page explains how the numbers are worked out.</p></noscript>
+
+  <div class="tool-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Your numbers</h2>
+      <form id="roiForm" novalidate>
+        <h3 class="group-title first">Manual work you could automate</h3>
+        <ol class="task-list" id="taskList"></ol>
+        <div class="actions tight"><button type="button" class="btn sm primary" id="addTaskBtn">+ Add task</button></div>
+        <p class="hint">"% automatable" is your estimate of how much of the task a workflow could take over. Few tasks are 100%.</p>
+        <div class="grid3">
+        <div class="field">
+          <div class="field-row"><label for="hourlyCost">Cost per hour</label></div>
+          <input type="number" id="hourlyCost" aria-describedby="hourlyCostHint" min="0" step="any" inputmode="decimal" autocomplete="off">
+          <p class="hint" id="hourlyCostHint">Pay plus overheads for the people doing this work.</p>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="currency">Currency</label></div>
+          <select id="currency"></select>
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="weeksPerYear">Working weeks a year</label></div>
+          <input type="number" id="weeksPerYear" min="1" max="52" step="1" inputmode="numeric" value="48">
+        </div>
+        </div>
+
+        <h3 class="group-title">Leads you currently miss <span class="opt">(optional)</span></h3>
+        <div class="grid2">
+        <div class="field">
+          <div class="field-row"><label for="missedLeads">Leads missed or answered late, per month</label></div>
+          <input type="number" id="missedLeads" min="0" step="any" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="recoverable">Share faster follow-up could recover (%)</label></div>
+          <input type="number" id="recoverable" min="0" max="100" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="closeRate">Your close rate (%)</label></div>
+          <input type="number" id="closeRate" min="0" max="100" step="1" inputmode="numeric">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="averageSale">Average sale value</label></div>
+          <input type="number" id="averageSale" min="0" step="any" inputmode="decimal" autocomplete="off">
+        </div>
+        </div>
+
+        <h3 class="group-title">Cost of automating</h3>
+        <div class="grid2">
+        <div class="field">
+          <div class="field-row"><label for="setupCost">One-time setup cost <span class="opt">(optional)</span></label></div>
+          <input type="number" id="setupCost" min="0" step="any" inputmode="decimal" autocomplete="off">
+        </div>
+        <div class="field">
+          <div class="field-row"><label for="monthlyCost">Monthly software cost <span class="opt">(optional)</span></label></div>
+          <input type="number" id="monthlyCost" min="0" step="any" inputmode="decimal" autocomplete="off">
+        </div>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn sm" id="exampleBtn">Load example</button>
+          <button type="button" class="btn sm ghost" id="resetBtn">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel output" aria-labelledby="output-title">
+      <h2 id="output-title">Your estimate</h2>
+      <p class="empty" id="emptyState">Enter your numbers to see the estimate.</p>
+      <div id="resultState" hidden>
+        <dl class="tiles">
+          <div class="tile big"><dt>Hours saved per year</dt><dd id="outHours"></dd><dd class="tile-note" id="outHoursNote"></dd></div>
+          <div class="tile big"><dt>Yearly benefit</dt><dd id="outBenefit"></dd></div>
+          <div class="tile"><dt>First-year net result</dt><dd id="outNet"></dd></div>
+          <div class="tile"><dt>First-year ROI</dt><dd id="outRoi"></dd></div>
+          <div class="tile"><dt>Payback period</dt><dd id="outPayback"></dd></div>
+        </dl>
+        <p class="hint" id="costNote">Enter a setup or monthly cost to see ROI and payback.</p>
+        <div class="bars" aria-hidden="true">
+          <div class="bar-row"><span>Value of saved time</span><div class="bar-track"><div class="bar good" id="barLabour"></div></div><b id="barLabourVal"></b></div>
+          <div class="bar-row" id="rowRevenue"><span>Recovered revenue</span><div class="bar-track"><div class="bar good2" id="barRevenue"></div></div><b id="barRevenueVal"></b></div>
+          <div class="bar-row"><span>First-year cost</span><div class="bar-track"><div class="bar cost" id="barCost"></div></div><b id="barCostVal"></b></div>
+        </div>
+        <p class="sub">Summary</p>
+        <pre class="code" id="summary" tabindex="0" aria-label="Estimate summary"></pre>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copyBtn" disabled>Copy summary</button>
+        <button type="button" class="btn" id="downloadBtn" disabled>Download .txt</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+      <div class="cta-box">
+        <p><strong>Want a second opinion on these numbers?</strong> I can review your workflows and tell you what is realistic to automate.</p>
+        <a class="btn sm" href="../../#book">Book a 20-minute call</a>
+      </div>
+    </section>
+  </div>
+
+  <article class="prose">
+    <h2>How to use the calculator</h2>
+    <ol>
+      <li>List the repetitive tasks your team does by hand, with the hours they take each week and how many people do them.</li>
+      <li>Estimate how much of each task could be automated, and enter what an hour of that work costs you.</li>
+      <li>If slow follow-up is costing you leads, fill in the missed leads section.</li>
+      <li>Enter what automating would cost to see the first-year return and the payback period.</li>
+    </ol>
+
+    <h2>How the numbers are worked out</h2>
+    <ul>
+      <li><strong>Hours saved per year</strong> = hours per week × people × share automatable × working weeks, added up across tasks.</li>
+      <li><strong>Value of saved time</strong> = hours saved × cost per hour.</li>
+      <li><strong>Recovered revenue</strong> = missed leads per month × share recoverable × close rate × average sale × 12.</li>
+      <li><strong>Yearly benefit</strong> = value of saved time + recovered revenue.</li>
+      <li><strong>First-year cost</strong> = setup cost + monthly cost × 12.</li>
+      <li><strong>First-year ROI</strong> = (yearly benefit − first-year cost) ÷ first-year cost.</li>
+      <li><strong>Payback period</strong> = setup cost ÷ (monthly benefit − monthly cost).</li>
+    </ul>
+
+    <h2>Read the result with care</h2>
+    <ul>
+      <li>This is arithmetic on the numbers you enter. It is an estimate, not a forecast or a guarantee.</li>
+      <li>Saved hours only become saved money if that time is used for other valuable work or the cost is actually removed.</li>
+      <li>Be conservative with the share that can be automated and the share of leads you could recover. Small changes there move the result a lot.</li>
+      <li>Costs such as maintenance, training and the time to manage a new system are not included unless you add them to the cost fields.</li>
+    </ul>
+
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../sms-segment-calculator/">SMS Segment and Cost Calculator</a>: check message length and campaign cost.</li>
+      <li><a href="../invoice-generator/">Invoice Generator</a>: create a branded invoice and save it as a PDF.</li>
+      <li><a href="../">Back to all free tools</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte · Free tools that run in your browser</span>
+  <nav aria-label="Footer">
+    <a href="../">All free tools</a>
+    <a href="../../">Portfolio</a>
+    <a href="../../#contact">Contact</a>
+  </nav>
+</footer>
+<script type="module" src="../../assets/tools/js/roi-calculator.js"></script>
+</body>
+</html>

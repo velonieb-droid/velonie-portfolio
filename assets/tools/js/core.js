@@ -26,6 +26,23 @@ export function isHttpUrl(value) {
   }
 }
 
+/** Currencies offered by the money tools. */
+export const CURRENCIES = ['USD', 'EUR', 'GBP', 'AUD', 'CAD', 'NZD', 'SGD', 'PHP', 'INR', 'JPY', 'AED', 'CHF', 'MXN', 'ZAR'];
+
+/** Parse a number typed by a visitor. Anything unreadable is 0. */
+export const toNumber = (value) => {
+  const n = parseFloat(String(value ?? '').replace(/,/g, ''));
+  return Number.isFinite(n) ? n : 0;
+};
+
+export function formatMoney(amount, currency) {
+  try {
+    return new Intl.NumberFormat('en', { style: 'currency', currency }).format(amount);
+  } catch {
+    return `${currency} ${amount.toFixed(2)}`;
+  }
+}
+
 /** Copy text to the clipboard. Resolves true on success, false on failure. */
 export async function copyText(text) {
   try {
@@ -93,6 +110,7 @@ export function createTracker(toolId) {
     generate: () => { if (!generated) { generated = true; send('tool_generate'); } },
     // source is one of 'url', 'paste' or 'file'. The address or page content is never sent.
     analyze: (source) => send('tool_analyze', { analyze_source: source }),
+    print: () => send('tool_print'),
     copy: () => send('tool_copy'),
     download: () => send('tool_download')
   };
