@@ -2068,6 +2068,11 @@ body::before {
   margin-left: 6px;
 }
 .nav .nav-cta:hover { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #031809; }
+/* Narrow desktop: tighter link spacing so the full nav still fits beside the brand */
+@media (min-width: 861px) and (max-width: 1140px) {
+  .nav > a:not(.nav-cta), .nav-dropdown > a { padding: 6px 7px; }
+  .nav .nav-cta { margin-left: 2px; }
+}
 
 /* Packages */
 .packages-grid { align-items: stretch; }
@@ -2458,6 +2463,7 @@ body { font-synthesis: none; }
         </div>
       </div>
       <a href="#about">About</a>
+      <a href="tools/">Free Tools</a>
       <a href="hire-me/">For Employers</a>
       <a href="mailto:velonieb@gmail.com?subject=Resume%20Request">Request Resume</a>
       <a href="#contact">Contact</a>
@@ -3806,6 +3812,7 @@ body { font-synthesis: none; }
   <div class="footer-links">
     <a href="mailto:velonieb@gmail.com">Email</a>
     <a href="hire-me/">For Employers</a>
+    <a href="tools/">Free Tools</a>
     <a href="https://www.linkedin.com/in/velonie-baluarte" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp</a>
     <a href="mailto:velonieb@gmail.com?subject=Resume%20Request">Request Resume</a>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBC8SXEGR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WBC8SXEGR3');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free AI Prompt Builder for ChatGPT, Claude and Gemini | Velonie Baluarte</title>
+<meta name="description" content="Build clear, structured prompts for ChatGPT, Claude and Gemini from guided fields and templates. A prompt builder, not an AI: nothing is sent anywhere.">
+<link rel="canonical" href="https://velonieautomation.com/tools/ai-prompt-builder/">
+<link rel="icon" type="image/png" href="../../assets/vab-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free AI Prompt Builder for ChatGPT, Claude and Gemini">
+<meta property="og:description" content="Build structured prompts from guided fields and templates. Runs in your browser and calls no AI service.">
+<meta property="og:url" content="https://velonieautomation.com/tools/ai-prompt-builder/">
+<meta property="og:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<meta property="og:site_name" content="Velonie Baluarte">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free AI Prompt Builder for ChatGPT, Claude and Gemini">
+<meta name="twitter:description" content="Build structured prompts from guided fields and templates. Runs in your browser and calls no AI service.">
+<meta name="twitter:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://velonieautomation.com/tools/ai-prompt-builder/#app",
+      "name": "AI Prompt Builder",
+      "url": "https://velonieautomation.com/tools/ai-prompt-builder/",
+      "description": "Assembles structured prompts for AI assistants from guided fields and templates. Text is built in the browser with fixed rules and no AI model is called.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Velonie Baluarte", "url": "https://velonieautomation.com/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://velonieautomation.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://velonieautomation.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "AI Prompt Builder", "item": "https://velonieautomation.com/tools/ai-prompt-builder/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/tools/css/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="../../" aria-label="Velonie Baluarte portfolio home">
+      <img src="../../assets/vab-logo.png" alt="" class="brand-mark" width="36" height="36">
+      <span>Velonie Baluarte</span>
+    </a>
+    <nav class="tnav" aria-label="Tools navigation">
+      <a href="../">Free Tools</a>
+      <a href="../../">Portfolio</a>
+      <a class="btn primary sm" href="../../#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Portfolio</a></li>
+      <li><a href="../">Free Tools</a></li>
+      <li aria-current="page">AI Prompt Builder</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <span class="eyebrow">Free prompt tool</span>
+    <h1>AI Prompt Builder</h1>
+    <p class="lead">Turn a rough idea into a clear, structured prompt you can paste into ChatGPT, Claude, Gemini or any other AI assistant.</p>
+    <p class="local-note">This is a prompt builder, not an AI. It arranges your text with fixed rules in your browser. Nothing is sent to an AI service, uploaded or stored.</p>
+  </header>
+
+  <noscript><p class="notice">This tool needs JavaScript to build the prompt. The guide further down the page explains the structure so you can write one by hand.</p></noscript>
+
+  <div class="tool-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Prompt details</h2>
+      <form id="promptForm" novalidate>
+        <div class="field">
+          <div class="field-row"><label for="template">Start from a template <span class="opt">(optional)</span></label></div>
+          <select id="template" aria-describedby="templateHint">
+            <option value="">Choose a template…</option>
+          </select>
+          <p class="hint" id="templateHint">Templates fill the form with a starting point. Replace the [placeholders] with your own details.</p>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="role">AI role</label></div>
+          <input type="text" id="role" autocomplete="off" placeholder="an experienced email copywriter">
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="objective">Main task or objective <span class="req" aria-hidden="true">*</span></label></div>
+          <textarea id="objective" rows="2" required aria-describedby="objectiveErr" placeholder="What should the assistant produce?"></textarea>
+          <p class="err" id="objectiveErr" role="alert"></p>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="context">Business or project context</label></div>
+          <textarea id="context" rows="3" placeholder="Who is this for? What is the business and the situation?"></textarea>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="input">Input information</label></div>
+          <textarea id="input" rows="3" aria-describedby="inputHint" placeholder="Notes, data or text the assistant should work from"></textarea>
+          <p class="hint" id="inputHint">Remove passwords, API keys and personal data before pasting a prompt into any AI assistant.</p>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="instructions">Instructions</label></div>
+          <textarea id="instructions" rows="4" aria-describedby="instructionsHint" placeholder="One step per line"></textarea>
+          <p class="hint" id="instructionsHint">One step per line. They are numbered for you.</p>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="constraints">Constraints</label></div>
+          <textarea id="constraints" rows="3" aria-describedby="constraintsHint" placeholder="One rule per line, such as length limits or things to avoid"></textarea>
+          <p class="hint" id="constraintsHint">One rule per line. They become a bullet list.</p>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="tone">Preferred tone</label></div>
+          <input type="text" id="tone" list="toneList" autocomplete="off" placeholder="Choose or type a tone">
+          <datalist id="toneList"></datalist>
+        </div>
+
+        <div class="field">
+          <div class="field-row"><label for="format">Expected output format</label></div>
+          <textarea id="format" rows="2" placeholder="For example: a table, a bullet list, or an email with a subject line"></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn sm ghost" id="resetBtn">Clear form</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel output" aria-labelledby="output-title">
+      <h2 id="output-title">Your prompt</h2>
+      <p class="empty" id="emptyState">Enter the main objective, or choose a template, to build your prompt.</p>
+      <div id="resultState" hidden>
+        <label for="output" class="sub" style="display:block">Editable: adjust the wording before you copy</label>
+        <textarea class="code" id="output" spellcheck="true"></textarea>
+        <p class="notice" id="editedNote" hidden style="margin:10px 0 0">You edited the prompt, so form changes will not overwrite it.
+          <button type="button" class="btn sm" id="regenBtn" style="margin-left:6px">Rebuild from form</button></p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copyBtn" disabled>Copy prompt</button>
+        <button type="button" class="btn" id="downloadBtn" disabled>Download .txt</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <h3 class="group-title">Prompt quality checklist</h3>
+      <ul class="tips" id="tips" aria-label="Prompt quality checklist"></ul>
+    </section>
+  </div>
+
+  <article class="prose">
+    <h2>How to use the builder</h2>
+    <ol>
+      <li>Pick a template or start with an empty form.</li>
+      <li>Fill in the sections. Only the main objective is required, but each extra section usually improves the answer you get.</li>
+      <li>Watch the checklist to see what is still missing.</li>
+      <li>Edit the final prompt if you want, then copy it or download it as a text file and paste it into your AI assistant.</li>
+    </ol>
+
+    <h2>What this tool does and does not do</h2>
+    <p>The builder takes what you type and arranges it under clear headings: role, objective, context, input, instructions, constraints, tone and output format. That is all it does. It does not generate ideas, rewrite your text or call an AI model, and the same input always produces the same prompt.</p>
+
+    <h2>Why structure helps</h2>
+    <ul>
+      <li><strong>Role</strong> points the assistant to the right expertise and vocabulary.</li>
+      <li><strong>Objective</strong> states the one result you need, so the answer does not drift.</li>
+      <li><strong>Context</strong> gives the audience and situation the assistant cannot guess.</li>
+      <li><strong>Instructions</strong> break the work into steps you can check.</li>
+      <li><strong>Constraints</strong> set limits such as length, scope and what must not be invented.</li>
+      <li><strong>Output format</strong> saves you from reformatting the answer afterwards.</li>
+    </ul>
+
+    <h2>Example prompt</h2>
+    <pre class="code"># Role
+You are an experienced B2B email copywriter.
+
+# Objective
+Write a short outreach email that introduces our bookkeeping service to dental clinics.
+
+# Instructions
+1. Open with a specific problem the reader recognises
+2. End with a single clear call to action
+
+# Constraints
+- Maximum 130 words
+- No invented statistics
+
+# Output format
+A subject line, then the email body in plain text.</pre>
+
+    <h2>Template categories</h2>
+    <p>Templates are included for business and marketing, SEO and content, CRM automation, AI agent configuration, website development and workflow troubleshooting.</p>
+
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../seo-meta-generator/">SEO Meta Tag Generator</a>: title, description, canonical and social tags.</li>
+      <li><a href="../faq-schema-generator/">FAQ Schema Generator</a>: create FAQPage structured data in JSON-LD.</li>
+      <li><a href="../">Back to all free tools</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte · Free tools that run in your browser</span>
+  <nav aria-label="Footer">
+    <a href="../">All free tools</a>
+    <a href="../../">Portfolio</a>
+    <a href="../../#contact">Contact</a>
+  </nav>
+</footer>
+<script type="module" src="../../assets/tools/js/prompt-builder.js"></script>
+</body>
+</html>

@@ -21,6 +21,9 @@ Static GitHub Pages site, no build system required.
 - `case-study-*.html`: technical case studies, including a confidential-engagement Google Ads research and conversion QA study
 - `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
 - Resume buttons link to the current photo resume stored in Google Drive
+- `tools/`: Free Tools directory and three browser-based tools (see "Free Tools" below)
+- `assets/tools/`: shared stylesheet and JavaScript modules for the tools
+- `tests/tools-logic.test.mjs`: logic tests for the tools
 - `sitemap.xml`, `robots.txt`: indexation support
 - Legacy `indexnew.html`, `profile-card-v2.html`, and `assets/index.html` have `noindex,follow` and canonical-to-home metadata. Keep them out of the sitemap until archived.
 
@@ -68,6 +71,26 @@ If the calendar embed is blocked or unavailable, the user can still contact via 
 - Verify the intro video is shareable publicly.
 - Check image loading, any client publication permissions, and portfolio metrics.
 - Inspect responsive layout and Core Web Vitals in a real browser.
+
+## Free Tools
+
+Live at `/tools/`. Three tools that run entirely in the visitor's browser: no API, backend, login or storage.
+
+| Page | Script | What it does |
+|---|---|---|
+| `tools/index.html` | `directory.js` | Directory with search and category filter. Cards are static HTML and work without JavaScript. |
+| `tools/seo-meta-generator/` | `seo-meta.js` | Title, description, canonical, robots, Open Graph and Twitter/X tags. All values are HTML-entity escaped. |
+| `tools/faq-schema-generator/` | `faq-schema.js` | Schema.org FAQPage JSON-LD via `JSON.stringify`, with `<` written as `<` so pasted output cannot close a script element. |
+| `tools/ai-prompt-builder/` | `prompt-builder.js`, `prompt-templates.js` | Deterministic prompt assembly from form fields and templates. It is not AI and calls no model. |
+
+- Shared code: `assets/tools/css/tools.css` and `assets/tools/js/core.js` (escaping, URL validation, clipboard, download, status messages, analytics).
+- Each tool module exports its pure functions and only touches the page inside `init()`, so the logic is testable in Node: `node --test tests/tools-logic.test.mjs` (Node 22+ recommended; no dependencies).
+- Local preview: `python -m http.server 8080` from the repository root, then open `http://localhost:8080/tools/`. The tool scripts are ES modules, so open them through a server, not from `file://`.
+- Visitor text is written to the page with `textContent` or `.value` only. Do not use `innerHTML` with visitor input.
+- GA4 events (same property): `tool_open`, `tool_generate` (first valid result per page view), `tool_copy`, `tool_download`. The only parameter is `tool_id`. Never send typed or generated content.
+- To add a tool: create `tools/<slug>/index.html` from an existing tool page, add `assets/tools/js/<slug>.js`, add a card in `tools/index.html` (and its `ItemList` JSON-LD), add the URL to `sitemap.xml`, and add tests.
+- Do not claim rankings or rich results. Google no longer shows FAQ rich results; the FAQ page says so.
+- The source is public by nature (public repository and browser-delivered code). Proprietary or paid features belong in a separate private codebase with server-side processing, a database and authentication, on hosting that permits commercial SaaS. GitHub Pages is not intended for that.
 
 ## Deployment
 

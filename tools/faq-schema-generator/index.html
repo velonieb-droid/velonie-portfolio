@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WBC8SXEGR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WBC8SXEGR3');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free FAQ Schema Generator (JSON-LD) | Velonie Baluarte</title>
+<meta name="description" content="Create valid Schema.org FAQPage JSON-LD from your questions and answers. Add, edit and reorder items, then copy or download. Free and browser-based.">
+<link rel="canonical" href="https://velonieautomation.com/tools/faq-schema-generator/">
+<link rel="icon" type="image/png" href="../../assets/vab-logo.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free FAQ Schema Generator (JSON-LD)">
+<meta property="og:description" content="Turn questions and answers into valid Schema.org FAQPage JSON-LD. Runs in your browser.">
+<meta property="og:url" content="https://velonieautomation.com/tools/faq-schema-generator/">
+<meta property="og:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<meta property="og:site_name" content="Velonie Baluarte">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free FAQ Schema Generator (JSON-LD)">
+<meta name="twitter:description" content="Turn questions and answers into valid Schema.org FAQPage JSON-LD. Runs in your browser.">
+<meta name="twitter:image" content="https://velonieautomation.com/assets/automation-portfolio-hero.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://velonieautomation.com/tools/faq-schema-generator/#app",
+      "name": "FAQ Schema Generator",
+      "url": "https://velonieautomation.com/tools/faq-schema-generator/",
+      "description": "Generates Schema.org FAQPage structured data in JSON-LD from questions and answers, in the browser.",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Person", "name": "Velonie Baluarte", "url": "https://velonieautomation.com/" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Portfolio", "item": "https://velonieautomation.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://velonieautomation.com/tools/" },
+        { "@type": "ListItem", "position": 3, "name": "FAQ Schema Generator", "item": "https://velonieautomation.com/tools/faq-schema-generator/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/tools/css/tools.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="../../" aria-label="Velonie Baluarte portfolio home">
+      <img src="../../assets/vab-logo.png" alt="" class="brand-mark" width="36" height="36">
+      <span>Velonie Baluarte</span>
+    </a>
+    <nav class="tnav" aria-label="Tools navigation">
+      <a href="../">Free Tools</a>
+      <a href="../../">Portfolio</a>
+      <a class="btn primary sm" href="../../#book">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../../">Portfolio</a></li>
+      <li><a href="../">Free Tools</a></li>
+      <li aria-current="page">FAQ Schema Generator</li>
+    </ol>
+  </nav>
+
+  <header class="page-head">
+    <span class="eyebrow">Free structured data tool</span>
+    <h1>FAQ Schema Generator</h1>
+    <p class="lead">Add your questions and answers and get valid Schema.org FAQPage markup in JSON-LD, ready to paste into your page.</p>
+    <p class="local-note">Runs in your browser. Nothing you type is uploaded or stored.</p>
+  </header>
+
+  <noscript><p class="notice">This tool needs JavaScript to build the schema. The guide further down the page shows the FAQPage format so you can write it by hand.</p></noscript>
+
+  <div class="tool-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Questions and answers</h2>
+      <ol class="faq-list" id="faqList"></ol>
+      <div class="actions">
+        <button type="button" class="btn primary sm" id="addBtn">+ Add question</button>
+        <button type="button" class="btn sm" id="exampleBtn">Load example</button>
+        <button type="button" class="btn sm ghost" id="resetBtn">Clear all</button>
+      </div>
+    </section>
+
+    <section class="panel output" aria-labelledby="output-title">
+      <h2 id="output-title">Generated JSON-LD</h2>
+      <div class="field">
+        <label class="check" for="wrapScript">
+          <input type="checkbox" id="wrapScript" checked>
+          Include the &lt;script&gt; tag so it can be pasted straight into HTML
+        </label>
+      </div>
+      <p class="empty" id="emptyState">Add at least one question and its answer to generate the schema.</p>
+      <div id="resultState" hidden>
+        <pre class="code" id="output" tabindex="0" aria-label="Generated FAQ schema"></pre>
+      </div>
+      <p class="hint" id="itemCount"></p>
+      <div class="actions">
+        <button type="button" class="btn primary" id="copyBtn" disabled>Copy schema</button>
+        <button type="button" class="btn" id="downloadBtn" disabled>Download</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <article class="prose">
+    <h2>How to use the generator</h2>
+    <ol>
+      <li>Type a question and its answer. Use <strong>Add question</strong> for more.</li>
+      <li>Use the arrows to change the order, or the ✕ button to remove an item.</li>
+      <li>Copy or download the result and paste it into the HTML of the page that shows the same questions and answers.</li>
+    </ol>
+
+    <h2>What FAQ schema is</h2>
+    <p>FAQPage is a Schema.org type that describes a list of questions and their answers in a format machines can read. It is added to a page as JSON-LD inside a <code>&lt;script type="application/ld+json"&gt;</code> element. It does not change how the page looks to visitors.</p>
+
+    <h2>Example output</h2>
+    <pre class="code">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a CRM setup take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most small-business CRM setups take one to two weeks."
+      }
+    }
+  ]
+}</pre>
+
+    <h2>Will this give me rich results in Google?</h2>
+    <p>No, and no tool can promise that. Valid structured data does not guarantee any special appearance in search results. Google has also retired the FAQ rich result, so FAQ markup no longer produces the expandable questions that used to appear under a listing. The markup is still valid Schema.org data that describes your content clearly to search engines and other systems that read structured data.</p>
+
+    <h2>Good to know</h2>
+    <ul>
+      <li>Only mark up questions and answers that are visible on the same page.</li>
+      <li>Answers are treated as plain text. Quotation marks, emoji and other Unicode characters are handled for you.</li>
+      <li>The tool writes the <code>&lt;</code> character as <code><</code>. This is standard JSON, and it means text such as <code>&lt;/script&gt;</code> in an answer cannot break the page you paste it into.</li>
+      <li>Rows that are completely empty are ignored. A row with only a question or only an answer must be completed or removed.</li>
+    </ul>
+
+    <h2>Related tools</h2>
+    <ul>
+      <li><a href="../seo-meta-generator/">SEO Meta Tag Generator</a>: title, description, canonical and social tags.</li>
+      <li><a href="../ai-prompt-builder/">AI Prompt Builder</a>: build structured prompts for AI assistants.</li>
+      <li><a href="../">Back to all free tools</a></li>
+    </ul>
+  </article>
+</main>
+
+<footer class="wrap footer">
+  <span>Velonie Baluarte · Free tools that run in your browser</span>
+  <nav aria-label="Footer">
+    <a href="../">All free tools</a>
+    <a href="../../">Portfolio</a>
+    <a href="../../#contact">Contact</a>
+  </nav>
+</footer>
+<script type="module" src="../../assets/tools/js/faq-schema.js"></script>
+</body>
+</html>
