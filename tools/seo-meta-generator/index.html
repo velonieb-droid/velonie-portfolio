@@ -86,11 +86,65 @@
   <header class="page-head">
     <span class="eyebrow">Free SEO tool</span>
     <h1>SEO Meta Tag Generator</h1>
-    <p class="lead">Fill in the page details and get clean, ready-to-paste HTML for the title, meta description, canonical link, Open Graph and Twitter/X cards.</p>
+    <p class="lead">Check an existing page for title, description and keyword suggestions, or fill in the details yourself. Then get clean, ready-to-paste HTML for the title, meta description, canonical link, Open Graph and Twitter/X cards.</p>
     <p class="local-note">Runs in your browser. Nothing you type is uploaded or stored.</p>
   </header>
 
   <noscript><p class="notice">This tool needs JavaScript to generate the tags. The guide further down the page explains what each tag does and how to write it by hand.</p></noscript>
+
+  <section class="panel analyzer" aria-labelledby="an-title">
+    <h2 id="an-title">Check an existing page <span class="opt">(optional)</span></h2>
+    <p class="an-intro">Give it a page and it reads the current tags and text, points out problems, and suggests a title, a description and focus keywords. The suggestions follow fixed rules and use the page's own words. This is not AI.</p>
+    <form id="analyzeForm" novalidate>
+      <div class="field">
+        <div class="field-row"><label for="pageUrl">Page address</label></div>
+        <div class="inline">
+          <input type="url" id="pageUrl" inputmode="url" autocomplete="off" placeholder="https://www.example.com/page/" aria-describedby="pageUrlHint pageUrlErr">
+          <button type="submit" class="btn primary" id="checkBtn">Check page</button>
+        </div>
+        <p class="hint" id="pageUrlHint">Your browser requests the page directly from that website. Many websites block this. If it fails, use the option below.</p>
+        <p class="err" id="pageUrlErr" role="alert"></p>
+      </div>
+    </form>
+    <details id="pasteBox">
+      <summary>Or paste the HTML source, or upload a saved page</summary>
+      <p class="hint">To get the source: open the page, press <kbd>Ctrl</kbd> + <kbd>U</kbd> (<kbd>⌥</kbd> + <kbd>⌘</kbd> + <kbd>U</kbd> on a Mac), select everything and copy it. Or save the page with <kbd>Ctrl</kbd> + <kbd>S</kbd> and upload the .html file.</p>
+      <div class="field">
+        <div class="field-row"><label for="pageHtml">HTML source</label></div>
+        <textarea id="pageHtml" rows="5" spellcheck="false" placeholder="&lt;!DOCTYPE html&gt; …"></textarea>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn sm primary" id="analyzeHtmlBtn">Check pasted HTML</button>
+        <label class="btn sm" for="pageFile">Upload .html file</label>
+        <input type="file" id="pageFile" class="sr-only" accept=".html,.htm,text/html">
+      </div>
+    </details>
+    <p class="status" id="anStatus" role="status" aria-live="polite"></p>
+
+    <div id="anResults" hidden>
+      <div class="an-grid">
+        <div>
+          <h3>What the page has now</h3>
+          <dl class="an-current" id="anCurrent"></dl>
+          <h3>Checks</h3>
+          <ul class="findings" id="anFindings"></ul>
+        </div>
+        <div>
+          <h3>Suggested titles</h3>
+          <ul class="suggest" id="anTitles"></ul>
+          <h3>Suggested descriptions</h3>
+          <ul class="suggest" id="anDescs"></ul>
+          <h3>Focus keywords found on the page</h3>
+          <ul class="kwlist" id="anKeywords"></ul>
+          <p class="hint">Use these phrases naturally in the title, headings and text. Google ignores the keywords meta tag, so this tool does not create one.</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn sm" id="fillCurrent">Copy the page's current tags into the form</button>
+        <button type="button" class="btn sm ghost" id="anClear">Clear check</button>
+      </div>
+    </div>
+  </section>
 
   <div class="tool-grid">
     <section class="panel" aria-labelledby="form-title">
@@ -190,11 +244,21 @@
   <article class="prose">
     <h2>How to use the generator</h2>
     <ol>
-      <li>Enter the page title and meta description. The counters show when each one is a comfortable length.</li>
+      <li>Optionally check an existing page first and click <strong>Use this</strong> on a suggested title or description.</li>
+      <li>Enter or adjust the page title and meta description. The counters show when each one is a comfortable length.</li>
       <li>Add the canonical URL, which is the single preferred address for the page.</li>
       <li>Optionally add a website name, a share image and separate social wording.</li>
       <li>Copy the HTML, or download it, and paste it inside the <code>&lt;head&gt;</code> of your page. Replace any older versions of the same tags so none are duplicated.</li>
     </ol>
+
+    <h2>Checking an existing page</h2>
+    <p>The page checker reads a page's HTML and reports what it finds: the current title and description and their lengths, the number of H1 headings, whether a canonical link and social tags are present, a noindex instruction, and images with no alt attribute. It then suggests titles and descriptions built from the page's own heading and opening text, and lists the words and two-word phrases the page uses most, giving extra weight to the title and headings.</p>
+    <ul>
+      <li><strong>It is rule-based, not AI.</strong> Suggestions are drafts made from text already on the page. Read and edit them before you use them.</li>
+      <li><strong>Why an address may not work.</strong> Browsers stop one website from reading another unless that website allows it, and most do not. When that happens, paste the HTML source or upload the saved page. The result is the same.</li>
+      <li><strong>Privacy.</strong> Pasted or uploaded HTML is processed on your device and is not sent anywhere. When you enter an address, your browser requests that page from its own website, as it would if you visited it.</li>
+      <li><strong>Limits.</strong> It checks one page at a time, not a whole site, and it reads the HTML source only. Text that a page adds later with JavaScript will not be seen.</li>
+    </ul>
 
     <h2>What each tag does</h2>
     <h3>Title tag</h3>
@@ -238,5 +302,6 @@
   </nav>
 </footer>
 <script type="module" src="../../assets/tools/js/seo-meta.js"></script>
+<script type="module" src="../../assets/tools/js/page-analyzer.js"></script>
 </body>
 </html>

@@ -163,3 +163,78 @@ test('Prompt: every template is complete, unique and builds a prompt', () => {
     assert.ok(buildPrompt(t.fields).startsWith('# Role\nYou are '), t.id);
   }
 });
+
+// ── Page checker (pure functions; HTML parsing itself is covered by browser QA) ──
+const { keywordCandidates, recommendTitles, recommendDescriptions, pageFindings, analyzePage } = await import('../assets/tools/js/page-analyzer.js');
+
+const samplePage = {
+  url: 'https://www.riveraplumbing.example/emergency/',
+  title: 'Home',
+  description: '',
+  canonical: '', robots: '', ogTitle: '', ogDescription: '', ogImage: '', siteName: '',
+  h1: ['Emergency Plumber in Austin'],
+  h2: ['Water heater repair', 'Drain cleaning'],
+  paragraphs: [
+    'Rivera Plumbing provides emergency plumber services across Austin, with licensed technicians available day and night. We fix leaks, clogged drains and broken water heaters.',
+    'Our water heater repair team carries common parts, so most water heater repair visits are finished in one trip.'
+  ],
+  text: 'Rivera Plumbing provides emergency plumber services across Austin, with licensed technicians available day and night. We fix leaks, clogged drains and broken water heaters.\nOur water heater repair team carries common parts, so most water heater repair visits are finished in one trip.\nCall the emergency plumber line for a fast response.',
+  wordCount: 55, images: 4, imagesMissingAlt: 3
+};
+
+test('Analyzer: keywords favour repeated phrases and heading terms, without stopwords', () => {
+  const phrases = keywordCandidates(samplePage).map((k) => k.phrase);
+  assert.ok(phrases.includes('emergency plumber'), phrases.join(', '));
+  assert.ok(phrases.some((p) => p.includes('water heater')), phrases.join(', '));
+  assert.ok(phrases.length <= 8);
+  for (const p of phrases) for (const w of p.split(' ')) assert.ok(!['the', 'and', 'our', 'with'].includes(w), p);
+  assert.equal(new Set(phrases).size, phrases.length);
+});
+
+test('Analyzer: findings flag short title, missing description, alt text and thin content', () => {
+  const { findings } = analyzePage(samplePage);
+  const text = findings.map((f) => `${f.level}:${f.text}`).join('\n');
+  assert.match(text, /warn:The title tag is short \(4 characters\)/);
+  assert.match(text, /bad:No meta description found/);
+  assert.match(text, /ok:The page has one H1 heading/);
+  assert.match(text, /warn:No canonical link found/);
+  assert.match(text, /3 of 4 images have no alt attribute/);
+  assert.match(text, /Only about 55 words/);
+});
+
+test('Analyzer: noindex is reported as a problem', () => {
+  const f = pageFindings({ ...samplePage, robots: 'NOINDEX, follow' }, []);
+  assert.ok(f.some((x) => x.level === 'bad' && /noindex/.test(x.text)));
+});
+
+test('Analyzer: title suggestions come from the H1 and stay within 60 characters', () => {
+  const titles = recommendTitles(samplePage, keywordCandidates(samplePage));
+  assert.ok(titles.length >= 1 && titles.length <= 3);
+  assert.equal(titles[0].text, 'Emergency Plumber in Austin | Riveraplumbing');
+  for (const t of titles) assert.ok(t.text.length <= 60 && t.note, t.text);
+  const long = recommendTitles({ ...samplePage, title: 'A very long page title that keeps going well past the sixty character guide | Rivera Plumbing', h1: [] }, []);
+  assert.ok(long.length >= 1);
+  for (const t of long) assert.ok(t.text.length <= 60, t.text);
+});
+
+test('Analyzer: a good existing title and description are kept as the first option', () => {
+  const good = { ...samplePage, title: 'Emergency Plumber in Austin, TX | Rivera Plumbing', description: 'Licensed Austin plumbers for leaks, clogged drains and water heater repair. Same-day appointments and upfront pricing.' };
+  assert.equal(recommendTitles(good, [])[0].text, good.title);
+  assert.equal(recommendDescriptions(good, [])[0].text, good.description);
+});
+
+test('Analyzer: description suggestions use page text and stay within 160 characters', () => {
+  const descs = recommendDescriptions(samplePage, keywordCandidates(samplePage));
+  assert.ok(descs.length >= 1);
+  for (const d of descs) {
+    assert.ok(d.text.length >= 50 && d.text.length <= 160, `${d.text.length}: ${d.text}`);
+    assert.ok(samplePage.text.includes(d.text.slice(0, 40)), 'taken from the page, not invented');
+  }
+});
+
+test('Analyzer: an empty page produces no suggestions and does not throw', () => {
+  const empty = { url: '', title: '', description: '', h1: [], h2: [], paragraphs: [], text: '', wordCount: 0, images: 0, imagesMissingAlt: 0 };
+  const r = analyzePage(empty);
+  assert.deepEqual([r.keywords.length, r.titles.length, r.descriptions.length], [0, 0, 0]);
+  assert.ok(r.findings.some((f) => f.level === 'bad'));
+});

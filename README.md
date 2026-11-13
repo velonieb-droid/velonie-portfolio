@@ -80,6 +80,7 @@ Live at `/tools/`. Three tools that run entirely in the visitor's browser: no AP
 |---|---|---|
 | `tools/index.html` | `directory.js` | Directory with search and category filter. Cards are static HTML and work without JavaScript. |
 | `tools/seo-meta-generator/` | `seo-meta.js` | Title, description, canonical, robots, Open Graph and Twitter/X tags. All values are HTML-entity escaped. |
+| (same page) | `page-analyzer.js` | Page checker: reads a page's HTML (direct fetch when the site allows it, otherwise pasted source or an uploaded file), reports problems and suggests titles, descriptions and focus keywords. Rule-based, parsed with `DOMParser` (no scripts run). Cross-site fetches fail for most sites because of browser CORS rules; a reliable URL fetch would need a server-side proxy, which is intentionally not used. |
 | `tools/faq-schema-generator/` | `faq-schema.js` | Schema.org FAQPage JSON-LD via `JSON.stringify`, with `<` written as `<` so pasted output cannot close a script element. |
 | `tools/ai-prompt-builder/` | `prompt-builder.js`, `prompt-templates.js` | Deterministic prompt assembly from form fields and templates. It is not AI and calls no model. |
 
@@ -87,7 +88,7 @@ Live at `/tools/`. Three tools that run entirely in the visitor's browser: no AP
 - Each tool module exports its pure functions and only touches the page inside `init()`, so the logic is testable in Node: `node --test tests/tools-logic.test.mjs` (Node 22+ recommended; no dependencies).
 - Local preview: `python -m http.server 8080` from the repository root, then open `http://localhost:8080/tools/`. The tool scripts are ES modules, so open them through a server, not from `file://`.
 - Visitor text is written to the page with `textContent` or `.value` only. Do not use `innerHTML` with visitor input.
-- GA4 events (same property): `tool_open`, `tool_generate` (first valid result per page view), `tool_copy`, `tool_download`. The only parameter is `tool_id`. Never send typed or generated content.
+- GA4 events (same property): `tool_open`, `tool_generate` (first valid result per page view), `tool_copy`, `tool_download`, plus `tool_analyze` on the page checker. Parameters are `tool_id` and, for `tool_analyze`, `analyze_source` (`url`, `paste` or `file`). Never send typed or generated content.
 - To add a tool: create `tools/<slug>/index.html` from an existing tool page, add `assets/tools/js/<slug>.js`, add a card in `tools/index.html` (and its `ItemList` JSON-LD), add the URL to `sitemap.xml`, and add tests.
 - Do not claim rankings or rich results. Google no longer shows FAQ rich results; the FAQ page says so.
 - The source is public by nature (public repository and browser-delivered code). Proprietary or paid features belong in a separate private codebase with server-side processing, a database and authentication, on hosting that permits commercial SaaS. GitHub Pages is not intended for that.

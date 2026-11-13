@@ -80,9 +80,9 @@ export function setStatus(el, message, kind) {
  */
 export function createTracker(toolId) {
   let generated = false;
-  const send = (name) => {
+  const send = (name, extra) => {
     try {
-      if (typeof window.gtag === 'function') window.gtag('event', name, { tool_id: toolId });
+      if (typeof window.gtag === 'function') window.gtag('event', name, { tool_id: toolId, ...extra });
     } catch {
       // analytics must never break a tool
     }
@@ -91,6 +91,8 @@ export function createTracker(toolId) {
     open: () => send('tool_open'),
     // Output updates on every keystroke, so count the first valid result once per page view.
     generate: () => { if (!generated) { generated = true; send('tool_generate'); } },
+    // source is one of 'url', 'paste' or 'file'. The address or page content is never sent.
+    analyze: (source) => send('tool_analyze', { analyze_source: source }),
     copy: () => send('tool_copy'),
     download: () => send('tool_download')
   };
