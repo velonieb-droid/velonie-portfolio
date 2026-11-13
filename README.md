@@ -2,7 +2,7 @@
 
 Personal portfolio for GoHighLevel CRM, cross-platform workflow automation and AI integrations. Tools include n8n, Zapier, Pabbly, APIs and webhooks, with SEO/AEO, analytics and technical QA as supporting capabilities.
 
-**Live website:** https://velonieb-droid.github.io/velonie-portfolio/
+**Live website:** https://velonieautomation.com/
 
 ## Positioning
 
