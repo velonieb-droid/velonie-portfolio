@@ -18,7 +18,7 @@ Static GitHub Pages site, no build system required.
 - `index.html`: homepage HTML, inline styles, scripts and structured data
 - `hire-me/index.html`: dedicated recruiter/hiring profile with verified project scope, resume and role contact links
 - `assets/`: branding, project images and social sharing image
-- `case-study-*.html`: technical case studies including Project Driver Google Ads research and conversion QA
+- `case-study-*.html`: technical case studies, including a confidential-engagement Google Ads research and conversion QA study
 - `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
 - Resume buttons link to the current photo resume stored in Google Drive
 - `sitemap.xml`, `robots.txt`: indexation support
