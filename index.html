@@ -2349,6 +2349,36 @@ body { font-synthesis: none; }
     transform: none !important;
   }
 }
+/* BEGIN HERO V2 */
+.hx .hero-grid { grid-template-columns: minmax(0, 1fr) 400px; }
+.hx { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(48px, 5vw, 80px); }
+.hx h1 { max-width: 720px; font-size: clamp(38px, 4.5vw, 62px); line-height: 1.05; letter-spacing: -0.03em; }
+.hx .kicker { margin-bottom: 22px; }
+.hx .lead { max-width: 640px; margin-top: 22px; line-height: 1.7; }
+.hx .hx-lead2 { margin-top: 12px; font-size: 15.5px; color: var(--muted); }
+.hx-tech { margin-top: 22px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); }
+.hx .hero-cta { margin-top: 24px; }
+.hx-tools-btn { border-color: rgba(31, 228, 122, 0.45); color: var(--green); background: rgba(31, 228, 122, 0.06); }
+.hx-tools-btn:hover { border-color: var(--green); }
+.hx-book { margin-top: 18px; font-size: 14px; color: var(--muted); }
+.hx-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+/* The source video is 9:16. Inside the 4:5 frame it is shown slightly taller than the frame, so only its
+   empty top and bottom margins are trimmed and no content is cut. The sides blend into the frame colour. */
+.hx-reel { aspect-ratio: 4 / 5; background: #050c08; }
+.hx-reel video { position: absolute; left: 50%; top: -6%; width: auto; height: 112%; transform: translateX(-50%); object-fit: contain; }
+@media (max-width: 1100px) { .hx .hero-grid { grid-template-columns: minmax(0, 1fr) 360px; } }
+@media (max-width: 960px) {
+  .hx .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hx-card { width: 100%; max-width: 440px; margin: 0 auto; }
+  .hx .hx-reel { max-width: none; }
+}
+@media (max-width: 640px) {
+  .hx h1 { font-size: clamp(32px, 9vw, 44px); }
+  .hx-tech { letter-spacing: 0.1em; }
+  .hx .kicker { font-size: 11px; letter-spacing: 0.08em; }
+  .hx .hero-cta .btn { flex: 1 1 150px; }
+}
+/* END HERO V2 */
 /* BEGIN FREE TOOLS STRIP */
 .ft-strip {
   display: flex; align-items: center; gap: 16px;
@@ -2521,17 +2551,18 @@ body { font-synthesis: none; }
 <main id="top">
 
   <!-- HERO -->
-  <section class="wrap hero">
+  <!-- BEGIN HERO V2: solution-first hero. No first-person copy in this section. -->
+  <section class="wrap hero hx">
     <div class="hero-grid">
-      <div class="fade-in">
-        <div class="kicker">GoHighLevel CRM · AI Automation · Cross-Platform Integrations · QA</div>
-        <h1>I build reliable <em>CRM automations and AI integrations</em> that connect your tools and keep leads moving.</h1>
-        <p class="lead">
-          I help businesses and agencies build, fix and connect GoHighLevel CRM systems, booking flows and automated follow-up. I use n8n, Zapier, Pabbly, APIs and Voice AI where they fit, with clear testing, troubleshooting and handover. My engineering project management background helps me trace dependencies before changing working systems.
-        </p>
+      <div class="fade-in hx-copy">
+        <div class="kicker">CRM Systems · AI Automation · Business Tools</div>
+        <h1>Turn disconnected tools and manual work into a <em>connected business system.</em></h1>
+        <p class="lead">CRM setup, AI-assisted lead handling, workflow automation and conversion-focused websites that connect inquiries, follow-up, bookings and reporting.</p>
+        <p class="lead hx-lead2">Explore practical solutions for your business, or use free browser-based tools for invoices, automation ROI, SMS costs, SEO metadata, FAQ schema and AI prompt building.</p>
+        <p class="hx-tech" aria-label="Technologies: GoHighLevel, n8n, Zapier, Pabbly, APIs and AI">GoHighLevel · n8n · Zapier · Pabbly · APIs · AI</p>
         <div class="hero-cta">
-          <a class="btn primary" href="#how-i-solve-it">See How I Solve It</a>
-          <a class="btn secondary" href="#book">Book a 20-Minute Call</a>
+          <a class="btn primary" href="#how-i-solve-it" data-hero-cta="explore_solutions">Explore Solutions</a>
+          <a class="btn secondary hx-tools-btn" href="tools/" data-ft-loc="hero_cta">Try Free Tools</a>
           <button class="btn watch-intro" id="watchIntroBtn" aria-label="Scroll to and play the introduction video">
             <span class="play-icon">
               <svg viewBox="0 0 10 12" xmlns="http://www.w3.org/2000/svg"><polygon points="0,0 10,6 0,12"/></svg>
@@ -2539,31 +2570,29 @@ body { font-synthesis: none; }
             Watch My Intro
           </button>
         </div>
-        <p class="cta-trust">Hiring teams: <a class="intro-resume-link" href="hire-me/">Review my technical experience</a> · <a class="intro-resume-link" href="mailto:velonieb@gmail.com?subject=Resume%20Request">Request Resume</a></p>
-        <div class="client-strip" aria-label="Businesses running systems I built">
-          <span class="client-strip-label">Selected project work</span>
-          <span>Scott Kiere</span><span>Build Human</span><span>Sarah DeVido Health</span><span>HHP Pelvic Health</span><span>Alain Martinez Studio</span><span>Kensing LoHi</span><span>Confidential Client</span><span>PipelinePilot</span>
-        </div>
+        <p class="cta-trust hx-book">Need a system built or improved? <a class="intro-resume-link" href="#book">Book a 20-Minute Call <span aria-hidden="true">→</span></a></p>
       </div>
 
-      <aside class="hero-card fade-in" style="transition-delay:0.15s" aria-label="Portfolio snapshot">
+      <aside class="hero-card hx-card fade-in" style="transition-delay:0.15s" aria-label="Automation overview and contact options">
         <div class="hero-card-visual">
           <div class="hcv-header">
             <span class="hcv-badge">
               <span class="hcv-dot"></span>
-              Available for work
+              From inquiry to booking
             </span>
-            <span class="hcv-role-tag">GHL Specialist</span>
+            <span class="hcv-role-tag">30-sec overview</span>
           </div>
-          <div class="hcv-reel">
+          <div class="hcv-reel hx-reel">
             <video id="heroReel" autoplay muted loop playsinline preload="metadata"
                    poster="assets/velonie-hero-vertical-poster.jpg" width="720" height="1280"
-                   aria-label="30-second animation: common lead and workflow problems, then a connected CRM workflow that captures, qualifies, follows up, books and notifies the team">
+                   aria-describedby="heroReelText"
+                   aria-label="30-second animation of a connected CRM workflow">
               <source src="assets/velonie-hero-vertical-30s-web.mp4" type="video/mp4">
               <source src="assets/velonie-hero-vertical-30s-web.webm" type="video/webm">
             </video>
             <button type="button" class="sound-btn" id="heroSound" aria-pressed="false">&#128264; Tap for sound</button>
           </div>
+          <p class="hx-sr" id="heroReelText">The animation shows common lead and workflow problems, such as missed inquiries, booking issues and broken automations, then a connected CRM workflow that captures each lead, qualifies it, follows up, books the appointment and notifies the team.</p>
         </div>
         <div class="hero-card-body">
           <div class="hero-card-label">Let's build your system</div>
@@ -2575,6 +2604,7 @@ body { font-synthesis: none; }
       </aside>
     </div>
   </section>
+  <!-- END HERO V2 -->
 
   <!-- BEGIN FREE TOOLS STRIP -->
   <a class="ft-strip" id="freeToolsStrip" href="tools/" aria-label="Free tools: Invoice Generator, Automation ROI Calculator, SMS Cost Calculator, SEO Meta Tag Generator, FAQ Schema Generator and AI Prompt Builder. Open the Free Tools page.">
@@ -4491,13 +4521,20 @@ body { font-synthesis: none; }
   });
 })();
 </script>
-<!-- GA4: clicks on the homepage Free Tools strip -->
+<!-- GA4: navigation clicks toward Free Tools and the hero CTA. These are interest signals, not leads. -->
 <script>
 (function () {
-  const strip = document.getElementById('freeToolsStrip');
-  if (!strip) return;
-  strip.addEventListener('click', function () {
-    if (typeof window.gtag === 'function') window.gtag('event', 'free_tools_click', { link_location: 'homepage_strip', source_page: window.location.pathname });
+  const send = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, Object.assign({ source_page: window.location.pathname }, params)); };
+  document.addEventListener('click', function (event) {
+    const tools = event.target.closest('#freeToolsStrip, [data-ft-loc]');
+    if (tools) {
+      const params = { link_location: tools.id === 'freeToolsStrip' ? 'homepage_strip' : tools.dataset.ftLoc };
+      if (tools.dataset.ftTool) params.tool_id = tools.dataset.ftTool;
+      send('free_tools_click', params);
+      return;
+    }
+    const cta = event.target.closest('[data-hero-cta]');
+    if (cta) send('hero_cta_click', { cta_name: cta.dataset.heroCta });
   });
 })();
 </script>
