@@ -6,6 +6,46 @@ const pct = (value) => Math.min(pos(value), 100) / 100;
 const blank = (value) => String(value ?? '').trim() === '';
 
 /**
+ * Common tasks with a starting estimate of how much of each a workflow can take over.
+ * These are judgement-based starting points, not measured statistics:
+ *   90 = rule-based from start to finish (a trigger, then fixed steps)
+ *   80 = rule-based, with a person handling the exceptions
+ *   70 = mostly rule-based, but someone reviews or approves the result
+ *   60 = the routine parts automate; the writing or decisions stay with a person
+ *   50 = automation handles the common cases only
+ */
+export const TASK_PRESETS = [
+  { group: 'Leads and sales', tasks: [
+    ['Following up new leads', 80],
+    ['Entering lead details into the CRM', 90],
+    ['Moving deals and creating follow-up tasks', 80],
+    ['Asking qualifying questions before a call', 60],
+    ['Preparing quotes or proposals from a template', 60]
+  ] },
+  { group: 'Scheduling', tasks: [
+    ['Booking and rescheduling appointments', 80],
+    ['Sending appointment reminders', 90],
+    ['Following up missed appointments', 80]
+  ] },
+  { group: 'Customer communication', tasks: [
+    ['Answering common customer questions', 50],
+    ['Sending onboarding emails and forms', 80],
+    ['Requesting reviews and feedback', 90],
+    ['Chasing documents or missing information', 70]
+  ] },
+  { group: 'Admin and data', tasks: [
+    ['Copying data between tools', 90],
+    ['Building weekly or monthly reports', 70],
+    ['Creating invoices and payment reminders', 70],
+    ['Updating spreadsheets from forms or emails', 80]
+  ] },
+  { group: 'Marketing', tasks: [
+    ['Sending email nurture sequences', 60],
+    ['Scheduling social media posts', 60]
+  ] }
+];
+
+/**
  * hours saved per year = sum of (hours per week x people x share that can be automated) x working weeks
  * labour value         = hours saved x hourly cost
  * recovered revenue    = missed leads per month x share recoverable x close rate x average sale x 12
@@ -108,12 +148,13 @@ function init() {
         const control = el('input');
         control.type = type;
         control.value = task[key];
+        control.dataset.key = key;
         Object.entries(attrs).forEach(([k, v]) => control.setAttribute(k, v));
         control.addEventListener('input', () => { tasks[index][key] = control.value; render(); });
         wrap.append(el('span', '', label), control);
         return { wrap, control };
       };
-      const name = field('name', `Task ${n}`, 'text', { placeholder: 'e.g. Following up new leads', autocomplete: 'off' });
+      const name = field('name', `Task ${n} name`, 'text', { placeholder: 'Pick a suggestion above or type your own', autocomplete: 'off' });
       const hoursField = field('hours', 'Hours per week', 'number', { min: '0', step: 'any', inputmode: 'decimal' });
       const people = field('people', 'People', 'number', { min: '0', step: '1', inputmode: 'numeric' });
       const share = field('automatable', '% automatable', 'number', { min: '0', max: '100', step: '1', inputmode: 'numeric' });
@@ -126,8 +167,31 @@ function init() {
         renderTasks(Math.min(index, tasks.length - 1));
       });
       name.wrap.classList.add('wide');
+      // Suggestions fill the task name and a starting percentage. Both stay editable.
+      const pickWrap = el('label', 'mini wide');
+      const pick = el('select');
+      pick.dataset.key = 'preset';
+      pick.appendChild(Object.assign(el('option', '', 'Choose a common task…'), { value: '' }));
+      TASK_PRESETS.forEach(({ group, tasks: options }) => {
+        const optgroup = el('optgroup');
+        optgroup.label = group;
+        options.forEach(([label, percent]) => optgroup.appendChild(Object.assign(el('option', '', `${label} (about ${percent}%)`), { value: label })));
+        pick.appendChild(optgroup);
+      });
+      pick.addEventListener('change', () => {
+        const found = TASK_PRESETS.flatMap((g) => g.tasks).find(([label]) => label === pick.value);
+        if (!found) return;
+        tasks[index].name = found[0];
+        tasks[index].automatable = String(found[1]);
+        name.control.value = found[0];
+        share.control.value = String(found[1]);
+        pick.value = '';
+        render();
+        hoursField.control.focus();
+      });
+      pickWrap.append(el('span', '', `Suggestions for task ${n}`), pick);
       const row = el('li', 'task-row');
-      row.append(name.wrap, hoursField.wrap, people.wrap, share.wrap, remove);
+      row.append(pickWrap, name.wrap, hoursField.wrap, people.wrap, share.wrap, remove);
       list.appendChild(row);
       if (focusIndex === index) name.control.focus();
     });

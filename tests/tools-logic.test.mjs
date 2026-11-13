@@ -378,3 +378,13 @@ test('SMS: campaign cost, merge fields and line endings', () => {
   const a = analyzeSms('Hello');
   assert.ok(buildSmsReport('Hello', a, campaignCost(1, '10', '0.02'), 'USD').includes('Estimated cost: USD 0.20'));
 });
+
+test('ROI: task suggestions are well formed', async () => {
+  const { TASK_PRESETS } = await import('../assets/tools/js/roi-calculator.js');
+  const all = TASK_PRESETS.flatMap((g) => g.tasks);
+  assert.ok(TASK_PRESETS.length >= 4 && all.length >= 15);
+  assert.equal(new Set(all.map(([label]) => label)).size, all.length, 'labels are unique');
+  for (const [label, percent] of all) {
+    assert.ok(label.length > 5 && [50, 60, 70, 80, 90].includes(percent), label);
+  }
+});
