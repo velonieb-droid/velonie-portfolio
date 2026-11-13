@@ -56,7 +56,8 @@ If the calendar embed is blocked or unavailable, the user can still contact via 
 - Recheck client links regularly; external projects can move or become temporarily unavailable.
 - Featured case studies distinguish findings from completed work, and proposals from launched campaigns.
 - The homepage and recruiter page share GA4 property `G-WBC8SXEGR3`; verify event flow in GA4 separately.
-- The site social preview image uses `assets/automation-portfolio-hero.png`, since `assets/og-card.png` is not present.
+- Social preview image: `assets/automation-portfolio-hero-og.jpg` (1200 px, compressed derivative of `assets/automation-portfolio-hero.png`, which is kept). The header logo uses `assets/vab-logo-144.webp`, a small derivative of `assets/vab-logo.png` (kept as the favicon).
+- SEO naming: titles on the homepage and service pages use the brand "Velonie Automation"; the person entity, author and profile pages use "Velonie Baluarte". Every page refers to the same JSON-LD Person, `https://velonieautomation.com/#person`, with country PH and services offered to the United States.
 - Update homepage title, description and structured data when professional positioning changes.
 - Adjust sitemap last-modified entries **only for pages actually changed**.
 
