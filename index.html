@@ -2349,6 +2349,52 @@ body { font-synthesis: none; }
     transform: none !important;
   }
 }
+/* BEGIN FREE TOOLS STRIP */
+.ft-strip {
+  display: flex; align-items: center; gap: 16px;
+  width: min(1160px, calc(100% - 40px)); margin: 0 auto;
+  padding: 12px 16px;
+  border: 1px solid rgba(31, 228, 122, 0.28); border-radius: 14px;
+  background: linear-gradient(90deg, rgba(31, 228, 122, 0.10), rgba(61, 217, 240, 0.06));
+  color: var(--ink); overflow: hidden;
+  transition: border-color 0.2s, background 0.2s;
+}
+.ft-strip:hover, .ft-strip:focus-visible { border-color: rgba(31, 228, 122, 0.65); background: linear-gradient(90deg, rgba(31, 228, 122, 0.16), rgba(61, 217, 240, 0.10)); }
+.ft-strip:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+.ft-badge {
+  flex: none; padding: 6px 12px; border-radius: 999px;
+  background: var(--green); color: #031809;
+  font: 800 12px "Outfit", sans-serif; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+}
+.ft-viewport {
+  flex: 1; min-width: 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.ft-track { display: flex; width: max-content; animation: ft-scroll 36s linear infinite; }
+.ft-strip:hover .ft-track, .ft-strip:focus-visible .ft-track { animation-play-state: paused; }
+.ft-set { display: flex; flex: none; }
+.ft-chip {
+  display: inline-flex; align-items: center; gap: 9px; margin-right: 28px;
+  font: 600 14px "Inter", sans-serif; color: var(--ink); white-space: nowrap;
+}
+.ft-chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
+.ft-cta { flex: none; font: 700 13px "Inter", sans-serif; color: var(--green); white-space: nowrap; }
+.ft-strip:hover .ft-arrow { display: inline-block; transform: translateX(3px); }
+.ft-arrow { display: inline-block; transition: transform 0.2s; }
+@keyframes ft-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (max-width: 640px) {
+  .ft-strip { width: calc(100% - 32px); gap: 10px; padding: 10px 12px; }
+  .ft-badge { font-size: 11px; padding: 5px 10px; }
+  .ft-chip { font-size: 13px; margin-right: 22px; }
+  .ft-cta { font-size: 0; }
+  .ft-cta .ft-arrow { font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ft-track { animation: none; }
+  .ft-set + .ft-set { display: none; }
+}
+/* END FREE TOOLS STRIP */
 /* BEGIN HOW I SOLVE IT */
 .his { padding: 64px 0 56px; } /* sticky-header offset comes from the page's existing html { scroll-padding-top: 88px } */
 .his-head { max-width: 760px; margin-bottom: 28px; }
@@ -2529,6 +2575,19 @@ body { font-synthesis: none; }
       </aside>
     </div>
   </section>
+
+  <!-- BEGIN FREE TOOLS STRIP -->
+  <a class="ft-strip" id="freeToolsStrip" href="tools/" aria-label="Free tools: Invoice Generator, Automation ROI Calculator, SMS Cost Calculator, SEO Meta Tag Generator, FAQ Schema Generator and AI Prompt Builder. Open the Free Tools page.">
+    <span class="ft-badge">Free Tools</span>
+    <span class="ft-viewport" aria-hidden="true">
+      <span class="ft-track">
+        <span class="ft-set"><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span></span>
+        <span class="ft-set"><span class="ft-chip">Invoice Generator</span><span class="ft-chip">Automation ROI Calculator</span><span class="ft-chip">SMS Cost Calculator</span><span class="ft-chip">SEO Meta Tag Generator</span><span class="ft-chip">FAQ Schema Generator</span><span class="ft-chip">AI Prompt Builder</span></span>
+      </span>
+    </span>
+    <span class="ft-cta" aria-hidden="true">Try them free <span class="ft-arrow">→</span></span>
+  </a>
+  <!-- END FREE TOOLS STRIP -->
 
   <!-- BEGIN HOW I SOLVE IT -->
   <section class="wrap his" id="how-i-solve-it" aria-labelledby="his-title">
@@ -4429,6 +4488,16 @@ body { font-synthesis: none; }
         link_label: label
       });
     }
+  });
+})();
+</script>
+<!-- GA4: clicks on the homepage Free Tools strip -->
+<script>
+(function () {
+  const strip = document.getElementById('freeToolsStrip');
+  if (!strip) return;
+  strip.addEventListener('click', function () {
+    if (typeof window.gtag === 'function') window.gtag('event', 'free_tools_click', { link_location: 'homepage_strip', source_page: window.location.pathname });
   });
 })();
 </script>
