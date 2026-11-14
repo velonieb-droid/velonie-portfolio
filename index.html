@@ -2669,7 +2669,7 @@ body { font-synthesis: none; }
             <span class="hcv-role-tag">30-sec overview</span>
           </div>
           <div class="hcv-reel hx-reel">
-            <video id="heroReel" autoplay muted loop playsinline preload="metadata"
+            <video id="heroReel" muted loop playsinline preload="none"
                    poster="assets/velonie-hero-vertical-poster.jpg" width="720" height="1280"
                    aria-describedby="heroReelText"
                    aria-label="30-second animation of a connected CRM workflow">
@@ -2961,7 +2961,7 @@ body { font-synthesis: none; }
         id="introVideo"
         controls
         playsinline
-        preload="metadata"
+        preload="none"
         poster="assets/velonie-intro-poster.jpg"
         aria-label="Velonie Baluarte introduction video"
       >
@@ -4292,7 +4292,8 @@ body { font-synthesis: none; }
   let nodes = [], edges = [], packets = [];
   let scrollY = window.scrollY, lastScrollY = scrollY, scrollVel = 0;
   let mouse = { x: -9999, y: -9999, active: false };
-  let running = false, lastT = 0, packetClock = 0;
+  let running = false, frameId = 0, lastT = null, packetClock = 0;
+  let maxScroll = 1;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
 
   const GREEN = [31, 228, 122], CYAN = [61, 217, 240];
@@ -4345,14 +4346,17 @@ body { font-synthesis: none; }
 
   function frame(t) {
     if (!running) return;
-    const dt = Math.min(48, t - lastT || 16) / 16.67;   // in "frames"
+    frameId = requestAnimationFrame(frame);
+    // Draw at up to 30 fps. Keep movement proportional to elapsed time.
+    const elapsed = lastT === null ? 16.67 : t - lastT;
+    if (lastT !== null && elapsed < 32) return;
+    const dt = Math.min(48, elapsed) / 16.67;
     lastT = t;
 
     // scroll velocity (decays)
     scrollVel = lerp(scrollVel, Math.abs(scrollY - lastScrollY), 0.4);
     lastScrollY = scrollY;
 
-    const maxScroll = Math.max(1, root.scrollHeight - H);
     const hueT = Math.min(1, scrollY / maxScroll);      // green at top → cyan at bottom
     const rgb = mixRGB(hueT);
     const link = LINK();
@@ -4441,19 +4445,31 @@ body { font-synthesis: none; }
       ctx.fillStyle = `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0.25)`; ctx.fill();
     }
     if (packets.length > 60) packets.length = 60;
-
-    requestAnimationFrame(frame);
   }
 
-  function start() { if (running) return; running = true; lastT = 0; requestAnimationFrame(frame); }
-  function stop() { running = false; }
+  function start() {
+    if (running || document.hidden) return;
+    running = true;
+    lastT = null;
+    frameId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    cancelAnimationFrame(frameId);
+  }
 
   if (canvas && ctx && !reduceMotion) {
-    sizeCanvas();
-    canvas.classList.add('ready');
-    start();
-    window.addEventListener('resize', debounce(sizeCanvas, 150));
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    const initCanvas = () => {
+      sizeCanvas();
+      canvas.classList.add('ready');
+      start();
+      window.addEventListener('resize', debounce(sizeCanvas, 150));
+      document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    };
+    window.addEventListener('load', () => {
+      if ('requestIdleCallback' in window) window.requestIdleCallback(initCanvas, { timeout: 1000 });
+      else setTimeout(initCanvas, 0);
+    }, { once: true });
     if (finePointer) {
       window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }, { passive: true });
       window.addEventListener('mouseleave', () => { mouse.active = false; });
@@ -4469,7 +4485,7 @@ body { font-synthesis: none; }
     requestAnimationFrame(() => {
       ticking = false;
       const viewportHeight = Math.max(1, window.innerHeight);
-      const maxScroll = Math.max(1, root.scrollHeight - viewportHeight);
+      maxScroll = Math.max(1, root.scrollHeight - viewportHeight);
       root.style.setProperty('--sy', scrollY);
       root.style.setProperty('--progress', Math.min(1, scrollY / maxScroll).toFixed(4));
       if (topbar) topbar.classList.toggle('scrolled', scrollY > 24);
@@ -4542,10 +4558,19 @@ body { font-synthesis: none; }
   const r = document.getElementById('heroReel');
   if (!r) return;
   const b = document.getElementById('heroSound');
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.removeAttribute('autoplay'); r.pause(); r.controls = true; if (b) b.hidden = true; return; }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { r.controls = true; if (b) b.hidden = true; return; }
   let userPaused = false;
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (!userPaused) r.play().catch(() => { r.controls = true; }); } else r.pause(); }, { threshold: 0.2 }).observe(r);
+    let inView = false;
+    const playWhenVisible = () => {
+      if (inView && !userPaused && r.paused) r.play().catch(() => { r.controls = true; });
+    };
+    window.addEventListener('load', playWhenVisible, { once: true });
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting && entry.intersectionRatio >= 0.2;
+      if (!inView) r.pause();
+      else if (document.readyState === 'complete') playWhenVisible();
+    }, { threshold: 0.2 }).observe(r);
   }
   let heard = false;
   const setLabel = () => { const on = !r.muted; if (b) { b.setAttribute('aria-pressed', on); b.innerHTML = on ? '&#128266; Sound on' : '&#128264; Tap for sound'; } };
