@@ -1560,7 +1560,7 @@ h2 {
   font-family: "Outfit", sans-serif;
   font-size: 38px;
   font-weight: 900;
-  color: rgba(31, 228, 122, 0.18);
+  color: var(--green);
   line-height: 1;
   margin-bottom: 14px;
 }
@@ -1841,21 +1841,33 @@ h2 {
 
 .works-dots {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 4px;
   align-items: center;
 }
 
 .works-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: var(--soft);
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
   border: none;
   cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
   padding: 0;
 }
 
-.works-dot.active {
+.works-dot::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--soft);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.works-dot.active::before {
   background: var(--green);
   transform: scale(1.35);
 }
@@ -3954,7 +3966,7 @@ body { font-synthesis: none; }
           <span class="book-proof-txt">missed-call rate uncovered in a credit-repair client's account on a "simple cleanup" request: surfaced in the first review. <a href="case-study-systems-audit.html">Read the case study →</a></span>
         </div>
       </div>
-      <div id="book-cal" class="book-cal" aria-label="Booking calendar"></div>
+      <div id="book-cal" class="book-cal" role="region" aria-label="Booking calendar"></div>
       <div id="book-fallback" class="book-fallback">
         <p>Prefer email? Send me a note and I'll reply within one business day with available times.</p>
         <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Systems%20Call%20Request">Email Me for Times</a>
@@ -3997,7 +4009,7 @@ body { font-synthesis: none; }
 </footer>
 
 <!-- Sticky mobile CTA (appears after hero, hides while the booking section is on screen) -->
-<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+<div class="sticky-cta" id="stickyCta" inert>
   <span class="sticky-cta-txt">Losing leads to slow follow-up?</span>
   <a class="btn primary" href="#book">Book a free call</a>
 </div>
@@ -4569,7 +4581,7 @@ body { font-synthesis: none; }
   const update = () => {
     const show = pastHero && !onBook && !onContact;
     bar.classList.toggle('show', show);
-    bar.setAttribute('aria-hidden', String(!show));
+    bar.inert = !show;
   };
   new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting && e.boundingClientRect.bottom < 0; update(); }, { threshold: 0 }).observe(hero);
   if (book) new IntersectionObserver(([e]) => { onBook = e.isIntersecting; update(); }, { threshold: 0.15 }).observe(book);
