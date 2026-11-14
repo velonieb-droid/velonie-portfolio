@@ -4572,6 +4572,7 @@ body { font-synthesis: none; }
 <!-- GA4 portfolio intent events: clicks only, not confirmed leads or bookings -->
 <script>
 (function () {
+  let lastResumeRequest = 0;
   document.addEventListener('click', function (event) {
     const link = event.target.closest('a[href]');
     if (!link || typeof window.gtag !== 'function') return;
@@ -4582,7 +4583,15 @@ body { font-synthesis: none; }
     let eventName = '';
     let channel = '';
 
-    if (/^mailto:/i.test(href)) {
+    if (/^mailto:/i.test(href) && /[?&]subject=Resume(%20|\+| )Request/i.test(href)) {
+      // Resume requests get their own event instead of a general email contact_click.
+      // Repeat clicks within 1 second (for example a double-click) are not counted again.
+      const now = Date.now();
+      if (now - lastResumeRequest < 1000) return;
+      lastResumeRequest = now;
+      eventName = 'resume_request_click';
+      channel = 'resume';
+    } else if (/^mailto:/i.test(href)) {
       eventName = 'contact_click';
       channel = 'email';
     } else if (/^(https?:\/\/)?(wa\.me|api\.whatsapp\.com)\//i.test(href)) {
@@ -4591,9 +4600,6 @@ body { font-synthesis: none; }
     } else if (href === '#book' || href === '../#book' || /cal\.com\//i.test(href)) {
       eventName = 'booking_intent';
       channel = 'booking';
-    } else if (/drive\.google\.com\/file\//i.test(href) && /resume|cv/i.test(label)) {
-      eventName = 'resume_view_click';
-      channel = 'resume';
     } else if (/^(?:\.\.\/)?(?:go-highlevel-automation-specialist|ghl-crm-setup|ghl-workflow-automation|n8n-go-highlevel-integration|ghl-systems-audit)\/?(?:index\.html)?$/i.test(href)) {
       eventName = 'service_interest_click';
       channel = 'service_page';

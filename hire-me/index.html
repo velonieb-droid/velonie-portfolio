@@ -173,5 +173,25 @@ footer{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;paddin
   </section>
 </main>
 <footer class="wrap"><span>© 2026 Velonie Baluarte · CRM, AI Automation &amp; Integrations</span><span><a href="../">Portfolio</a> · <a href="https://github.com/velonieb-droid" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="mailto:velonieb@gmail.com">Email</a></span></footer>
+<!-- GA4: resume request clicks. Uses the existing gtag; one event per click, repeats within 1 second ignored. -->
+<script>
+(function () {
+  let lastResumeRequest = 0;
+  document.addEventListener('click', function (event) {
+    const link = event.target.closest('a[href^="mailto:"]');
+    if (!link || typeof window.gtag !== 'function') return;
+    const href = link.getAttribute('href') || '';
+    if (!/[?&]subject=Resume(%20|\+| )Request/i.test(href)) return;
+    const now = Date.now();
+    if (now - lastResumeRequest < 1000) return;
+    lastResumeRequest = now;
+    window.gtag('event', 'resume_request_click', {
+      interaction_channel: 'resume',
+      source_page: window.location.pathname,
+      link_label: (link.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80)
+    });
+  });
+})();
+</script>
 </body>
 </html>

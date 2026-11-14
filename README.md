@@ -20,7 +20,7 @@ Static GitHub Pages site, no build system required.
 - `assets/`: branding, project images and social sharing image
 - `case-study-*.html`: technical case studies, including a confidential-engagement Google Ads research and conversion QA study
 - `go-highlevel-automation-specialist/`, `ghl-*/`, `n8n-go-highlevel-integration/`: service-specific landing pages
-- Resume buttons link to the current photo resume stored in Google Drive
+- Resume buttons are "Request Resume" email links (`mailto:...?subject=Resume%20Request`); there is no public resume file
 - `tools/`: Free Tools directory and three browser-based tools (see "Free Tools" below)
 - `assets/tools/`: shared stylesheet and JavaScript modules for the tools
 - `tests/tools-logic.test.mjs`: logic tests for the tools
@@ -56,6 +56,7 @@ If the calendar embed is blocked or unavailable, the user can still contact via 
 - Recheck client links regularly; external projects can move or become temporarily unavailable.
 - Featured case studies distinguish findings from completed work, and proposals from launched campaigns.
 - The homepage and recruiter page share GA4 property `G-WBC8SXEGR3`; verify event flow in GA4 separately.
+- GA4 `resume_request_click` (parameters `interaction_channel: resume`, `source_page`, `link_label`) fires once per click on a Request Resume email link, on the homepage, service pages, case studies and `hire-me/`. Repeat clicks within 1 second are ignored. It replaced `resume_view_click`, which tracked a Google Drive resume link that no longer exists. Resume clicks are no longer counted as `contact_click`.
 - Social preview image: `assets/automation-portfolio-hero-og.jpg` (1200 px, compressed derivative of `assets/automation-portfolio-hero.png`, which is kept). The header logo uses `assets/vab-logo-144.webp`, a small derivative of `assets/vab-logo.png` (kept as the favicon).
 - SEO naming: titles on the homepage and service pages use the brand "Velonie Automation"; the person entity, author and profile pages use "Velonie Baluarte". Every page refers to the same JSON-LD Person, `https://velonieautomation.com/#person`, with country PH and services offered to the United States.
 - Update homepage title, description and structured data when professional positioning changes.
