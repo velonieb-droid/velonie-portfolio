@@ -90,10 +90,6 @@ h1 em { font-style: normal; background: linear-gradient(135deg, var(--green), va
 .hero-video-wrap { width: 100%; }
 .hero-video { position: relative; width: 100%; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--bg); border: 1px solid rgba(31, 228, 122, 0.28); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 50px rgba(31, 228, 122, 0.1); }
 .hero-video video { display: block; width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
-.sound-btn { position: absolute; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 999px; border: 1px solid rgba(31, 228, 122, 0.35); background: rgba(6, 14, 10, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: var(--ink); font: 600 12px "Inter", sans-serif; cursor: pointer; transition: border-color .15s, background .15s; }
-.sound-btn:hover { border-color: var(--green); }
-.sound-btn[aria-pressed="true"] { background: rgba(31, 228, 122, 0.16); border-color: var(--green); }
-.sound-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 .video-cap { margin-top: 12px; font-size: 12.5px; color: var(--muted); text-align: center; }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
@@ -215,7 +211,10 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
       "datePublished": "2026-07-03",
       "dateModified": "2026-11-14",
       "mainEntityOfPage": "https://velonieautomation.com/case-study-automation-build.html",
-      "image": "https://velonieautomation.com/assets/automation-portfolio-hero-og.jpg",
+      "image": [
+        "https://velonieautomation.com/assets/n8n-canvas-view.webp",
+        "https://velonieautomation.com/assets/velonie-automation-build-poster.webp"
+      ],
       "video": {
         "@id": "https://velonieautomation.com/case-study-automation-build.html#video"
       }
@@ -241,7 +240,7 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
 <div class="topbar">
   <div class="wrap topbar-inner">
     <div class="brand">Velonie Baluarte</div>
-    <a class="back-link" href="index.html">&larr; Back to portfolio</a>
+    <a class="back-link" href="/">&larr; Back to portfolio</a>
   </div>
 </div>
 
@@ -262,12 +261,11 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
 
     <div class="hero-video-wrap">
       <div class="hero-video">
-        <video id="buildVideo" autoplay muted loop playsinline preload="metadata"
+        <video id="buildVideo" controls playsinline preload="metadata"
                poster="assets/velonie-automation-build-poster.webp" width="720" height="1280"
                aria-label="30-second walkthrough of this build: the five-stage donor model, the Facebook auto-poster pipeline, screenshots and what shipped">
           <source src="assets/velonie-automation-build-30s-web.mp4" type="video/mp4">
         </video>
-        <button type="button" class="sound-btn" id="buildSound" aria-pressed="false">&#128264; Tap for sound</button>
       </div>
       <p class="video-cap">30-second walkthrough of this build</p>
     </div>
@@ -463,7 +461,7 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
       <div class="contact-actions">
         <a class="btn primary" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry">Email Me</a>
         <a class="btn secondary" href="case-study-systems-audit.html">Next case study: Systems Audit →</a>
-        <a class="btn ghost" href="index.html">View more work</a>
+        <a class="btn ghost" href="/">View more work</a>
       </div>
     </div>
   </div>
@@ -478,22 +476,6 @@ body>section{background:linear-gradient(180deg,rgba(6,14,10,.72),rgba(7,18,12,.6
   </div>
 </footer>
 
-<script id="build-video-script">
-(function(){
-  const v=document.getElementById('buildVideo'), b=document.getElementById('buildSound');
-  if(!v||!b)return;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
-  let heard=false;
-  function setLabel(){const on=!v.muted;b.setAttribute('aria-pressed',on);b.innerHTML=on?'&#128266; Sound on':'&#128264; Tap for sound';}
-  b.addEventListener('click',function(){
-    v.muted=!v.muted;
-    if(!v.muted&&!heard){heard=true;v.currentTime=0;}
-    if(v.paused)v.play().catch(function(){});
-    setLabel();
-  });
-  v.addEventListener('click',function(){if(v.paused)v.play().catch(function(){});else v.pause();});
-})();
-</script>
 
 <script id="shared-motion-script">
 (function(){
