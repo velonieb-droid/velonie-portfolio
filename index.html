@@ -2659,7 +2659,7 @@ body { font-synthesis: none; }
         <p class="cta-trust hx-book">Need a system built or improved? <a class="intro-resume-link" href="#book">Book a 20-Minute Call <span aria-hidden="true">→</span></a></p>
       </div>
 
-      <aside class="hero-card hx-card fade-in" style="transition-delay:0.15s" aria-label="Automation overview and contact options">
+      <aside class="hero-card hx-card" aria-label="Automation overview and contact options">
         <div class="hero-card-visual">
           <div class="hcv-header">
             <span class="hcv-badge">
@@ -4057,7 +4057,7 @@ body { font-synthesis: none; }
     function goTo(index) {
       const max = positions() - 1;
       current = Math.max(0, Math.min(index, max));
-      track.style.transform = `translateX(-${current * slideWidth()}px)`;
+      track.style.transform = current ? `translateX(-${current * slideWidth()}px)` : "";
       prevBtn.disabled = current === 0;
       nextBtn.disabled = current >= max;
       dotsWrap.querySelectorAll('.works-dot').forEach((d, i) => d.classList.toggle('active', i === current));
@@ -4067,8 +4067,8 @@ body { font-synthesis: none; }
     nextBtn.addEventListener('click', () => goTo(current + 1));
     window.addEventListener('resize', debounce(() => {
       current = Math.min(current, positions() - 1);
-      buildDots();
       goTo(current);
+      buildDots();
     }, 120));
 
     // Drag or swipe: suppress accidental link clicks after a real drag
@@ -4194,8 +4194,7 @@ body { font-synthesis: none; }
   })();
 
   // ── CAL.COM INLINE BOOKING ──
-  (function() {
-    if (!CAL_LINK) return; // fallback block stays visible until configured
+  function initBooking() {
     (function (C, A, L) {
       let p = function (a, ar) { a.q.push(ar); };
       let d = C.document;
@@ -4270,6 +4269,35 @@ body { font-synthesis: none; }
       }
     }
     if (fb) fb.querySelector('p').textContent = "If the calendar is unavailable, email me and I'll send available times.";
+  }
+
+  (function() {
+    const bookingSection = document.getElementById('book');
+    if (!CAL_LINK || !bookingSection) return;
+
+    let started = false;
+    const nearBooking = 'IntersectionObserver' in window
+      ? new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) startBooking();
+        }, { rootMargin: '400px' })
+      : null;
+
+    function startBooking() {
+      if (started) return;
+      started = true;
+      if (nearBooking) nearBooking.disconnect();
+      initBooking();
+    }
+
+    // Respond to booking intent even while a smooth scroll is in progress.
+    document.addEventListener('click', event => {
+      if (event.target.closest('a[href="#book"]')) startBooking();
+    });
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === '#book') startBooking();
+    });
+    if (window.location.hash === '#book' || !nearBooking) startBooking();
+    else nearBooking.observe(bookingSection);
   })();
 </script>
 
