@@ -2961,7 +2961,7 @@ body { font-synthesis: none; }
         id="introVideo"
         controls
         playsinline
-        preload="none"
+        preload="metadata"
         poster="assets/velonie-intro-poster.jpg"
         aria-label="Velonie Baluarte introduction video"
       >
@@ -4565,11 +4565,10 @@ body { font-synthesis: none; }
     const playWhenVisible = () => {
       if (inView && !userPaused && r.paused) r.play().catch(() => { r.controls = true; });
     };
-    window.addEventListener('load', playWhenVisible, { once: true });
     new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting && entry.intersectionRatio >= 0.2;
       if (!inView) r.pause();
-      else if (document.readyState === 'complete') playWhenVisible();
+      else playWhenVisible();
     }, { threshold: 0.2 }).observe(r);
   }
   let heard = false;
