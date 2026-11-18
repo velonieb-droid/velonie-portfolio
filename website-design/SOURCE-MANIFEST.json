@@ -1,0 +1,187 @@
+{
+  "collection": "Velonie Automation - Latest ProFlow 20 Niche Websites",
+  "version": "corrected-latest-source-build",
+  "master_template": "ProFlow Plumbing",
+  "niches": [
+    {
+      "number": "1",
+      "slug": "plumbing",
+      "business": "ProFlow Plumbing",
+      "niche": "Plumbing",
+      "source_html": "ProFlow-Plumbing-Sticky-Header.html",
+      "html_path": "websites/plumbing/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "2",
+      "slug": "hvac",
+      "business": "Northstar Comfort",
+      "niche": "HVAC",
+      "source_html": "Northstar-Comfort-HVAC-Preview.html",
+      "html_path": "websites/hvac/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "3",
+      "slug": "roofing",
+      "business": "Summit Ridge Roofing",
+      "niche": "Roofing",
+      "source_html": "Summit-Ridge-Roofing-Preview.html",
+      "html_path": "websites/roofing/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "4",
+      "slug": "electrical",
+      "business": "Volt & Valley Electric",
+      "niche": "Electrical",
+      "source_html": "Volt-Valley-Electric-Preview.html",
+      "html_path": "websites/electrical/index.html",
+      "assets_path": "websites/electrical/assets/"
+    },
+    {
+      "number": "5",
+      "slug": "landscaping",
+      "business": "Evergreen Outdoor Co.",
+      "niche": "Landscaping",
+      "source_html": "Evergreen-Outdoor-Preview.html",
+      "html_path": "websites/landscaping/index.html",
+      "assets_path": "websites/landscaping/assets/"
+    },
+    {
+      "number": "6",
+      "slug": "cleaning",
+      "business": "FreshNest Cleaning Co.",
+      "niche": "Home Cleaning",
+      "source_html": "Home-Cleaning-Website-Preview.html",
+      "html_path": "websites/cleaning/index.html",
+      "assets_path": "websites/cleaning/assets/"
+    },
+    {
+      "number": "7",
+      "slug": "pest-control",
+      "business": "ClearShield Pest Control",
+      "niche": "Pest Control",
+      "source_html": "Pest-Control-Website-Preview.html",
+      "html_path": "websites/pest-control/index.html",
+      "assets_path": "websites/pest-control/assets/"
+    },
+    {
+      "number": "8",
+      "slug": "dentist",
+      "business": "Brightside Dental Studio",
+      "niche": "Dental Clinic",
+      "source_html": "Dental-Clinic-Website-Preview.html",
+      "html_path": "websites/dentist/index.html",
+      "assets_path": "websites/dentist/assets/"
+    },
+    {
+      "number": "9",
+      "slug": "med-spa",
+      "business": "Stillwater Aesthetics",
+      "niche": "Med Spa",
+      "source_html": "Med-Spa-Website-Preview.html",
+      "html_path": "websites/med-spa/index.html",
+      "assets_path": "websites/med-spa/assets/"
+    },
+    {
+      "number": "10",
+      "slug": "law-firm",
+      "business": "Briar & Stone Legal",
+      "niche": "Law Firm",
+      "source_html": "Law-Firm-Preview-Updated.html",
+      "html_path": "websites/law-firm/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "11",
+      "slug": "real-estate",
+      "business": "Foundry Homes",
+      "niche": "Real Estate",
+      "source_html": "Real-Estate-Preview-Updated.html",
+      "html_path": "websites/real-estate/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "12",
+      "slug": "auto-repair",
+      "business": "Goodline Auto Works",
+      "niche": "Auto Repair",
+      "source_html": "Auto-Repair-Website-Preview.html",
+      "html_path": "websites/auto-repair/index.html",
+      "assets_path": "websites/auto-repair/assets/"
+    },
+    {
+      "number": "13",
+      "slug": "restaurant",
+      "business": "Table & Thyme",
+      "niche": "Restaurant & Café",
+      "source_html": "Restaurant-Cafe-Website-Preview.html",
+      "html_path": "websites/restaurant/index.html",
+      "assets_path": "websites/restaurant/assets/"
+    },
+    {
+      "number": "14",
+      "slug": "salon",
+      "business": "The Modern Chair",
+      "niche": "Salon & Barbershop",
+      "source_html": "Salon-Preview-Updated.html",
+      "html_path": "websites/salon/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "15",
+      "slug": "childcare",
+      "business": "Little Grove Learning",
+      "niche": "Childcare & Preschool",
+      "source_html": "Childcare-Preview-Updated.html",
+      "html_path": "websites/childcare/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "16",
+      "slug": "accounting",
+      "business": "Ledger & Co.",
+      "niche": "Accounting & Tax",
+      "source_html": "Accounting-Preview-Updated.html",
+      "html_path": "websites/accounting/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "17",
+      "slug": "remodeling",
+      "business": "Forma Renovation",
+      "niche": "Home Remodeling",
+      "source_html": "Remodeling-Preview-Updated.html",
+      "html_path": "websites/remodeling/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "18",
+      "slug": "fitness",
+      "business": "Momentum Movement",
+      "niche": "Fitness Studio",
+      "source_html": "Fitness-Preview-Updated.html",
+      "html_path": "websites/fitness/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "19",
+      "slug": "pet-care",
+      "business": "Paw & Whisker Club",
+      "niche": "Pet Care & Grooming",
+      "source_html": "Pet-Care-Preview-Updated.html",
+      "html_path": "websites/pet-care/index.html",
+      "assets_path": null
+    },
+    {
+      "number": "20",
+      "slug": "home-care",
+      "business": "Kindred Home Support",
+      "niche": "Senior Home Care",
+      "source_html": "Home-Care-Preview-Updated.html",
+      "html_path": "websites/home-care/index.html",
+      "assets_path": null
+    }
+  ]
+}
