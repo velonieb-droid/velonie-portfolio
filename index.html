@@ -2640,7 +2640,7 @@ body { font-synthesis: none; }
       <a href="tools/">Free Tools</a>
       <a href="hire-me/">For Employers</a>
       <a href="#contact">Contact</a>
-      <a class="btn primary nav-cta" href="#book">Book a call</a>
+      <a class="btn primary nav-cta" href="#book" data-booking-cta>Book a call</a>
     </nav>
   </div>
 </header>
@@ -2667,7 +2667,7 @@ body { font-synthesis: none; }
             Watch My Intro
           </button>
         </div>
-        <p class="cta-trust hx-book">Need a system built or improved? <a class="intro-resume-link" href="#book">Book a 20-Minute Call <span aria-hidden="true">→</span></a></p>
+        <p class="cta-trust hx-book">Need a system built or improved? <a class="intro-resume-link" href="#book" data-booking-cta>Book a 20-Minute Call <span aria-hidden="true">→</span></a></p>
       </div>
 
       <aside class="hero-card hx-card" aria-label="Automation overview and contact options">
@@ -3982,7 +3982,7 @@ body { font-synthesis: none; }
         <p>I can review the current process, identify which steps belong in GHL and set up the follow-up, calendar and handoff logic that fits your team.</p>
       </div>
       <div class="contact-actions">
-        <a class="btn primary" href="#book">Book My Free Systems Call</a>
+        <a class="btn primary" href="#book" data-booking-cta>Book My Free Systems Call</a>
         <a class="btn secondary" href="https://wa.me/639152845260?text=Hi%20Velonie%2C%20I%20found%20your%20portfolio" target="_blank" rel="noopener">WhatsApp Me</a>
         <a class="btn ghost" href="mailto:velonieb@gmail.com?subject=Portfolio%20Inquiry%20-%20Velonie%20Baluarte">Email Me</a>
       </div>
@@ -4637,6 +4637,8 @@ body { font-synthesis: none; }
 (function () {
   let lastResumeRequest = 0;
   document.addEventListener('click', function (event) {
+    if (!event.isTrusted) return;
+
     const link = event.target.closest('a[href]');
     if (!link || typeof window.gtag !== 'function') return;
 
@@ -4660,7 +4662,7 @@ body { font-synthesis: none; }
     } else if (/^(https?:\/\/)?(wa\.me|api\.whatsapp\.com)\//i.test(href)) {
       eventName = 'contact_click';
       channel = 'whatsapp';
-    } else if (href === '#book' || href === '../#book' || /cal\.com\//i.test(href)) {
+    } else if (link.hasAttribute('data-booking-cta')) {
       eventName = 'booking_intent';
       channel = 'booking';
     } else if (/^(?:\.\.\/)?(?:go-highlevel-automation-specialist|ghl-crm-setup|ghl-workflow-automation|n8n-go-highlevel-integration|ghl-systems-audit)\/?(?:index\.html)?$/i.test(href)) {
